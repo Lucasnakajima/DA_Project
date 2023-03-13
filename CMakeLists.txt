@@ -3,4 +3,4 @@ project(Projeto)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Projeto main.cpp station.cpp station.h operations.cpp operations.h Graph.cpp Graph.h VertexEdge.cpp VertexEdge.h)
+add_executable(Projeto main.cpp Station.cpp Station.h Graph.cpp Graph.h basic_graph_classes/GraphBasic.cpp basic_graph_classes/GraphBasic.h basic_graph_classes/VertexEdge.cpp basic_graph_classes/VertexEdge.h Connection.cpp Connection.h)

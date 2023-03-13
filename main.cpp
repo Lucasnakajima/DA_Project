@@ -1,6 +1,18 @@
 #include <iostream>
 
+#include "Graph.h"
+
 int main() {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    Graph g;
+
+    bool bstations = g.loadStations();
+    bool bconnections = g.loadConnections();
+
+    vector<Station> stations = g.getStations();
+
+    vector<Connection> connections = g.getConnections();
+
+    cout << bstations << " " << bconnections << endl;
+
+    cout << connections.size() << endl;
 }

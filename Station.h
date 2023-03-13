@@ -8,7 +8,7 @@
 
 using namespace std;
 
-class station {
+class Station {
 private:
     string name;
     string district;
@@ -18,8 +18,13 @@ private:
 
 
 public:
-    station(string name, string district, string municipality, string township, string line);
+    Station(string name, string district, string municipality, string township, string line);
 
+    string getName();
+    string getDistrict();
+    string getMunicipality();
+    string getTownship();
+    string getLine();
 };
 
 

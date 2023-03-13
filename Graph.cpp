@@ -2,91 +2,91 @@
 // Created by Utilizador on 3/9/2023.
 //
 
+
+#include <fstream>
+#include <sstream>
 #include "Graph.h"
 
-int Graph::getNumVertex() const {
-    return vertexSet.size();
-}
+using namespace std;
 
-std::vector<Vertex *> Graph::getVertexSet() const {
-    return vertexSet;
-}
+Graph::Graph() {}
 
-/*
- * Auxiliary function to find a vertex with a given content.
- */
-Vertex * Graph::findVertex(const int &id) const {
-    for (auto v : vertexSet)
-        if (v->getId() == id)
-            return v;
-    return nullptr;
-}
+bool Graph::loadStations() {
+    ifstream inputFile("stations.csv");
 
-/*
- * Finds the index of the vertex with a given content.
- */
-int Graph::findVertexIdx(const int &id) const {
-    for (unsigned i = 0; i < vertexSet.size(); i++)
-        if (vertexSet[i]->getId() == id)
-            return i;
-    return -1;
-}
-/*
- *  Adds a vertex with a given content or info (in) to a graph (this).
- *  Returns true if successful, and false if a vertex with that content already exists.
- */
-bool Graph::addVertex(const int &id) {
-    if (findVertex(id) != nullptr)
+    if (!inputFile.is_open()) {
         return false;
-    vertexSet.push_back(new Vertex(id));
-    return true;
-}
-
-/*
- * Adds an edge to a graph (this), given the contents of the source and
- * destination vertices and the edge weight (w).
- * Returns true if successful, and false if the source or destination vertex does not exist.
- */
-bool Graph::addEdge(const int &sourc, const int &dest, double w) {
-    auto v1 = findVertex(sourc);
-    auto v2 = findVertex(dest);
-    if (v1 == nullptr || v2 == nullptr)
-        return false;
-    v1->addEdge(v2, w);
-    return true;
-}
-
-bool Graph::addBidirectionalEdge(const int &sourc, const int &dest, double w) {
-    auto v1 = findVertex(sourc);
-    auto v2 = findVertex(dest);
-    if (v1 == nullptr || v2 == nullptr)
-        return false;
-    auto e1 = v1->addEdge(v2, w);
-    auto e2 = v2->addEdge(v1, w);
-    e1->setReverse(e2);
-    e2->setReverse(e1);
-    return true;
-}
-
-void deleteMatrix(int **m, int n) {
-    if (m != nullptr) {
-        for (int i = 0; i < n; i++)
-            if (m[i] != nullptr)
-                delete [] m[i];
-        delete [] m;
     }
-}
 
-void deleteMatrix(double **m, int n) {
-    if (m != nullptr) {
-        for (int i = 0; i < n; i++)
-            if (m[i] != nullptr)
-                delete [] m[i];
-        delete [] m;
+    // Skip header line
+    string line;
+    getline(inputFile, line);
+
+    while (getline(inputFile, line)) {
+        istringstream iss(line);
+
+        string name, district, municipality, township, line;
+        getline(iss, name, ',');
+        getline(iss, district, ',');
+        getline(iss, municipality, ',');
+        getline(iss, township, ',');
+        getline(iss, line, ',');
+
+        stations.emplace_back(name, district, municipality, township, line);
     }
+
+    return true;
 }
 
-Graph::~Graph() {
-    deleteMatrix(distMatrix, vertexSet.size());
-    deleteMatrix(pathMatrix, vertexSet.size());
+bool Graph::loadConnections() {
+    ifstream inputFile("network.csv");
+
+    if (!inputFile.is_open()) {
+        return false;
+    }
+
+    // Skip header line
+    string line;
+    getline(inputFile, line);
+
+    while (std::getline(inputFile, line)) {
+        istringstream iss(line);
+
+        string sourceName, destName, service;
+        int capacity;
+        getline(iss, sourceName, ',');
+        getline(iss, destName, ',');
+        iss >> capacity;
+        getline(iss.ignore(), service, ',');
+
+        // Find the source and destination stations in the list of stations
+        Station* source = nullptr;
+        Station* dest = nullptr;
+        for (auto& station : stations) {
+            if (station.getName() == sourceName) {
+                source = &station;
+            }
+            if (station.getName() == destName) {
+                dest = &station;
+            }
+            if (source && dest) {
+                break;
+            }
+        }
+
+        // Add the connection if the source and destination stations were found
+        if (source && dest) {
+            connections.emplace_back(source, dest, capacity, service);
+        }
+    }
+
+    return true;
+}
+
+vector<Station> Graph::getStations() {
+    return stations;
+}
+
+vector<Connection> Graph::getConnections() {
+    return connections;
 }
