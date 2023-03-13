@@ -49,7 +49,7 @@ bool Graph::loadConnections() {
     string line;
     getline(inputFile, line);
 
-    while (std::getline(inputFile, line)) {
+    while (getline(inputFile, line)) {
         istringstream iss(line);
 
         string sourceName, destName, service;
