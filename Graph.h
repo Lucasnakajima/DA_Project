@@ -7,6 +7,7 @@
 
 #include <string>
 #include <vector>
+#include <unordered_map>
 #include "Station.h"
 #include "Connection.h"
 
@@ -15,7 +16,8 @@ using namespace std;
 class Graph {
 
 private:
-    vector<Station> stations;
+    unordered_map<string, Station> stations;
+    unordered_map<string, vector<Connection>> targets;
     vector<Connection> connections;
 
 
@@ -25,8 +27,9 @@ public:
     bool loadStations();
     bool loadConnections();
 
-    vector<Station> getStations();
+    unordered_map<string, Station> getStations();
     vector<Connection> getConnections();
+    unordered_map<string, vector<Connection>> getTargets();
 };
 
 

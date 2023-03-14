@@ -32,7 +32,8 @@ bool Graph::loadStations() {
         getline(iss, township, ',');
         getline(iss, line, ',');
 
-        stations.emplace_back(name, district, municipality, township, line);
+        Station station(name, district, municipality, township, line);
+        stations.emplace(station.getName(), station);
     }
 
     return true;
@@ -59,34 +60,29 @@ bool Graph::loadConnections() {
         iss >> capacity;
         getline(iss.ignore(), service, ',');
 
-        // Find the source and destination stations in the list of stations
-        Station* source = nullptr;
-        Station* dest = nullptr;
-        for (auto& station : stations) {
-            if (station.getName() == sourceName) {
-                source = &station;
-            }
-            if (station.getName() == destName) {
-                dest = &station;
-            }
-            if (source && dest) {
-                break;
-            }
-        }
+        // Find the source and destination stations in the unordered_map
+        auto source = stations.find(sourceName);
+        auto dest = stations.find(destName);
 
         // Add the connection if the source and destination stations were found
-        if (source && dest) {
-            connections.emplace_back(source, dest, capacity, service);
+        if (source != stations.end() && dest != stations.end()) {
+            Connection connection(&(source->second), &(dest->second), capacity, service);
+            targets[sourceName].push_back(connection);
+            connections.push_back(connection);
         }
     }
 
     return true;
 }
 
-vector<Station> Graph::getStations() {
+unordered_map<string, Station> Graph::getStations() {
     return stations;
 }
 
 vector<Connection> Graph::getConnections() {
     return connections;
+}
+
+unordered_map<string, vector<Connection>> Graph::getTargets() {
+    return targets;
 }
