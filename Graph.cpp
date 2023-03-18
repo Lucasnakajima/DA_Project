@@ -75,6 +75,67 @@ bool Graph::loadConnections() {
     return true;
 }
 
+int maxTrainsBetweenStations(string stationA, string stationB) {
+    // create adjacency list to store graph
+    unordered_map<string, vector<pair<string, int>>> adj;
+    for (auto conn : targets) {
+        string source = conn.first;
+        for (auto c : conn.second) {
+            string dest = c.destination->name;
+            adj[source].push_back(make_pair(dest, c.capacity));
+            adj[dest].push_back(make_pair(source, 0));  // residual edge
+        }
+    }
+
+    // find shortest augmenting path using BFS
+    int maxFlow = 0;
+    while (true) {
+        unordered_map<string, string> parent;
+        unordered_map<string, int> capacity;
+        parent[stationA] = "";
+        capacity[stationA] = INT_MAX;
+        queue<string> q;
+        q.push(stationA);
+        while (!q.empty()) {
+            string u = q.front();
+            q.pop();
+            for (auto v : adj[u]) {
+                if (parent.find(v.first) == parent.end() && v.second > 0) {
+                    parent[v.first] = u;
+                    capacity[v.first] = min(capacity[u], v.second);
+                    if (v.first == stationB) {
+                        break;
+                    }
+                    q.push(v.first);
+                }
+            }
+            if (parent.find(stationB) != parent.end()) {
+                break;
+            }
+        }
+        if (parent.find(stationB) == parent.end()) {
+            break;
+        }
+        maxFlow += capacity[stationB];
+        string u = stationB;
+        while (u != stationA) {
+            string v = parent[u];
+            for (auto& edge : adj[u]) {
+                if (edge.first == v) {
+                    edge.second -= capacity[stationB];
+                    break;
+                }
+            }
+            for (auto& edge : adj[v]) {
+                if (edge.first == u) {
+                    edge.second += capacity[stationB];
+                    break;
+                }
+            }
+            u = v;
+        }
+    }
+
 unordered_map<string, Station> Graph::getStations() {
     return stations;
 }

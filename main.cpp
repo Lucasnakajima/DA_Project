@@ -10,7 +10,7 @@ int main() {
 
     unordered_map<string, Station> stations = g.getStations();
 
-    vector<Connection> connections = g.getConnections();
+    vector<Connection> connections = g.getTargets()["Vila Nova de Gaia-Devesas"];
 
     cout << bstations << " " << bconnections << endl;
 
@@ -18,7 +18,7 @@ int main() {
 
 
 
-    for (auto i : g.getTargets()["Vila Nova de Gaia-Devesas"]) {
+    for (auto i : connections) {
         cout << i.getSource()->getName() << endl;
         cout << i.getDestination()->getName() << endl;
     }
