@@ -5,6 +5,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <queue>
 #include "Graph.h"
 
 using namespace std;
@@ -75,14 +76,14 @@ bool Graph::loadConnections() {
     return true;
 }
 
-int maxTrainsBetweenStations(string stationA, string stationB) {
+int Graph::maxTrainsBetweenStations(string stationA, string stationB) {
     // create adjacency list to store graph
     unordered_map<string, vector<pair<string, int>>> adj;
-    for (auto conn : targets) {
+    for (auto conn: targets) {
         string source = conn.first;
-        for (auto c : conn.second) {
-            string dest = c.destination->name;
-            adj[source].push_back(make_pair(dest, c.capacity));
+        for (auto c: conn.second) {
+            string dest = c.getDestination()->getName();
+            adj[source].push_back(make_pair(dest, c.getCapacity()));
             adj[dest].push_back(make_pair(source, 0));  // residual edge
         }
     }
@@ -99,7 +100,7 @@ int maxTrainsBetweenStations(string stationA, string stationB) {
         while (!q.empty()) {
             string u = q.front();
             q.pop();
-            for (auto v : adj[u]) {
+            for (auto v: adj[u]) {
                 if (parent.find(v.first) == parent.end() && v.second > 0) {
                     parent[v.first] = u;
                     capacity[v.first] = min(capacity[u], v.second);
@@ -120,13 +121,13 @@ int maxTrainsBetweenStations(string stationA, string stationB) {
         string u = stationB;
         while (u != stationA) {
             string v = parent[u];
-            for (auto& edge : adj[u]) {
+            for (auto &edge: adj[u]) {
                 if (edge.first == v) {
                     edge.second -= capacity[stationB];
                     break;
                 }
             }
-            for (auto& edge : adj[v]) {
+            for (auto &edge: adj[v]) {
                 if (edge.first == u) {
                     edge.second += capacity[stationB];
                     break;
@@ -135,6 +136,7 @@ int maxTrainsBetweenStations(string stationA, string stationB) {
             u = v;
         }
     }
+}
 
 unordered_map<string, Station> Graph::getStations() {
     return stations;
