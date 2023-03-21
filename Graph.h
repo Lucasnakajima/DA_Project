@@ -22,6 +22,10 @@ private:
     unordered_map<string, vector<Connection>> targets;
     vector<Connection> connections;
 
+    vector<Station*> bfs(Station* start, Station* end);
+    void dfsHelper(Station* current, unordered_map<Station*, bool>& visited, vector<Station*>& path);
+    vector<Station*> dfs(Station* start, Station* end);
+
 
 public:
     Graph();

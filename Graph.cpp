@@ -5,6 +5,7 @@
 
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 #include "Graph.h"
 
 using namespace std;
@@ -136,4 +137,65 @@ vector<Connection> Graph::getConnections(){
 
 unordered_map<string, vector<Connection>> Graph::getTargets() {
     return targets;
+}
+
+vector<Station*> Graph::bfs(Station* start, Station* end) {
+    unordered_map<Station*, bool> visited;
+    unordered_map<Station*, Station*> parent;
+    queue<Station*> q;
+
+    q.push(start);
+    visited[start] = true;
+
+    while (!q.empty()) {
+        Station* current = q.front();
+        q.pop();
+
+        if (current == end) {
+            break;
+        }
+
+        for (auto& conn : targets[current->getName()]) {
+            Station* neighbor = conn.getDestination();
+
+            if (!visited[neighbor]) {
+                visited[neighbor] = true;
+                parent[neighbor] = current;
+                q.push(neighbor);
+            }
+        }
+    }
+
+    // Reconstruct the path from start to end
+    vector<Station*> path;
+    Station* current = end;
+    while (current != nullptr) {
+        path.push_back(current);
+        current = parent[current];
+    }
+    reverse(path.begin(), path.end());
+
+    return path;
+}
+
+void Graph::dfsHelper(Station* current, unordered_map<Station*, bool>& visited, vector<Station*>& path) {
+    visited[current] = true;
+    path.push_back(current);
+
+    for (auto& conn : targets[current->getName()]) {
+        Station* neighbor = conn.getDestination();
+
+        if (!visited[neighbor]) {
+            dfsHelper(neighbor, visited, path);
+        }
+    }
+}
+
+vector<Station*> Graph::dfs(Station* start, Station* end) {
+    unordered_map<Station*, bool> visited;
+    vector<Station*> path;
+
+    dfsHelper(start, visited, path);
+
+    return path;
 }
