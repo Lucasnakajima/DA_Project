@@ -1,0 +1,533 @@
+Name,District,Municipality,Township,Line
+Porto Campanhã,PORTO,PORTO,Porto,Linha do Norte
+Viana do Castelo,VIANA DO CASTELO,VIANA DO CASTELO,Viana do Castelo,Linha do Minho
+Ermidas-Sado,SETÚBAL,SANTIAGO DO CACÉM,Ermidas-Sado,Linha do Sul
+Faro,FARO,FARO,Faro,Linha do Algarve
+Funcheira,BEJA,OURIQUE,Funcheira,Linha do Sul
+Lisboa Oriente,LISBOA,LISBOA,Parque das Nações,Linha do Norte
+Nine,BRAGA,FAMALICÃO,Nine,Linha do Minho
+Pinhal Novo,SETÚBAL,PALMELA,Pinhal Novo,Linha do Sul
+Pombal,LEIRIA,POMBAL,Pombal,Linha do Norte
+Tunes,FARO,SILVES,Tunes,Linha do Sul
+Vila Nova de Gaia-Devesas,PORTO,VILA NOVA DE GAIA,Vila Nova de Gaia,Linha do Norte
+Silva,BRAGA,BARCELOS,Silva,Linha do Minho
+São Pedro da Torre,VIANA DO CASTELO,VALENÇA,São Pedro da Torre,Linha do Minho
+Vila Nova da Raínha,LISBOA,AZAMBUJA,Vila Nova da Rainha,Linha do Norte
+Estarreja,AVEIRO,ESTARREJA,Beduído e Veiros,Linha do Norte
+Branca,AVEIRO,ALBERGARIA-A-VELHA,Branca,Linha do Vouga
+Valongo-Vouga,AVEIRO,ÁGUEDA,Valongo do Vouga,Linha do Vouga
+Mirão,PORTO,BAIÃO,Santa Cruz do Douro e São Tomé de Covelas,Linha do Douro
+Oliveira,PORTO,AMARANTE,Vila Meã,Linha do Douro
+Famalicão,BRAGA,VILA NOVA DE FAMALICÃO,Vila Nova de Famalicão e Calendário,Linha do Minho
+Covas,BRAGA,GUIMARÃES,Urgezes,Linha de Guimarães
+Darque,VIANA DO CASTELO,VIANA DO CASTELO,Darque,Linha do Minho
+Seiça-Ourém,SANTARÉM,OURÉM,Seiça,Linha do Norte
+Alferrarede,SANTARÉM,ABRANTES,Abrantes (São Vicente e São João) e Alferrarede,Linha da Beira Baixa
+Fernando Pó,SETÚBAL,PALMELA,Poceirão e Marateca,Linha do Alentejo
+Aveiro - Vouga,AVEIRO,AVEIRO,Esgueira,Linha do Vouga
+São Romão,PORTO,TROFA,Coronado (São Romão e São Mamede),Linha do Minho
+Freixo de Numão,GUARDA,VILA NOVA DE FOZ CÔA,Vila Nova de Foz Côa,Linha do Douro
+Benquerenças,CASTELO BRANCO,CASTELO BRANCO,Benquerenças,Linha da Beira Baixa
+Fungalvaz Resguardo,SANTARÉM,TOMAR,Madalena e Beselga,Linha do Norte
+Alcainça-Moinhos,LISBOA,MAFRA,Malveira e São Miguel de Alcainça,Linha do Oeste
+Pereirinhas,BRAGA,GUIMARÃES,Moreira de Cónegos,Linha de Guimarães
+São Frutuoso,PORTO,MAIA,Folgosa,Linha do Minho
+Vila Franca de Xira,LISBOA,VILA FRANCA DE XIRA,Vila Franca de Xira,Linha do Norte
+Couto de Cucujães,AVEIRO,OLIVEIRA DE AZEMÉIS,Vila de Cucujães,Linha do Vouga
+Oliveira de Azeméis,AVEIRO,OLIVEIRA DE AZEMÉIS,"O. Azeméis, Riba-Ul, Ul, Macinhata da Seixa, Madail",Linha do Vouga
+Carreço,VIANA DO CASTELO,VIANA DO CASTELO,Carreço,Linha do Minho
+Afife,VIANA DO CASTELO,VIANA DO CASTELO,Afife,Linha do Minho
+Simões,COIMBRA,SOURE,Soure,Linha do Norte
+Taipa - Requeixo,AVEIRO,AVEIRO,"Requeixo, Nossa Senhora de Fátima e Nariz",Linha do Vouga
+Marco de Canaveses,PORTO,MARCO DE CANAVESES,Marco,Linha do Douro
+Vila Nova de Anços,COIMBRA,SOURE,Vila Nova de Anços,Linha do Norte
+Sanfins,AVEIRO,SANTA MARIA DA FEIRA,"Santa Maria da Feira, Travanca, Sanfins e Espargo",Linha do Vouga
+São Mamede de Infesta,PORTO,MATOSINHOS,São Mamede de Infesta e Senhora da Hora,Linha de Leixões
+Ferreiros,BRAGA,BRAGA,Ferreiros e Gondizalves,Ramal de Braga
+Contumil,PORTO,PORTO,Campanhã,Linha do Minho
+Meinedo,PORTO,LOUSADA,Meinedo,Linha do Douro
+Rio Tinto,PORTO,GONDOMAR,Rio Tinto,Linha do Minho
+Cête,PORTO,PAREDES,Cete,Linha do Douro
+Vila Meã,PORTO,AMARANTE,Vila Meã,Linha do Douro
+Caxarias,SANTARÉM,OURÉM,Caxarias,Linha do Norte
+Entroncamento,SANTARÉM,ENTRONCAMENTO,Nossa Senhora de Fátima,Linha do Norte
+Senhora da Agonia,VIANA DO CASTELO,CAMINHA,Caminha (Matriz) e Vilarelho,Linha do Minho
+Ermida,PORTO,BAIÃO,Santa Marinha do Zêzere,Linha do Douro
+Mealhada Norte,AVEIRO,MEALHADA,"Mealhada, Ventosa do Bairro e Antes",Linha do Norte
+Avanca,AVEIRO,ESTARREJA,Avanca,Linha do Norte
+Santana Cartaxo Resguardo,SANTARÉM,CARTAXO,Vila Chã de Ourique,Linha do Norte
+Braga,BRAGA,BRAGA,"Braga (Maximinos, Sé e Cividade)",Ramal de Braga
+Cuca,BRAGA,GUIMARÃES,Moreira de Cónegos,Linha de Guimarães
+Travassô,AVEIRO,ÁGUEDA,Travassô e Óis da Ribeira,Linha do Vouga
+Salreu,AVEIRO,ESTARREJA,Salreu,Linha do Norte
+São João de Ver,AVEIRO,SANTA MARIA DA FEIRA,São João de Ver,Linha do Vouga
+Pelariga,LEIRIA,POMBAL,Pelariga,Linha do Norte
+Meia Praia,FARO,LAGOS,São Gonçalo de Lagos,Linha do Algarve
+Castanheira do Ribatejo,LISBOA,VILA FRANCA DE XIRA,Castanheira do Ribatejo e Cachoeiras,Linha do Norte
+Granja,PORTO,VILA NOVA DE GAIA,São Félix da Marinha,Linha do Norte
+Ul,AVEIRO,OLIVEIRA DE AZEMÉIS,"O. Azeméis, Riba-Ul, Ul, Macinhata da Seixa, Madail",Linha do Vouga
+Monte de Paramos,AVEIRO,ESPINHO,Paramos,Linha do Vouga
+Bobadela,LISBOA,LOURES,"Santa Iria de Azoia, São João da Talha e Bobadela",Linha do Norte
+Livração,PORTO,MARCO DE CANAVESES,Constance,Linha do Douro
+Algés,LISBOA,OEIRAS,"Algés, Linda-a-Velha e Cruz Quebrada-Dafundo",Linha de Cascais
+Francelos,PORTO,VILA NOVA DE GAIA,Gulpilhares e Valadares,Linha do Norte
+Olhão,FARO,OLHÃO,Olhão,Linha do Algarve
+Tavira,FARO,TAVIRA,Tavira (Santa Maria e Santiago),Linha do Algarve
+Oronhe,AVEIRO,ÁGUEDA,Recardães e Espinhel,Linha do Vouga
+Paços de Brandão,AVEIRO,SANTA MARIA DA FEIRA,Paços de Brandão,Linha do Vouga
+Pinheiro da Bemposta,AVEIRO,OLIVEIRA DE AZEMÉIS,"Pinheiro da Bemposta, Travanca e Palmaz",Linha do Vouga
+Setúbal-Mar,SETÚBAL,SETÚBAL,Setúbal (São Sebastião),Linha do Sul
+Casal do Álvaro,AVEIRO,ÁGUEDA,Recardães e Espinhel,Linha do Vouga
+Pereira,COIMBRA,MONTEMOR-O-VELHO,Pereira,Linha do Norte
+Albergaria-a-Velha,AVEIRO,ALBERGARIA-A-VELHA,Albergaria-a-Velha e Valmaior,Linha do Vouga
+Taveiro,COIMBRA,COIMBRA,"Taveiro, Ameal e Arzila",Linha do Norte
+Santiago de Riba-Ul,AVEIRO,OLIVEIRA DE AZEMÉIS,"O. Azeméis, Riba-Ul, Ul, Macinhata da Seixa, Madail",Linha do Vouga
+Espinho,AVEIRO,ESPINHO,Espinho,Linha do Norte
+Paraimo,AVEIRO,ANADIA,Sangalhos,Linha do Norte
+Carapeços,BRAGA,BARCELOS,Carapeços,Linha do Minho
+Recezinhos,PORTO,PENAFIEL,Castelões,Linha do Douro
+Esmeriz,BRAGA,VILA NOVA DE FAMALICÃO,Esmeriz e Cabeçudos,Linha do Minho
+Trancoso,PORTO,PAREDES,Recarei,Linha do Douro
+Aveleda,BRAGA,BRAGA,"Celeirós, Aveleda e Vimieiro",Ramal de Braga
+Vila Pouca do Campo,COIMBRA,COIMBRA,"Taveiro, Ameal e Arzila",Linha do Norte
+Curia,AVEIRO,ANADIA,"Tamengos, Aguim e Óis do Bairro",Linha do Norte
+Terronhas,PORTO,PAREDES,Recarei,Linha do Douro
+Senhora das Neves,VIANA DO CASTELO,VIANA DO CASTELO,Vila de Punhe,Linha do Minho
+Carregado Norte,LISBOA,ALENQUER,Carregado e Cadafais,Linha do Norte
+General Torres,PORTO,VILA NOVA DE GAIA,Santa Marinha e São Pedro da Afurada,Linha do Norte
+Coimbra B,COIMBRA,COIMBRA,Eiras e São Paulo de Frades,Linha do Norte
+Mazagão,BRAGA,BRAGA,"Celeirós, Aveleda e Vimieiro",Ramal de Braga
+Portela,PORTO,TROFA,Covelas,Linha do Minho
+Mouquim,BRAGA,VILA NOVA DE FAMALICÃO,"Lemenhe, Mouquim e Jesufrei",Linha do Minho
+Castelo Novo,CASTELO BRANCO,FUNDÃO,Castelo Novo,Linha da Beira Baixa
+Giesteira,BRAGA,GUIMARÃES,Lordelo,Linha de Guimarães
+Seixas,VIANA DO CASTELO,CAMINHA,Seixas,Linha do Minho
+Vermoil,LEIRIA,POMBAL,Santiago e S. Simão de Litém e Albergaria dos Doze,Linha do Norte
+Ruílhe,BRAGA,BRAGA,Ruilhe,Ramal de Braga
+Mato Miranda,SANTARÉM,GOLEGÃ,Azinhaga,Linha do Norte
+Tadim,BRAGA,BRAGA,Tadim,Ramal de Braga
+Carvalhal da Portela,AVEIRO,ÁGUEDA,Valongo do Vouga,Linha do Vouga
+Fontela,COIMBRA,FIGUEIRA DA FOZ,Vila Verde,Linha do Oeste
+Ferradosa,VISEU,SÃO JOÃO DA PESQUEIRA,Vale de Figueira,Linha do Douro
+Tojeirinha,CASTELO BRANCO,VILA VELHA DE RÓDÃO,Vila Velha de Ródão,Linha da Beira Baixa
+Irivo,PORTO,PENAFIEL,Irivo,Linha do Douro
+Martingança,LEIRIA,ALCOBAÇA,Pataias e Martingança,Linha do Oeste
+Coimbra,COIMBRA,COIMBRA,"Sé Nova, Santa Cruz, Almedina e São Bartolomeu",Ramal da Lousã
+São Romão - A,PORTO,TROFA,Coronado (São Romão e São Mamede),Linha do Minho
+Pedra Furada,LISBOA,SINTRA,"Almargem do Bispo, Pêro Pinheiro e Montelavar",Linha do Oeste
+Gata,GUARDA,GUARDA,Casal de Cinza,Linha da Beira Alta
+Curvaceiras,SANTARÉM,TOMAR,Madalena e Beselga,Ramal de Tomar
+Rede,VILA REAL,MESÃO FRIO,Vila Marim,Linha do Douro
+Madalena,PORTO,VILA NOVA DE GAIA,Madalena,Linha do Norte
+Cortegaça,AVEIRO,OVAR,Cortegaça,Linha do Norte
+Pala,PORTO,BAIÃO,Ancede e Ribadouro,Linha do Douro
+Gondarém,VIANA DO CASTELO,VILA NOVA DE CERVEIRA,Gondarém,Linha do Minho
+Santa Iria,LISBOA,LOURES,"Santa Iria de Azoia, São João da Talha e Bobadela",Linha do Norte
+Torres Vedras,LISBOA,TORRES VEDRAS,"Santa Maria, São Pedro e Matacães",Linha do Oeste
+Caldas de Moledo,VILA REAL,PESO DA RÉGUA,Fontelas,Linha do Douro
+Mealhada,AVEIRO,MEALHADA,"Mealhada, Ventosa do Bairro e Antes",Linha do Norte
+Travanca-Macinhata,AVEIRO,OLIVEIRA DE AZEMÉIS,"Pinheiro da Bemposta, Travanca e Palmaz",Linha do Vouga
+Pombal Resguardo,LEIRIA,POMBAL,Pombal,Linha do Norte
+Soure,COIMBRA,SOURE,Soure,Linha do Norte
+Belmonte-Manteigas,CASTELO BRANCO,BELMONTE,Belmonte e Colmeal da Torre,Linha da Beira Baixa
+Oliveirinha Cabanas,VISEU,CARREGAL DO SAL,Oliveira do Conde,Linha da Beira Alta
+Bagaúste,VILA REAL,PESO DA RÉGUA,Poiares e Canelas,Linha do Douro
+Tramagal,SANTARÉM,ABRANTES,Tramagal,Linha da Beira Baixa
+Fanhais,LEIRIA,NAZARÉ,Nazaré,Linha do Oeste
+Vila da Feira,AVEIRO,SANTA MARIA DA FEIRA,"Santa Maria da Feira, Travanca, Sanfins e Espargo",Linha do Vouga
+Bencanta,COIMBRA,COIMBRA,São Martinho do Bispo e Ribeira de Frades,Linha do Norte
+Paramos,AVEIRO,ESPINHO,Paramos,Linha do Norte
+Carregal do Sal,VISEU,CARREGAL DO SAL,Carregal do Sal,Linha da Beira Alta
+Senhora das Dores,PORTO,TROFA,Bougado (São Martinho e Santiago),Linha do Minho
+Águas Santas,PORTO,MAIA,Águas Santas,Linha do Minho
+São Gemil,PORTO,MAIA,Águas Santas,Linha de Leixões
+Monte Redondo,LEIRIA,LEIRIA,Monte Redondo e Carreira,Linha do Oeste
+Barroselas,VIANA DO CASTELO,VIANA DO CASTELO,Barroselas e Carvoeiro,Linha do Minho
+Belver,PORTALEGRE,GAVIÃO,Belver,Linha da Beira Baixa
+Faria,AVEIRO,OLIVEIRA DE AZEMÉIS,Vila de Cucujães,Linha do Vouga
+Escapães,AVEIRO,SANTA MARIA DA FEIRA,Escapães,Linha do Vouga
+Aguim,AVEIRO,ANADIA,"Tamengos, Aguim e Óis do Bairro",Linha do Norte
+Mosteirô,PORTO,BAIÃO,Ancede e Ribadouro,Linha do Douro
+Lardosa,CASTELO BRANCO,CASTELO BRANCO,Lardosa,Linha da Beira Baixa
+Paúl,LEIRIA,BOMBARRAL,Roliça,Linha do Oeste
+Dois Portos,LISBOA,TORRES VEDRAS,Dois Portos e Runa,Linha do Oeste
+Recarei - Sobreira,PORTO,PAREDES,Sobreira,Linha do Douro
+Adémia,COIMBRA,COIMBRA,Trouxemil e Torre de Vilela,Linha do Norte
+Caniços,BRAGA,VILA NOVA DE FAMALICÃO,Bairro,Linha de Guimarães
+Donas,CASTELO BRANCO,FUNDÃO,"Fundão, Valverde, Donas, A. Joanes, A. Nova do Cabo",Linha da Beira Baixa
+Lapa do Lobo,VISEU,NELAS,Lapa do Lobo,Linha da Beira Alta
+Ameal,COIMBRA,COIMBRA,"Taveiro, Ameal e Arzila",Linha do Norte
+Régua,VILA REAL,PESO DA RÉGUA,Peso da Régua e Godim,Linha do Douro
+Valadares,PORTO,VILA NOVA DE GAIA,Gulpilhares e Valadares,Linha do Norte
+Barracão-Sabugal,GUARDA,GUARDA,Panoias de Cima,Linha da Beira Baixa
+Valado,LEIRIA,NAZARÉ,Valado dos Frades,Linha do Oeste
+Soito,VISEU,MORTÁGUA,Espinho,Linha da Beira Alta
+Pinhão,VILA REAL,ALIJÓ,Pinhão,Linha do Douro
+Campo-Serra,LEIRIA,CALDAS DA RAINHA,Tornada e Salir do Porto,Linha do Oeste
+Pampilhosa,AVEIRO,MEALHADA,Pampilhosa,Linha do Norte
+Évora,ÉVORA,ÉVORA,Malagueira e Horta das Figueiras,Linha de Évora
+Bombarral,LEIRIA,BOMBARRAL,Bombarral e Vale Covo,Linha do Oeste
+Arentim,BRAGA,BRAGA,Arentim e Cunha,Ramal de Braga
+Parada,PORTO,PAREDES,Parada de Todeia,Linha do Douro
+Luz,FARO,TAVIRA,Luz de Tavira e Santo Estêvão,Linha do Algarve
+Penteado,SETÚBAL,MOITA,Moita,Linha do Alentejo
+Portela de Sintra,LISBOA,SINTRA,"S. Maria, S. Miguel, S. Martinho e S. Pedro de Penaferrim",Linha de Sintra
+Lavradio,SETÚBAL,BARREIRO,Barreiro e Lavradio,Linha do Alentejo
+Porto de Sines,SETÚBAL,SINES,Sines,Linha de Sines
+Feliteira,LISBOA,TORRES VEDRAS,Dois Portos e Runa,Linha do Oeste
+Guimarães,BRAGA,GUIMARÃES,Urgezes,Linha de Guimarães
+Lapa,AVEIRO,SANTA MARIA DA FEIRA,São Paio de Oleiros,Linha do Vouga
+Oiã,AVEIRO,OLIVEIRA DO BAIRRO,Oiã,Linha do Norte
+Suzão,PORTO,VALONGO,Valongo,Linha do Douro
+Virtudes,LISBOA,AZAMBUJA,Aveiras de Baixo,Linha do Norte
+Nespereira,BRAGA,GUIMARÃES,Nespereira,Linha de Guimarães
+Algoz,FARO,SILVES,Algoz e Tunes,Linha do Algarve
+Areia - Darque,VIANA DO CASTELO,VIANA DO CASTELO,Darque,Linha do Minho
+Lordelo,BRAGA,GUIMARÃES,Lordelo,Linha de Guimarães
+Albergaria-a-Nova,AVEIRO,ALBERGARIA-A-VELHA,Branca,Linha do Vouga
+Tortosendo,CASTELO BRANCO,COVILHÃ,Tortosendo,Linha da Beira Baixa
+Casais,COIMBRA,COIMBRA,São Martinho do Bispo e Ribeira de Frades,Linha do Norte
+Cela,LEIRIA,ALCOBAÇA,Cela,Linha do Oeste
+Ródão,CASTELO BRANCO,VILA VELHA DE RÓDÃO,Vila Velha de Ródão,Linha da Beira Baixa
+Carriço,LEIRIA,POMBAL,Carriço,Linha do Oeste
+Espadanal da Azambuja,LISBOA,AZAMBUJA,Vila Nova da Rainha,Linha do Norte
+Couto de Cambeses,BRAGA,BARCELOS,Cambeses,Ramal de Braga
+Parede,LISBOA,CASCAIS,Carcavelos e Parede,Linha de Cascais
+Vesúvio,GUARDA,VILA NOVA DE FOZ CÔA,Numão,Linha do Douro
+Fundão,CASTELO BRANCO,FUNDÃO,"Fundão, Valverde, Donas, A. Joanes, A. Nova do Cabo",Linha da Beira Baixa
+São Martinho do Porto,LEIRIA,ALCOBAÇA,São Martinho do Porto,Linha do Oeste
+Quinta do Valongo - Vacariça,AVEIRO,MEALHADA,Vacariça,Linha da Beira Alta
+Oleiros,PORTO,PENAFIEL,Guilhufe e Urrô,Linha do Douro
+Alhandra,LISBOA,VILA FRANCA DE XIRA,"Alhandra, São João dos Montes e Calhandriz",Linha do Norte
+Areosa,VIANA DO CASTELO,VIANA DO CASTELO,Areosa,Linha do Minho
+Vale de Figueira,SANTARÉM,SANTARÉM,São Vicente do Paul e Vale de Figueira,Linha do Norte
+Juncal,PORTO,MARCO DE CANAVESES,Paredes de Viadores e Manhuncelos,Linha do Douro
+São Martinho do Campo,PORTO,VALONGO,Campo e Sobrado,Linha do Douro
+Paialvo,SANTARÉM,TOMAR,Madalena e Beselga,Linha do Norte
+Vilela - Fornos,COIMBRA,COIMBRA,Trouxemil e Torre de Vilela,Linha do Norte
+Leandro,PORTO,MAIA,São Pedro Fins,Linha do Minho
+Vila Nova da Cerveira,VIANA DO CASTELO,VILA NOVA DE CERVEIRA,Vila Nova de Cerveira e Lovelhe,Linha do Minho
+Vargelas,VISEU,SÃO JOÃO DA PESQUEIRA,Vale de Figueira,Linha do Douro
+Noémi,GUARDA,ALMEIDA,Miuzela e Porto de Ovelha,Linha da Beira Alta
+Alcaide,CASTELO BRANCO,FUNDÃO,Alcaide,Linha da Beira Baixa
+Pinhel,GUARDA,PINHEL,Alverca da Beira/Bouça Cova,Linha da Beira Alta
+Soalheira,CASTELO BRANCO,FUNDÃO,Castelo Novo,Linha da Beira Baixa
+Regueira de Pontes,LEIRIA,LEIRIA,Regueira de Pontes,Linha do Oeste
+Mouriscas-A,SANTARÉM,ABRANTES,Mouriscas,Linha da Beira Baixa
+Carcavelos,LISBOA,CASCAIS,Carcavelos e Parede,Linha de Cascais
+Oeiras,LISBOA,OEIRAS,"Oeiras e S. Julião da Barra, Paço de Arcos e Caxias",Linha de Cascais
+Leça do Balio,PORTO,MATOSINHOS,"Custóias, Leça do Balio e Guifões",Linha de Leixões
+Barrimau,BRAGA,VILA NOVA DE FAMALICÃO,Vila Nova de Famalicão e Calendário,Linha do Minho
+Portalegre,PORTALEGRE,PORTALEGRE,Urra,Linha do Leste
+São Mamede,LEIRIA,BOMBARRAL,Roliça,Linha do Oeste
+Telhada,COIMBRA,FIGUEIRA DA FOZ,Paião,Linha do Oeste
+São Mamede do Tua,VILA REAL,ALIJÓ,Castedo e Cotas,Linha do Douro
+Mouriscas,SANTARÉM,ABRANTES,Mouriscas,Linha da Beira Baixa
+Ermesinde - A,PORTO,VALONGO,Ermesinde,Linha do Douro
+Bicanho,COIMBRA,SOURE,Samuel,Linha do Oeste
+Caldas da Rainha,LEIRIA,CALDAS DA RAINHA,"Nossa Senhora do Pópulo, Coto e São Gregório",Linha do Oeste
+Luso Buçaco,AVEIRO,MEALHADA,Luso,Linha da Beira Alta
+Barquinha,SANTARÉM,VILA NOVA DA BARQUINHA,Vila Nova da Barquinha,Linha da Beira Baixa
+Lares,COIMBRA,FIGUEIRA DA FOZ,Vila Verde,Linha do Oeste
+Ramalhal,LISBOA,TORRES VEDRAS,Ramalhal,Linha do Oeste
+Carrascal-Delongo,SANTARÉM,TOMAR,Paialvo,Ramal de Tomar
+Gouveia,VISEU,MANGUALDE,Abrunhosa-a-Velha,Linha da Beira Alta
+Zibreira,LISBOA,SOBRAL DE MONTE AGRAÇO,Sobral de Monte Agraço,Linha do Oeste
+Santo Amaro,LISBOA,OEIRAS,"Oeiras e S. Julião da Barra, Paço de Arcos e Caxias",Linha de Cascais
+Barqueiros,VILA REAL,MESÃO FRIO,Barqueiros,Linha do Douro
+Cabêda,PORTO,VALONGO,Alfena,Linha do Douro
+Fratel,CASTELO BRANCO,VILA VELHA DE RÓDÃO,Fratel,Linha da Beira Baixa
+Assumar,PORTALEGRE,MONFORTE,Assumar,Linha do Leste
+Marvila,LISBOA,LISBOA,Marvila,Linha de Cintura
+Sabugo,LISBOA,SINTRA,"Almargem do Bispo, Pêro Pinheiro e Montelavar",Linha do Oeste
+Aldeia,GUARDA,ALMEIDA,Castelo Bom,Linha da Beira Alta
+Alcaria,CASTELO BRANCO,FUNDÃO,Alcaria,Linha da Beira Baixa
+Bouro,LEIRIA,CALDAS DA RAINHA,Tornada e Salir do Porto,Linha do Oeste
+Cerdeira,GUARDA,SABUGAL,Cerdeira,Linha da Beira Alta
+Alpedrinha,CASTELO BRANCO,FUNDÃO,Alpedrinha,Linha da Beira Baixa
+Dagorda - Peniche,LEIRIA,ÓBIDOS,"Santa Maria, São Pedro e Sobral da Lagoa",Linha do Oeste
+Bifurcação do Luso,AVEIRO,MEALHADA,Luso,Linha da Beira Alta
+Cais do Sodré,LISBOA,LISBOA,Misericórdia,Linha de Cascais
+Bemposta,SANTARÉM,ABRANTES,São Facundo e Vale de Mós,Linha do Leste
+Monte Estoril,LISBOA,CASCAIS,Cascais e Estoril,Linha de Cascais
+Fontela-A,COIMBRA,FIGUEIRA DA FOZ,Vila Verde,Linha do Oeste
+Retaxo,CASTELO BRANCO,CASTELO BRANCO,Cebolais de Cima e Retaxo,Linha da Beira Baixa
+Outeiro,LISBOA,TORRES VEDRAS,Campelos e Outeiro da Cabeça,Linha do Oeste
+Torre das Vargens,PORTALEGRE,PONTE DE SOR,"Ponte de Sor, Tramaga e Vale de Açor",Linha do Leste
+Fazenda,PORTALEGRE,PONTE DE SOR,"Ponte de Sor, Tramaga e Vale de Açor",Linha do Leste
+Carvalhos de Figueiredo,SANTARÉM,TOMAR,Madalena e Beselga,Ramal de Tomar
+Guia,LEIRIA,POMBAL,"Guia, Ilha e Mata Mourisca",Linha do Oeste
+Contenças,VISEU,MANGUALDE,Santiago de Cassurrães e Póvoa de Cervães,Linha da Beira Alta
+Jerumelo,LISBOA,SOBRAL DE MONTE AGRAÇO,Sapataria,Linha do Oeste
+Torre da Gadanha,ÉVORA,MONTEMOR-O-NOVO,São Cristóvão,Linha do Alentejo
+Bombel,ÉVORA,VENDAS NOVAS,Vendas Novas,Linha do Alentejo
+Rio Meão,AVEIRO,SANTA MARIA DA FEIRA,Rio Meão,Linha do Vouga
+Roma - Areeiro,LISBOA,LISBOA,Alvalade,Linha de Cintura
+Entrecampos - Poente,LISBOA,LISBOA,Avenidas Novas,Linha de Cintura
+Sete Rios,LISBOA,LISBOA,São Domingos de Benfica,Linha de Cintura
+Boliqueime,FARO,LOULÉ,Boliqueime,Linha do Algarve
+Santo Tirso,PORTO,SANTO TIRSO,"St. Tirso, Couto (S. Cristina e S. Miguel) e Burgães",Linha de Guimarães
+Urgueiras,AVEIRO,ALBERGARIA-A-VELHA,Albergaria-a-Velha e Valmaior,Linha do Vouga
+Chelas,LISBOA,LISBOA,Beato,Linha de Cintura
+Alcântara-Mar,LISBOA,LISBOA,Estrela,Linha de Cascais
+Penalva,SETÚBAL,PALMELA,Quinta do Anjo,Linha do Sul
+Alcântara-Terra,LISBOA,LISBOA,Estrela,Linha de Cintura
+Ferragudo,FARO,LAGOA,Estômbar e Parchal,Linha do Algarve
+Cuba,BEJA,CUBA,Cuba,Linha do Alentejo
+Mata,PORTALEGRE,ALTER DO CHÃO,Chancelaria,Linha do Leste
+Alvito,BEJA,ALVITO,Alvito,Linha do Alentejo
+Vila Nova da Baronia,BEJA,ALVITO,Vila Nova da Baronia,Linha do Alentejo
+São João das Craveiras,SETÚBAL,MONTIJO,Pegões,Linha do Alentejo
+Moita,SETÚBAL,MOITA,Moita,Linha do Alentejo
+Agualva-Cacém,LISBOA,SINTRA,Agualva e Mira-Sintra,Linha de Sintra
+Beja,BEJA,BEJA,Beja (Salvador e Santa Maria da Feira),Linha do Alentejo
+Panóias,BEJA,OURIQUE,Panoias e Conceição,Linha do Alentejo
+Sintra,LISBOA,SINTRA,"S. Maria, S. Miguel, S. Martinho e S. Pedro de Penaferrim",Linha de Sintra
+Alcáçovas,ÉVORA,ÉVORA,N. S. da Tourega e N. S. de Guadalupe,Linha do Alentejo
+Coimbrões,PORTO,VILA NOVA DE GAIA,Canidelo,Linha do Norte
+Pataias,LEIRIA,ALCOBAÇA,Pataias e Martingança,Linha do Oeste
+Muxagata,GUARDA,FORNOS DE ALGODRES,Figueiró da Granja,Linha da Beira Alta
+Almourol,SANTARÉM,VILA NOVA DA BARQUINHA,Praia do Ribatejo,Linha da Beira Baixa
+Verride,COIMBRA,MONTEMOR-O-VELHO,"Abrunheira, Verride e Vila Nova da Barca",Ramal de Alfarelos
+Alhos Vedros,SETÚBAL,MOITA,Alhos Vedros,Linha do Alentejo
+Baixa da Banheira,SETÚBAL,MOITA,Baixa da Banheira e Vale da Amoreira,Linha do Alentejo
+Sernada do Vouga,AVEIRO,ÁGUEDA,Macinhata do Vouga,Linha do Vouga
+Oliveira do Bairro,AVEIRO,OLIVEIRA DO BAIRRO,Oliveira do Bairro,Linha do Norte
+Rio de Mouro,LISBOA,SINTRA,Rio de Mouro,Linha de Sintra
+Barreiro-A,SETÚBAL,BARREIRO,Barreiro e Lavradio,Linha do Alentejo
+Barreiro,SETÚBAL,BARREIRO,Barreiro e Lavradio,Linha do Alentejo
+Massamá-Barcarena,LISBOA,OEIRAS,Barcarena,Linha de Sintra
+Monte Abraão,LISBOA,SINTRA,Queluz e Belas,Linha de Sintra
+Lavre,SANTARÉM,CORUCHE,Santana do Mato,Linha de Vendas Novas
+São Torcato,SANTARÉM,CORUCHE,"Coruche, Fajarda e Erra",Linha de Vendas Novas
+Salgueirinha,SANTARÉM,CORUCHE,"Coruche, Fajarda e Erra",Linha de Vendas Novas
+Quintans,AVEIRO,AVEIRO,Oliveirinha,Linha do Norte
+Lousal,SETÚBAL,GRÂNDOLA,Azinheira dos Barros e São Mamede do Sádão,Linha do Sul
+Porto São Bento,PORTO,PORTO,"Cedofeita, Ildefonso, Sé, Miragaia, Nicolau, Vitória",Linha do Minho
+Algueirão-Mem Martins,LISBOA,SINTRA,Algueirão-Mem Martins,Linha de Sintra
+Lisboa Santa Apolónia,LISBOA,LISBOA,São Vicente,Linha do Norte
+Morgado,SANTARÉM,CARTAXO,Valada,Linha de Vendas Novas
+Chança,PORTALEGRE,ALTER DO CHÃO,Chancelaria,Linha do Leste
+Bifurcação de Lares,COIMBRA,MONTEMOR-O-VELHO,"Abrunheira, Verride e Vila Nova da Barca",Linha do Oeste
+Montemor,COIMBRA,SOURE,Alfarelos,Ramal de Alfarelos
+Cruz Quebrada,LISBOA,OEIRAS,"Algés, Linda-a-Velha e Cruz Quebrada-Dafundo",Linha de Cascais
+Santa Eulália-A,PORTALEGRE,ELVAS,Santa Eulália,Linha do Leste
+Belém,LISBOA,LISBOA,Belém,Linha de Cascais
+Ponte de Sôr,PORTALEGRE,PONTE DE SOR,"Ponte de Sor, Tramaga e Vale de Açor",Linha do Leste
+Coina,SETÚBAL,SEIXAL,"Seixal, Arrentela e Aldeia de Paio Pires",Linha do Sul
+Arrifana,AVEIRO,SANTA MARIA DA FEIRA,Arrifana,Linha do Vouga
+Pocinho,GUARDA,VILA NOVA DE FOZ CÔA,Vila Nova de Foz Côa,Linha do Douro
+Fuseta,FARO,OLHÃO,Moncarapacho e Fuseta,Linha do Algarve
+Ourique,BEJA,CASTRO VERDE,Castro Verde e Casével,Linha do Alentejo
+Monte das Flores,ÉVORA,ÉVORA,Malagueira e Horta das Figueiras,Linha de Évora
+Alcantarilha,FARO,SILVES,Alcantarilha e Pêra,Linha do Algarve
+Poço Barreto,FARO,SILVES,Silves,Linha do Algarve
+Paredes,PORTO,PAREDES,Paredes,Linha do Douro
+Benfica,LISBOA,LISBOA,Benfica,Linha de Sintra
+São Bartolomeu da Serra,SETÚBAL,SANTIAGO DO CACÉM,"Santiago do Cacém, S. Cruz e S. Bartolomeu da Serra",Linha de Sines
+Riachos - Torres Novas - Golegã,SANTARÉM,TORRES NOVAS,Riachos,Linha do Norte
+Silves,FARO,SILVES,Silves,Linha do Algarve
+Bom João,FARO,FARO,Faro (Sé e São Pedro),Linha do Algarve
+Santana Cartaxo,SANTARÉM,CARTAXO,Vila Chã de Ourique,Linha do Norte
+Pereiras,BEJA,ODEMIRA,Santa Clara-a-Velha,Linha do Sul
+Monte Novo-Palma,SETÚBAL,ALCÁCER DO SAL,Santa Maria do Castelo e Santiago e Santa Susana,Linha do Sul
+Aguda,PORTO,VILA NOVA DE GAIA,Arcozelo,Linha do Norte
+Azinheira dos Barros – A,SETÚBAL,GRÂNDOLA,Azinheira dos Barros e São Mamede do Sádão,Linha do Sul
+Formoselha / Santo Varão,COIMBRA,MONTEMOR-O-VELHO,Santo Varão,Linha do Norte
+Almancil,FARO,LOULÉ,Almancil,Linha do Algarve
+Agolada,SANTARÉM,CORUCHE,"Coruche, Fajarda e Erra",Linha de Vendas Novas
+Fatela-Penamacor,CASTELO BRANCO,FUNDÃO,Enxames,Linha da Beira Baixa
+Alcains,CASTELO BRANCO,CASTELO BRANCO,Alcains,Linha da Beira Baixa
+Silvalde,AVEIRO,ESPINHO,Silvalde,Linha do Norte
+Salir do Porto,LEIRIA,CALDAS DA RAINHA,Tornada e Salir do Porto,Linha do Oeste
+Parque das Cidades,FARO,LOULÉ,Almancil,Linha do Algarve
+Pero Negro,LISBOA,SOBRAL DE MONTE AGRAÇO,Sapataria,Linha do Oeste
+Castelejo,VISEU,SANTA COMBA DÃO,São João de Areias,Linha da Beira Alta
+Águeda,AVEIRO,ÁGUEDA,Águeda e Borralha,Linha do Vouga
+Mortágua,VISEU,MORTÁGUA,"Mortágua, Vale de Remígio, Cortegaça e Almaça",Linha da Beira Alta
+Figueira da Foz,COIMBRA,FIGUEIRA DA FOZ,Buarcos e São Julião,Linha do Oeste
+Barcelos,BRAGA,BARCELOS,Arcozelo,Linha do Minho
+Monte dos Lobos,VISEU,MORTÁGUA,"Mortágua, Vale de Remígio, Cortegaça e Almaça",Linha da Beira Alta
+Estômbar-Lagoa,FARO,LAGOA,Estômbar e Parchal,Linha do Algarve
+Trofa,PORTO,TROFA,Bougado (São Martinho e Santiago),Linha do Minho
+Desvio de Picotas,BEJA,CASTRO VERDE,Castro Verde e Casével,Ramal Neves Corvo
+Minas de Neves Corvo,BEJA,CASTRO VERDE,Santa Bárbara de Padrões,Ramal Neves Corvo
+Palmilheira,PORTO,MAIA,Águas Santas,Linha do Minho
+Cavaco,AVEIRO,SANTA MARIA DA FEIRA,"Santa Maria da Feira, Travanca, Sanfins e Espargo",Linha do Vouga
+Famalicão da Nazaré,LEIRIA,NAZARÉ,Famalicão,Linha do Oeste
+Aguieira,AVEIRO,ÁGUEDA,Valongo do Vouga,Linha do Vouga
+Valongo,PORTO,VALONGO,Valongo,Linha do Douro
+Carvalha,VIANA DO CASTELO,VILA NOVA DE CERVEIRA,Campos e Vila Meã,Linha do Minho
+Pego,AVEIRO,MEALHADA,Vacariça,Linha da Beira Alta
+Praia do Ribatejo,SANTARÉM,VILA NOVA DA BARQUINHA,Praia do Ribatejo,Linha da Beira Baixa
+Marujal,COIMBRA,MONTEMOR-O-VELHO,"Abrunheira, Verride e Vila Nova da Barca",Ramal de Alfarelos
+Entrecampos,LISBOA,LISBOA,Alvalade,Linha de Cintura
+Viana,ÉVORA,VIANA DO ALENTEJO,Viana do Alentejo,Linha do Alentejo
+Pegões,SETÚBAL,MONTIJO,Pegões,Linha do Alentejo
+Mercês,LISBOA,SINTRA,Algueirão-Mem Martins,Linha de Sintra
+Garvão,BEJA,OURIQUE,Garvão e Santa Luzia,Linha do Sul
+Reboleira,LISBOA,AMADORA,Águas Livres,Linha de Sintra
+Marinhais,SANTARÉM,SALVATERRA DE MAGOS,Marinhais,Linha de Vendas Novas
+Muge,SANTARÉM,SALVATERRA DE MAGOS,Muge,Linha de Vendas Novas
+Canal-Caveira,SETÚBAL,GRÂNDOLA,Grândola e Santa Margarida da Serra,Linha do Sul
+Vendas Novas,ÉVORA,VENDAS NOVAS,Vendas Novas,Linha do Alentejo
+São Pedro do Estoril,LISBOA,CASCAIS,Cascais e Estoril,Linha de Cascais
+Cascais,LISBOA,CASCAIS,Cascais e Estoril,Linha de Cascais
+Estoril,LISBOA,CASCAIS,Cascais e Estoril,Linha de Cascais
+São João do Estoril,LISBOA,CASCAIS,Cascais e Estoril,Linha de Cascais
+Paço de Arcos,LISBOA,OEIRAS,"Oeiras e S. Julião da Barra, Paço de Arcos e Caxias",Linha de Cascais
+Caxias,LISBOA,OEIRAS,"Oeiras e S. Julião da Barra, Paço de Arcos e Caxias",Linha de Cascais
+Crato,PORTALEGRE,CRATO,"Crato e Mártires, Flor da Rosa e Vale do Peso",Linha do Leste
+Fogueteiro,SETÚBAL,SEIXAL,"Seixal, Arrentela e Aldeia de Paio Pires",Linha do Sul
+Foros de Amora,SETÚBAL,SEIXAL,Amora,Linha do Sul
+Pragal,SETÚBAL,ALMADA,"Almada, Cova da Piedade, Pragal e Cacilhas",Linha do Sul
+Alvito-A,LISBOA,LISBOA,Alcântara,Linha do Sul
+Fuseta-A,FARO,OLHÃO,Moncarapacho e Fuseta,Linha do Algarve
+Cacela,FARO,VILA REAL DE SANTO ANTÓNIO,Vila Nova de Cacela,Linha do Algarve
+Durrães,BRAGA,BARCELOS,Durrães e Tregosa,Linha do Minho
+Póvoa,LISBOA,VILA FRANCA DE XIRA,Póvoa de Santa Iria e Forte da Casa,Linha do Norte
+Portimão,FARO,PORTIMÃO,Portimão,Linha do Algarve
+Caíde,PORTO,LOUSADA,Caíde de Rei,Linha do Douro
+Albergaria dos Doze,LEIRIA,POMBAL,Santiago e S. Simão de Litém e Albergaria dos Doze,Linha do Norte
+Vizela,BRAGA,VIZELA,Caldas de Vizela (São Miguel e São João),Linha de Guimarães
+Mexilhoeira Grande,FARO,PORTIMÃO,Mexilhoeira Grande,Linha do Algarve
+Messines-Alte,FARO,SILVES,São Bartolomeu de Messines,Linha do Sul
+São Marcos,FARO,SILVES,São Marcos da Serra,Linha do Sul
+Santa Clara-Sabóia,BEJA,ODEMIRA,Santa Clara-a-Velha,Linha do Sul
+Luzianes,BEJA,ODEMIRA,Luzianes-Gare,Linha do Sul
+Lagos,FARO,LAGOS,São Gonçalo de Lagos,Linha do Algarve
+Castro Marim,FARO,CASTRO MARIM,Castro Marim,Linha do Algarve
+Alvarães,VIANA DO CASTELO,VIANA DO CASTELO,Alvarães,Linha do Minho
+Grândola Norte,SETÚBAL,GRÂNDOLA,Grândola e Santa Margarida da Serra,Linha do Sul
+Loulé,FARO,LOULÉ,Loulé (São Sebastião),Linha do Algarve
+Conceição,FARO,TAVIRA,Conceição e Cabanas de Tavira,Linha do Algarve
+Moledo do Minho,VIANA DO CASTELO,CAMINHA,Moledo e Cristelo,Linha do Minho
+Válega,AVEIRO,OVAR,Válega,Linha do Norte
+Bifurcação de Torre Vã,BEJA,OURIQUE,Panoias e Conceição,Linha do Sul
+Alvalade,SETÚBAL,SANTIAGO DO CACÉM,Alvalade,Linha do Sul
+Carregado,LISBOA,VILA FRANCA DE XIRA,Castanheira do Ribatejo e Cachoeiras,Linha do Norte
+Figueiredo,AVEIRO,OLIVEIRA DE AZEMÉIS,"Pinheiro da Bemposta, Travanca e Palmaz",Linha do Vouga
+Vale de Guizo,SETÚBAL,ALCÁCER DO SAL,Santa Maria do Castelo e Santiago e Santa Susana,Linha do Sul
+Ovar,AVEIRO,OVAR,"Ovar, S. João, Arada e S. Vicente de Pereira Jusã",Linha do Norte
+Miramar,PORTO,VILA NOVA DE GAIA,Arcozelo,Linha do Norte
+Pinheiro,SETÚBAL,ALCÁCER DO SAL,Santa Maria do Castelo e Santiago e Santa Susana,Linha do Sul
+Monte Gordo,FARO,VILA REAL DE SANTO ANTÓNIO,Monte Gordo,Linha do Algarve
+Soudos - Vila Nova,SANTARÉM,TOMAR,Paialvo,Ramal de Tomar
+Albufeira - Ferreiras,FARO,ALBUFEIRA,Ferreiras,Linha do Algarve
+Vale da Rosa,SETÚBAL,SETÚBAL,Sado,Linha do Sul
+Mourisca-Sado,SETÚBAL,SETÚBAL,Gâmbia-Pontes-Alto da Guerra,Linha do Sul
+Eirol,AVEIRO,AVEIRO,Eixo e Eirol,Linha do Vouga
+Cachofarra,SETÚBAL,SETÚBAL,Setúbal (São Sebastião),Linha do Sul
+Praça do Quebedo,SETÚBAL,SETÚBAL,"S. Julião, N. S. da Anunciada e S. Maria da Graça",Linha do Sul
+Vila Real de Stº António,FARO,VILA REAL DE SANTO ANTÓNIO,Vila Real de Santo António,Linha do Algarve
+Palmela - A,SETÚBAL,PALMELA,Palmela,Linha do Sul
+Palmela,SETÚBAL,PALMELA,Palmela,Linha do Sul
+Praias-Sado-A,SETÚBAL,SETÚBAL,Setúbal (São Sebastião),Linha do Sul
+Porto Rei,VILA REAL,MESÃO FRIO,Barqueiros,Linha do Douro
+Venda do Alcaide,SETÚBAL,PALMELA,Palmela,Linha do Sul
+Braço de Prata,LISBOA,LISBOA,Marvila,Linha do Norte
+Águas de Moura,SETÚBAL,SETÚBAL,Gâmbia-Pontes-Alto da Guerra,Linha do Sul
+Corroios,SETÚBAL,SEIXAL,Corroios,Linha do Sul
+Âncora Praia,VIANA DO CASTELO,CAMINHA,Vila Praia de Âncora,Linha do Minho
+Santa Cruz/Damaia,LISBOA,AMADORA,Águas Livres,Linha de Sintra
+Lisboa Rossio,LISBOA,LISBOA,Santa Maria Maior,Linha de Sintra
+Santa Cita,SANTARÉM,TOMAR,Madalena e Beselga,Ramal de Tomar
+Louriçal,LEIRIA,POMBAL,Carriço,Linha do Oeste
+Ameal-Sul,COIMBRA,MONTEMOR-O-VELHO,Pereira,Linha do Norte
+Freineda,GUARDA,ALMEIDA,Freineda,Linha da Beira Alta
+Baraçal,GUARDA,CELORICO DA BEIRA,Baraçal,Linha da Beira Alta
+Celorico da Beira,GUARDA,CELORICO DA BEIRA,Forno Telheiro,Linha da Beira Alta
+Papízios,VISEU,CARREGAL DO SAL,Carregal do Sal,Linha da Beira Alta
+Mourisca do Vouga,AVEIRO,ÁGUEDA,"Trofa, Segadães e Lamas do Vouga",Linha do Vouga
+Cacia,AVEIRO,AVEIRO,Cacia,Linha do Norte
+Sacavém,LISBOA,LOURES,Sacavém e Prior Velho,Linha do Norte
+Reguengo - Vale da Pedra - Pontével,SANTARÉM,CARTAXO,Vale da Pedra,Linha do Norte
+Esqueiro,VIANA DO CASTELO,CAMINHA,Lanhelas,Linha do Minho
+Cabanões,AVEIRO,ÁGUEDA,Travassô e Óis da Ribeira,Linha do Vouga
+Azurva,AVEIRO,AVEIRO,Eixo e Eirol,Linha do Vouga
+Leixões,PORTO,MATOSINHOS,Matosinhos e Leça da Palmeira,Linha de Leixões
+Louro,BRAGA,VILA NOVA DE FAMALICÃO,Louro,Linha do Minho
+Eixo,AVEIRO,AVEIRO,Eixo e Eirol,Linha do Vouga
+Bustelo,PORTO,PENAFIEL,Bustelo,Linha do Douro
+Vale de Santarém,SANTARÉM,SANTARÉM,Vale de Santarém,Linha do Norte
+Ermesinde - B,PORTO,VALONGO,Ermesinde,Concordância São Gemil
+Silvalde-Vouga,AVEIRO,ESPINHO,Silvalde,Linha do Vouga
+Aregos,PORTO,BAIÃO,Santa Cruz do Douro e São Tomé de Covelas,Linha do Douro
+Espadaneira,COIMBRA,COIMBRA,São Martinho do Bispo e Ribeira de Frades,Linha do Norte
+Esgueira,AVEIRO,AVEIRO,Esgueira,Linha do Vouga
+Travagem,PORTO,VALONGO,Ermesinde,Linha do Minho
+Marinha Grande,LEIRIA,MARINHA GRANDE,Marinha Grande,Linha do Oeste
+Canelas,AVEIRO,ESTARREJA,Canelas e Fermelã,Linha do Norte
+Caminha,VIANA DO CASTELO,CAMINHA,Caminha (Matriz) e Vilarelho,Linha do Minho
+Litém,LEIRIA,POMBAL,Santiago e S. Simão de Litém e Albergaria dos Doze,Linha do Norte
+Sampaio-Oleiros,AVEIRO,SANTA MARIA DA FEIRA,São Paio de Oleiros,Linha do Vouga
+São João de Loure,AVEIRO,AVEIRO,Eixo e Eirol,Linha do Vouga
+Carreira,BRAGA,BARCELOS,Carreira e Fonte Coberta,Linha do Minho
+Santarém,SANTARÉM,SANTARÉM,União das freguesias da cidade de Santarém,Linha do Norte
+Fungalvaz,SANTARÉM,TORRES NOVAS,Assentiz,Linha do Norte
+Chão de Maçãs-Fátima,SANTARÉM,TOMAR,Sabacheira,Linha do Norte
+Mira Sintra - Meleças,LISBOA,SINTRA,Queluz e Belas,Linha do Oeste
+Barca da Amieira -Envendos,SANTARÉM,MAÇÃO,Envendos,Linha da Beira Baixa
+Runa,LISBOA,TORRES VEDRAS,Dois Portos e Runa,Linha do Oeste
+Ferrão,VILA REAL,SABROSA,Covas do Douro,Linha do Douro
+Vila Fernando,GUARDA,GUARDA,Vila Fernando,Linha da Beira Alta
+Mafra,LISBOA,MAFRA,Igreja Nova e Cheleiros,Linha do Oeste
+Castelo Mendo,GUARDA,ALMEIDA,"Castelo Mendo, Ade, Monteperobolso e Mesquitela",Linha da Beira Alta
+Maçainhas,CASTELO BRANCO,BELMONTE,Maçainhas,Linha da Beira Baixa
+Malveira,LISBOA,MAFRA,Malveira e São Miguel de Alcainça,Linha do Oeste
+Rochoso,GUARDA,GUARDA,Rochoso e Monte Margarida,Linha da Beira Alta
+Sarnadas,CASTELO BRANCO,VILA VELHA DE RÓDÃO,Sarnadas de Ródão,Linha da Beira Baixa
+Covilhã,CASTELO BRANCO,COVILHÃ,Covilhã e Canhoso,Linha da Beira Baixa
+Alegria,BRAGANÇA,CARRAZEDA DE ANSIÃES,Linhares,Linha do Douro
+Livramento,FARO,TAVIRA,Luz de Tavira e Santo Estêvão,Linha do Algarve
+Porta Nova,FARO,TAVIRA,Tavira (Santa Maria e Santiago),Linha do Algarve
+Casa Branca,ÉVORA,MONTEMOR-O-NOVO,Santiago do Escoural,Linha do Alentejo
+Tancos,SANTARÉM,VILA NOVA DA BARQUINHA,Praia do Ribatejo,Linha da Beira Baixa
+Queluz-Belas,LISBOA,SINTRA,Queluz e Belas,Linha de Sintra
+Reveles,COIMBRA,MONTEMOR-O-VELHO,"Abrunheira, Verride e Vila Nova da Barca",Ramal de Alfarelos
+Vidigal,ÉVORA,VENDAS NOVAS,Vendas Novas,Linha de Vendas Novas
+Canha,SETÚBAL,MONTIJO,Canha,Linha de Vendas Novas
+Amoreiras-Odemira,BEJA,ODEMIRA,São Martinho das Amoreiras,Linha do Sul
+Azinheira dos Barros,SETÚBAL,GRÂNDOLA,Azinheira dos Barros e São Mamede do Sádão,Linha do Sul
+Petrogal - Asfaltos,SETÚBAL,SINES,Sines,Ramal Petrogal - Asfaltos
+Ribeira de Seiça,COIMBRA,FIGUEIRA DA FOZ,Paião,Linha do Oeste
+Fornos de Algodres,GUARDA,FORNOS DE ALGODRES,Fornos de Algodres,Linha da Beira Alta
+Barragem de Belver,SANTARÉM,MAÇÃO,Ortiga,Linha da Beira Baixa
+Benespera,GUARDA,GUARDA,Benespera,Linha da Beira Baixa
+Monte Real,LEIRIA,LEIRIA,Souto da Carpalhosa e Ortigosa,Linha do Oeste
+Moimenta Alcafache,VISEU,MANGUALDE,Espinho,Linha da Beira Alta
+Esmoriz,AVEIRO,OVAR,Esmoriz,Linha do Norte
+Godim,VILA REAL,PESO DA RÉGUA,Peso da Régua e Godim,Linha do Douro
+Miuzela,GUARDA,ALMEIDA,Miuzela e Porto de Ovelha,Linha da Beira Alta
+Vale de Prazeres,CASTELO BRANCO,FUNDÃO,Vale de Prazeres e Mata da Rainha,Linha da Beira Baixa
+Óbidos,LEIRIA,ÓBIDOS,"Santa Maria, São Pedro e Sobral da Lagoa",Linha do Oeste
+Amieira,COIMBRA,SOURE,Samuel,Linha do Oeste
+Vila Franca das Naves,GUARDA,TRANCOSO,Vila Franca das Naves e Feital,Linha da Beira Alta
+Camarão,LEIRIA,BOMBARRAL,Bombarral e Vale Covo,Linha do Oeste
+Raquete,SETÚBAL,SINES,Sines,Linha de Sines
+Tomar,SANTARÉM,TOMAR,São João Baptista e Santa Maria dos Olivais,Ramal de Tomar
+"Desvio Km 19.5",SANTARÉM,SALVATERRA DE MAGOS,Glória do Ribatejo e Granho,Linha de Vendas Novas
+Grândola,SETÚBAL,GRÂNDOLA,Grândola e Santa Margarida da Serra,Linha do Sul
+Alvega-Ortiga,SANTARÉM,MAÇÃO,Ortiga,Linha da Beira Baixa
+Sapataria,LISBOA,SOBRAL DE MONTE AGRAÇO,Sapataria,Linha do Oeste
+Leiria,LEIRIA,LEIRIA,Marrazes e Barosa,Linha do Oeste
+Arronches,PORTALEGRE,ARRONCHES,Assunção,Linha do Leste
+Caria,CASTELO BRANCO,BELMONTE,Caria,Linha da Beira Baixa
+Canas Felgueira,VISEU,NELAS,Canas de Senhorim,Linha da Beira Alta
+Macinhata,AVEIRO,ÁGUEDA,Macinhata do Vouga,Linha do Vouga
+Carvalheira - Maceda,AVEIRO,OVAR,Maceda,Linha do Norte
+Francelos Sul,PORTO,VILA NOVA DE GAIA,Gulpilhares e Valadares,Linha do Norte
+Francelos Norte,PORTO,VILA NOVA DE GAIA,Gulpilhares e Valadares,Linha do Norte
+Fuentes de Onõro,,,,Rede Espanhola
+Badajoz,,,,Rede Espanhola
+Porto Campanhã,PORTO,PORTO,Porto,Linha do Norte
+Viana do Castelo,VIANA DO CASTELO,VIANA DO CASTELO,Viana do Castelo,Linha do Minho
+Ermidas-Sado,SETÚBAL,SANTIAGO DO CACÉM,Ermidas-Sado,Linha do Sul
+Faro,FARO,FARO,Faro,Linha do Algarve
+Funcheira,BEJA,OURIQUE,Funcheira,Linha do Sul
+Lisboa Oriente,LISBOA,LISBOA,Parque das Nações,Linha do Norte
+Nine,BRAGA,FAMALICÃO,Nine,Linha do Minho
+Pinhal Novo,SETÚBAL,PALMELA,Pinhal Novo,Linha do Sul
+Pombal,LEIRIA,POMBAL,Pombal,Linha do Norte
+Tunes,FARO,SILVES,Tunes,Linha do Sul
+Vila Nova de Gaia-Devesas,PORTO,VILA NOVA DE GAIA,Vila Nova de Gaia,Linha do Norte
