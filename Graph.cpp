@@ -67,7 +67,7 @@ bool Graph::loadConnections() {
 
         // Add the connection if the source and destination stations were found
         if (source != stations.end() && dest != stations.end()) {
-            Connection connection(&(source->second), &(dest->second), capacity, service);
+            Connection connection((source->second), (dest->second), capacity, service);
             targets[sourceName].push_back(connection);
             connections.push_back(connection);
         }
@@ -76,54 +76,65 @@ bool Graph::loadConnections() {
     return true;
 }
 
-int Graph::maxTrainsBetweenStations(const string& source, const string& destination) {
-    // Create a priority queue to store the unprocessed nodes
-    priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> pq;
-
-    // Create a map to store the shortest distance and minimum capacity for each node
-    unordered_map<string, pair<int, int>> distance;
-
-    // Initialize the distance and minimum capacity for each node
-    for (const auto& station : stations) {
-        distance[station.first] = make_pair(numeric_limits<int>::max(), numeric_limits<int>::min());
+void Graph::updateAdjacencyMatrix() {
+    for (Connection& connection : connections) {
+        string source = connection.getSource().getName();
+        string destination = connection.getDestination().getName();
+        int capacity = connection.getCapacity();
+        adjacencyMatrix[source][destination] = capacity;
     }
+}
 
-    // Set the distance and minimum capacity for the source station
-    distance[source] = make_pair(0, numeric_limits<int>::max());
+int Graph::maxTrainsBetweenStations(const string source, const string destination) {
+    int maxFlow = 0;
+    unordered_map<string, string> parent;
 
-    // Add the source station to the priority queue
-    pq.push(make_pair(0, source));
+    while (true) {
+        queue<string> q;
+        q.push(source);
 
-    while (!pq.empty()) {
-        int current_distance = pq.top().first;
-        string current_station = pq.top().second;
-        pq.pop();
+        parent.clear();
 
-        // If the current station is the destination, break the loop
-        if (current_station == destination) {
+        while (!q.empty() && parent.find(destination) == parent.end()) {
+            string current = q.front();
+            q.pop();
+
+            for (const auto& neighbor : adjacencyMatrix[current]) {
+                string neighborStation = neighbor.first;
+                int capacity = neighbor.second;
+
+                if (parent.find(neighborStation) == parent.end() && neighborStation != source && capacity > 0) {
+                    parent[neighborStation] = current;
+                    q.push(neighborStation);
+                }
+            }
+        }
+
+        if (parent.find(destination) == parent.end()) {
             break;
         }
 
-        // If the current station has already been processed, skip it
-        if (current_distance > distance[current_station].first) {
-            continue;
+        int pathFlow = INT_MAX;
+        string currentStation = destination;
+
+        while (currentStation != source) {
+            string prevStation = parent[currentStation];
+            pathFlow = min(pathFlow, adjacencyMatrix[prevStation][currentStation]);
+            currentStation = prevStation;
         }
 
-        for (Connection& connection : targets[current_station]) {
-            string next_station = connection.getDestination()->getName();
-            int new_distance = current_distance + 1;
-            int new_capacity = min(distance[current_station].second, connection.getCapacity());
+        maxFlow += pathFlow;
+        currentStation = destination;
 
-            // If the new path has a shorter distance or a higher capacity, update the values
-            if (new_distance < distance[next_station].first || new_capacity > distance[next_station].second) {
-                distance[next_station] = make_pair(new_distance, new_capacity);
-                pq.push(make_pair(new_distance, next_station));
-            }
+        while (currentStation != source) {
+            string prevStation = parent[currentStation];
+            adjacencyMatrix[prevStation][currentStation] -= pathFlow;
+            adjacencyMatrix[currentStation][prevStation] += pathFlow;
+            currentStation = prevStation;
         }
     }
 
-    // Return the minimum capacity of the shortest path between the source and destination stations
-    return distance[destination].second;
+    return maxFlow;
 }
 
 
@@ -139,61 +150,61 @@ unordered_map<string, vector<Connection>> Graph::getTargets() {
     return targets;
 }
 
-vector<Station*> Graph::bfs(Station* start, Station* end) {
-    unordered_map<Station*, bool> visited;
-    unordered_map<Station*, Station*> parent;
-    queue<Station*> q;
+vector<Station> Graph::bfs(Station start, Station end) {
+    unordered_map<string , bool> visited;
+    unordered_map<string, Station> parent;
+    queue<Station> q;
 
     q.push(start);
-    visited[start] = true;
+    visited[start.getName()] = true;
 
     while (!q.empty()) {
-        Station* current = q.front();
+        Station current = q.front();
         q.pop();
 
-        if (current == end) {
+        if (current.getName() == end.getName()) {
             break;
         }
 
-        for (auto& conn : targets[current->getName()]) {
-            Station* neighbor = conn.getDestination();
+        for (auto conn : targets[current.getName()]) {
+            Station neighbor = conn.getDestination();
 
-            if (!visited[neighbor]) {
-                visited[neighbor] = true;
-                parent[neighbor] = current;
+            if (!visited[neighbor.getName()]) {
+                visited[neighbor.getName()] = true;
+                parent[neighbor.getName()] = current;
                 q.push(neighbor);
             }
         }
     }
 
     // Reconstruct the path from start to end
-    vector<Station*> path;
-    Station* current = end;
-    while (current != nullptr) {
+    vector<Station> path;
+    Station current = end;
+    while (current.getName() != start.getName()) {
         path.push_back(current);
-        current = parent[current];
+        current = parent[current.getName()];
     }
     reverse(path.begin(), path.end());
 
     return path;
 }
 
-void Graph::dfsHelper(Station* current, unordered_map<Station*, bool>& visited, vector<Station*>& path) {
-    visited[current] = true;
+void Graph::dfsHelper(Station current, unordered_map<string, bool>& visited, vector<Station>& path) {
+    visited[current.getName()] = true;
     path.push_back(current);
 
-    for (auto& conn : targets[current->getName()]) {
-        Station* neighbor = conn.getDestination();
+    for (auto& conn : targets[current.getName()]) {
+        Station neighbor = conn.getDestination();
 
-        if (!visited[neighbor]) {
+        if (!visited[neighbor.getName()]) {
             dfsHelper(neighbor, visited, path);
         }
     }
 }
 
-vector<Station*> Graph::dfs(Station* start, Station* end) {
-    unordered_map<Station*, bool> visited;
-    vector<Station*> path;
+vector<Station> Graph::dfs(Station start, Station end) {
+    unordered_map<string, bool> visited;
+    vector<Station> path;
 
     dfsHelper(start, visited, path);
 

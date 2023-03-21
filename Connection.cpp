@@ -4,18 +4,18 @@
 
 #include "Connection.h"
 
-Connection::Connection(Station* source, Station* destination, int capacity, string service) {
+Connection::Connection(Station source, Station destination, int capacity, string service) {
     this->source = source;
     this->destination = destination;
     this->capacity = capacity;
     this->service = service;
 }
 
-Station* Connection::getSource(){
+Station Connection::getSource(){
     return source;
 }
 
-Station* Connection::getDestination(){
+Station Connection::getDestination(){
     return destination;
 }
 

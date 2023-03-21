@@ -12,19 +12,19 @@ using namespace std;
 
 class Connection {
 private:
-    Station* source;
-    Station* destination;
+    Station source;
+    Station destination;
     int capacity;
     string service;
 
 public:
     Connection();
 
-    Connection(Station* source, Station* destination, int capacity, string service);
+    Connection(Station source, Station destination, int capacity, string service);
 
-    Station* getSource();
+    Station getSource();
 
-    Station* getDestination();
+    Station getDestination();
 
     int getCapacity();
 

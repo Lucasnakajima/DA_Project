@@ -31,3 +31,7 @@ string Station::getTownship() {
 string Station::getLine() {
     return line;
 }
+
+Station::Station() {
+
+}
