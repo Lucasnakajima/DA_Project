@@ -30,7 +30,7 @@ public:
     unordered_map<string, Station> getStations();
     vector<Connection> getConnections();
     unordered_map<string, vector<Connection>> getTargets();
-    int maxTrainsBetweenStations(string stationA, string stationB)
+    int maxTrainsBetweenStations(string stationA, string stationB);
 };
 
 

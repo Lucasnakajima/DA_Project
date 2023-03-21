@@ -138,11 +138,11 @@ int Graph::maxTrainsBetweenStations(string stationA, string stationB) {
     }
 }
 
-unordered_map<string, Station> Graph::getStations() {
+unordered_map<string, Station> Graph::getStations(){
     return stations;
 }
 
-vector<Connection> Graph::getConnections() {
+vector<Connection> Graph::getConnections(){
     return connections;
 }
 
