@@ -9,6 +9,8 @@ int main() {
     bool bconnections = g.loadConnections();
 
     unordered_map<string, Station> stations = g.getStations();
+    string source = "Lisboa Oriente";
+    string destination = "Vila Nova de Gaia-Devesas";
 
     vector<Connection> connections = g.getTargets()["Vila Nova de Gaia-Devesas"];
 
@@ -16,6 +18,8 @@ int main() {
 
     cout << connections.size() << endl;
 
+    int maxTrains = g.maxTrainsBetweenStations(source, destination);
+    cout << "Maximum number of trains that can simultaneously travel between " << source << " and " << destination << " is: " << maxTrains << endl;
 
 
     for (auto i : connections) {

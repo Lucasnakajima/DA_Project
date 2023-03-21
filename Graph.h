@@ -8,6 +8,8 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <limits>
+#include <queue>
 #include "Station.h"
 #include "Connection.h"
 
@@ -30,7 +32,8 @@ public:
     unordered_map<string, Station> getStations();
     vector<Connection> getConnections();
     unordered_map<string, vector<Connection>> getTargets();
-    int maxTrainsBetweenStations(string stationA, string stationB);
+    int maxTrainsBetweenStations(const string& source, const string& destination);
+
 };
 
 

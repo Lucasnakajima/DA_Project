@@ -5,7 +5,6 @@
 
 #include <fstream>
 #include <sstream>
-#include <queue>
 #include "Graph.h"
 
 using namespace std;
@@ -76,67 +75,56 @@ bool Graph::loadConnections() {
     return true;
 }
 
-int Graph::maxTrainsBetweenStations(string stationA, string stationB) {
-    // create adjacency list to store graph
-    unordered_map<string, vector<pair<string, int>>> adj;
-    for (auto conn: targets) {
-        string source = conn.first;
-        for (auto c: conn.second) {
-            string dest = c.getDestination()->getName();
-            adj[source].push_back(make_pair(dest, c.getCapacity()));
-            adj[dest].push_back(make_pair(source, 0));  // residual edge
+int Graph::maxTrainsBetweenStations(const string& source, const string& destination) {
+    // Create a priority queue to store the unprocessed nodes
+    priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> pq;
+
+    // Create a map to store the shortest distance and minimum capacity for each node
+    unordered_map<string, pair<int, int>> distance;
+
+    // Initialize the distance and minimum capacity for each node
+    for (const auto& station : stations) {
+        distance[station.first] = make_pair(numeric_limits<int>::max(), numeric_limits<int>::min());
+    }
+
+    // Set the distance and minimum capacity for the source station
+    distance[source] = make_pair(0, numeric_limits<int>::max());
+
+    // Add the source station to the priority queue
+    pq.push(make_pair(0, source));
+
+    while (!pq.empty()) {
+        int current_distance = pq.top().first;
+        string current_station = pq.top().second;
+        pq.pop();
+
+        // If the current station is the destination, break the loop
+        if (current_station == destination) {
+            break;
+        }
+
+        // If the current station has already been processed, skip it
+        if (current_distance > distance[current_station].first) {
+            continue;
+        }
+
+        for (Connection& connection : targets[current_station]) {
+            string next_station = connection.getDestination()->getName();
+            int new_distance = current_distance + 1;
+            int new_capacity = min(distance[current_station].second, connection.getCapacity());
+
+            // If the new path has a shorter distance or a higher capacity, update the values
+            if (new_distance < distance[next_station].first || new_capacity > distance[next_station].second) {
+                distance[next_station] = make_pair(new_distance, new_capacity);
+                pq.push(make_pair(new_distance, next_station));
+            }
         }
     }
 
-    // find shortest augmenting path using BFS
-    int maxFlow = 0;
-    while (true) {
-        unordered_map<string, string> parent;
-        unordered_map<string, int> capacity;
-        parent[stationA] = "";
-        capacity[stationA] = INT_MAX;
-        queue<string> q;
-        q.push(stationA);
-        while (!q.empty()) {
-            string u = q.front();
-            q.pop();
-            for (auto v: adj[u]) {
-                if (parent.find(v.first) == parent.end() && v.second > 0) {
-                    parent[v.first] = u;
-                    capacity[v.first] = min(capacity[u], v.second);
-                    if (v.first == stationB) {
-                        break;
-                    }
-                    q.push(v.first);
-                }
-            }
-            if (parent.find(stationB) != parent.end()) {
-                break;
-            }
-        }
-        if (parent.find(stationB) == parent.end()) {
-            break;
-        }
-        maxFlow += capacity[stationB];
-        string u = stationB;
-        while (u != stationA) {
-            string v = parent[u];
-            for (auto &edge: adj[u]) {
-                if (edge.first == v) {
-                    edge.second -= capacity[stationB];
-                    break;
-                }
-            }
-            for (auto &edge: adj[v]) {
-                if (edge.first == u) {
-                    edge.second += capacity[stationB];
-                    break;
-                }
-            }
-            u = v;
-        }
-    }
+    // Return the minimum capacity of the shortest path between the source and destination stations
+    return distance[destination].second;
 }
+
 
 unordered_map<string, Station> Graph::getStations(){
     return stations;
