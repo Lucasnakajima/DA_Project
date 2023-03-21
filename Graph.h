@@ -41,6 +41,9 @@ public:
     vector<Station> dfs(Station start, Station end);
     int maxTrainsBetweenStations(const string source, const string destination);
 
+    vector<Station> djikstra(Station start, Station end);
+    Station getClosestStation(unordered_map<string, int>& distances, unordered_map<string, bool>& visited);
+    int maxTrainsBetweenStations2(const string source, const string destination);
 
 };
 

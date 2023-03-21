@@ -14,11 +14,11 @@ int main() {
 
     vector<Connection> targets = g.getTargets()[destination];
 
-    vector<Station> shortest = g.shortestPath(g.getStations()[source], g.getStations()[destination]);
+    int shortest = g.maxTrainsBetweenStations2("Bencanta","Aguim");
 
     cout << bstations << " " << bconnections << endl;
 
-    for (auto i : targets) {
-        cout << i.getDestination().getName() << endl;
-    }
+    cout << shortest;
+
+
 }

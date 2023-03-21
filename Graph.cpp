@@ -201,8 +201,59 @@ vector<Station> Graph::bfs(Station start, Station end) {
     return path;
 }
 
+// implement ford fulkerson algorithm
+int Graph::maxTrainsBetweenStations2(const string source, const string destination) {
+    int maxFlow = 0;
+    unordered_map<string, string> parent;
+
+    while (true) {
+        queue<string> q;
+        q.push(source);
+
+        parent.clear();
+
+        while (!q.empty() && parent.find(destination) == parent.end()) {
+            string current = q.front();
+            q.pop();
 
 
 
+            for (const auto& neighbor : adjacencyMatrix[current]) {
+                string neighborStation = neighbor.first;
+                int capacity = neighbor.second;
 
+                if (parent.find(neighborStation) == parent.end() && neighborStation != source && capacity > 0) {
+                    parent[neighborStation] = current;
+                    q.push(neighborStation);
+                }
+            }
+        }
 
+        if (parent.find(destination) == parent.end()) {
+            break;
+        }
+
+        int pathFlow = INT_MAX;
+        string currentStation = destination;
+
+        while (currentStation != source) {
+            string prevStation = parent[currentStation];
+            pathFlow = min(pathFlow, adjacencyMatrix[prevStation][currentStation]);
+            currentStation = prevStation;
+        }
+
+        cout << pathFlow;
+
+        maxFlow += pathFlow;
+        currentStation = destination;
+
+        while (currentStation != source) {
+            string prevStation = parent[currentStation];
+            adjacencyMatrix[prevStation][currentStation] -= pathFlow;
+            adjacencyMatrix[currentStation][prevStation] += pathFlow;
+            currentStation = prevStation;
+        }
+    }
+
+    return maxFlow;
+}
