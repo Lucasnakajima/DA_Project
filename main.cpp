@@ -14,7 +14,7 @@ int main() {
 
     vector<Connection> targets = g.getTargets()[destination];
 
-    int shortest = g.maxTrainsBetweenStations2("Bencanta","Aguim");
+    int shortest = g.maxTrainsBetweenStations2(source,destination);
 
     cout << bstations << " " << bconnections << endl;
 
