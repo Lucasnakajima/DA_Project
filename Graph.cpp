@@ -150,9 +150,33 @@ unordered_map<string, vector<Connection>> Graph::getTargets() {
     return targets;
 }
 
+// dfs implementation without pointer or reference
+vector<Station> Graph::dfs(Station start, Station end) {
+    unordered_map<string, bool> visited;
+    vector<Station> path;
+
+    dfsHelper(start, visited, path);
+
+    return path;
+}
+
+void Graph::dfsHelper(Station current, unordered_map<string, bool>& visited, vector<Station>& path) {
+    visited[current.getName()] = true;
+    path.push_back(current);
+
+    for (Connection& connection : targets[current.getName()]) {
+        Station neighbor = connection.getDestination();
+
+        if (!visited[neighbor.getName()]) {
+            dfsHelper(neighbor, visited, path);
+        }
+    }
+}
+
+
 vector<Station> Graph::bfs(Station start, Station end) {
-    unordered_map<string , bool> visited;
-    unordered_map<string, Station> parent;
+    unordered_map<string, bool> visited;
+    vector<Station> path;
     queue<Station> q;
 
     q.push(start);
@@ -162,51 +186,23 @@ vector<Station> Graph::bfs(Station start, Station end) {
         Station current = q.front();
         q.pop();
 
-        if (current.getName() == end.getName()) {
-            break;
-        }
+        path.push_back(current);
 
-        for (auto conn : targets[current.getName()]) {
-            Station neighbor = conn.getDestination();
+        for (Connection& connection : targets[current.getName()]) {
+            Station neighbor = connection.getDestination();
 
             if (!visited[neighbor.getName()]) {
-                visited[neighbor.getName()] = true;
-                parent[neighbor.getName()] = current;
                 q.push(neighbor);
+                visited[neighbor.getName()] = true;
             }
         }
     }
 
-    // Reconstruct the path from start to end
-    vector<Station> path;
-    Station current = end;
-    while (current.getName() != start.getName()) {
-        path.push_back(current);
-        current = parent[current.getName()];
-    }
-    reverse(path.begin(), path.end());
-
     return path;
 }
 
-void Graph::dfsHelper(Station current, unordered_map<string, bool>& visited, vector<Station>& path) {
-    visited[current.getName()] = true;
-    path.push_back(current);
 
-    for (auto& conn : targets[current.getName()]) {
-        Station neighbor = conn.getDestination();
 
-        if (!visited[neighbor.getName()]) {
-            dfsHelper(neighbor, visited, path);
-        }
-    }
-}
 
-vector<Station> Graph::dfs(Station start, Station end) {
-    unordered_map<string, bool> visited;
-    vector<Station> path;
 
-    dfsHelper(start, visited, path);
 
-    return path;
-}
