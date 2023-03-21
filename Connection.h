@@ -18,6 +18,8 @@ private:
     string service;
 
 public:
+    Connection();
+
     Connection(Station* source, Station* destination, int capacity, string service);
 
     Station* getSource();

@@ -18,6 +18,8 @@ private:
 
 
 public:
+    Station();
+
     Station(string name, string district, string municipality, string township, string line);
 
     string getName();
