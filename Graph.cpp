@@ -9,6 +9,7 @@
 #include "Graph.h"
 
 using namespace std;
+const int INF = 1e9;
 
 Graph::Graph() {}
 
@@ -76,66 +77,16 @@ bool Graph::loadConnections() {
     return true;
 }
 
-void Graph::updateAdjacencyMatrix() {
+void Graph::updateResidualMatrix() {
     for (Connection& connection : connections) {
         string source = connection.getSource().getName();
         string destination = connection.getDestination().getName();
         int capacity = connection.getCapacity();
-        adjacencyMatrix[source][destination] = capacity;
+        residual[source][destination] = capacity;
+        residual[destination][source] = capacity;
     }
 }
 
-int Graph::maxTrainsBetweenStations(const string source, const string destination) {
-    int maxFlow = 0;
-    unordered_map<string, string> parent;
-
-    while (true) {
-        queue<string> q;
-        q.push(source);
-
-        parent.clear();
-
-        while (!q.empty() && parent.find(destination) == parent.end()) {
-            string current = q.front();
-            q.pop();
-
-            for (const auto& neighbor : adjacencyMatrix[current]) {
-                string neighborStation = neighbor.first;
-                int capacity = neighbor.second;
-
-                if (parent.find(neighborStation) == parent.end() && neighborStation != source && capacity > 0) {
-                    parent[neighborStation] = current;
-                    q.push(neighborStation);
-                }
-            }
-        }
-
-        if (parent.find(destination) == parent.end()) {
-            break;
-        }
-
-        int pathFlow = INT_MAX;
-        string currentStation = destination;
-
-        while (currentStation != source) {
-            string prevStation = parent[currentStation];
-            pathFlow = min(pathFlow, adjacencyMatrix[prevStation][currentStation]);
-            currentStation = prevStation;
-        }
-
-        maxFlow += pathFlow;
-        currentStation = destination;
-
-        while (currentStation != source) {
-            string prevStation = parent[currentStation];
-            adjacencyMatrix[prevStation][currentStation] -= pathFlow;
-            adjacencyMatrix[currentStation][prevStation] += pathFlow;
-            currentStation = prevStation;
-        }
-    }
-
-    return maxFlow;
-}
 
 
 unordered_map<string, Station> Graph::getStations(){
@@ -202,59 +153,51 @@ vector<Station> Graph::bfs(Station start, Station end) {
 }
 
 // implement ford fulkerson algorithm
-int Graph::maxTrainsBetweenStations2(const string source, const string destination) {
-    int maxFlow = 0;
-    updateAdjacencyMatrix();
-    unordered_map<string, string> parent;
-
-    while (true) {
-        queue<string> q;
-        q.push(source);
-
-        parent.clear();
-
-        while (!q.empty() && parent.find(destination) == parent.end()) {
-            string current = q.front();
+int Graph::maxTrainsBetweenStations(const string source, const string destination) {
+    int n = stations.size();
+    // Construct the residual graph by subtracting the flow from the capacity along forward edges and adding the flow to the capacity along backward edges.
+    updateResidualMatrix();
+    int max_flow = 0;
+    while(true){
+        unordered_map<string,string> parent;
+        for(auto i : stations){
+            parent[i.first] = " ";
+        }
+        queue<pair<Station, int>> q;
+        q.push({stations.find(source)->second, INF});
+        while(!q.empty()){
+            Station u = q.front().first;
+            int flow = q.front().second;
+            auto name = u.getName();
             q.pop();
-
-
-
-            for (const auto& neighbor : adjacencyMatrix[current]) {
-                string neighborStation = neighbor.first;
-                int capacity = neighbor.second;
-
-                if (parent.find(neighborStation) == parent.end() && neighborStation != source && capacity > 0) {
-                    parent[neighborStation] = current;
-                    q.push(neighborStation);
+            for(auto v = parent.begin(); v!=parent.end(); v++){
+                auto first = v->first;
+                auto second = v->second;
+                if(v->first == "Vila Nova de Gaia-Devesas"){
+                    //cout<<v->second<<endl;
+                }
+                if(v->second == " " && residual[u.getName()][v->first] > 0){
+                    v->second = u.getName();
+                    //cout << v->first << endl;
+                    int new_flow = min(flow, residual[u.getName()][v->first]);
+                    if(v->first==destination){
+                        max_flow+=new_flow;
+                        while(v->first!=source){
+                            auto first = v->first;
+                            auto second = v->second;
+                            u= stations.find(v->second)->second;
+                            residual[u.getName()][v->first] -= new_flow;
+                            residual[v->first][u.getName()] += new_flow;
+                            v = parent.find(u.getName());
+                        }
+                        break;
+                    }
+                    q.push({stations.find(v->first)->second, new_flow});
                 }
             }
+            if(parent[destination] != " ") break;
         }
-
-        if (parent.find(destination) == parent.end()) {
-            break;
-        }
-
-        int pathFlow = INT_MAX;
-        string currentStation = destination;
-
-        while (currentStation != source) {
-            string prevStation = parent[currentStation];
-            pathFlow = min(pathFlow, adjacencyMatrix[prevStation][currentStation]);
-            currentStation = prevStation;
-        }
-
-        cout << pathFlow;
-
-        maxFlow += pathFlow;
-        currentStation = destination;
-
-        while (currentStation != source) {
-            string prevStation = parent[currentStation];
-            adjacencyMatrix[prevStation][currentStation] -= pathFlow;
-            adjacencyMatrix[currentStation][prevStation] += pathFlow;
-            currentStation = prevStation;
-        }
+        if(parent[destination] == " ") break;
     }
-
-    return maxFlow;
+        return max_flow;
 }
