@@ -254,8 +254,8 @@ vector<pair<string, string>> Graph::findStationPairsRequiringMostTrains() {
     return maxFlowStationPairs;
 }
 
-vector<pair<string, string>> Graph::findHeaviestEdgesInPath(string origin, string end) {
-    unordered_map<string, int> maxCapacity;
+Connection Graph::findHeaviestEdgesInPath(string origin, string end) {
+/*    unordered_map<string, int> maxCapacity;
     unordered_map<string, string> previous;
     unordered_set<string> unvisited;
 
@@ -315,7 +315,123 @@ vector<pair<string, string>> Graph::findHeaviestEdgesInPath(string origin, strin
         current = prev;
     }
 
-    return heaviestEdges;
+    return heaviestEdges;*/
+
+    unordered_map<string, int> maxCapacity;
+    unordered_map<string,string> parent;
+    unordered_map<string, int> distance;
+    unordered_map<string, int> distance1;
+    unordered_map<string, bool> visited;
+    for(auto i : stations){
+        parent[i.first] = " ";
+        maxCapacity[i.first] = 0;
+        distance[i.first] = INF;
+        distance1[i.first] = INF;
+        visited[i.first] = false;
+    }
+    priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> pq;
+    priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> pq1;
+    distance[origin] = 0;
+    distance1[end] = 0;
+    pq.push({0, origin});
+    pq1.push({0, end});
+    while(!pq.empty() && !pq1.empty()){
+        if(pq.top().first <= pq1.top().first) {
+            string u = pq.top().second;
+            pq.pop();
+            if(visited[u]) continue;
+            visited[u] = true;
+            for(auto j : targets[u]){
+                string v = j.getDestination().getName();
+                int weight = j.getCapacity();
+                if(!visited[v]){
+                    int new_distance = distance[u] + 1;
+                    if(new_distance < distance[v]) {
+                        distance[v] = new_distance;
+                        maxCapacity[v] = max(maxCapacity[u], weight);
+                        pq.push({distance[v], v});
+                    }
+                }
+            }
+            if(visited[end]) break;
+        } else{
+            string u = pq1.top().second;
+            pq1.pop();
+            if(visited[u]) continue;
+            visited[u] = true;
+            for(auto j : targets[u]){
+                string v = j.getDestination().getName();
+                int weight = j.getCapacity();
+                if(!visited[v]){
+                    int new_distance = distance1[u] + 1;
+                    if(new_distance < distance1[v]) {
+                        distance1[v] = new_distance;
+                        maxCapacity[v] = max(maxCapacity[u], weight);
+                        pq1.push({distance1[v], v});
+                    }
+                }
+            }
+            if(visited[origin]) break;
+        }
+    }
+
+    Connection heaviest_edge;
+    int min_distance = INF;
+    for(auto u: stations){
+        if(distance[u.first] < INF || distance1[u.first]< INF){
+            int ok = distance[u.first];
+            int ok1 = distance1[u.first];
+            min_distance = INF;
+        }
+        if((distance[u.first] < INF || distance1[u.first] < INF)/* && distance1[u.first] + distance[u.first] < min_distance*/){
+            if(distance[u.first] < INF) min_distance = distance[u.first];
+            else min_distance = distance1[u.first];
+            heaviest_edge = new Connection(u.second, u.second, maxCapacity[u.first], "a");
+            string v = u.first;
+            while(v!=origin){
+                string parent1 = " ";
+                for(auto connection : targets[v]){
+                    if(distance[connection.getDestination().getName()] < distance[v]){
+                        parent1 = connection.getDestination().getName();
+                        break;
+                    }
+                }
+               if(parent1 != " "){
+                   if(maxCapacity[parent1] > heaviest_edge.getCapacity()){
+                        heaviest_edge.setSource(stations[parent1]);
+                        heaviest_edge.setDestination(stations[v]);
+                        heaviest_edge.setCapacity(maxCapacity[parent1]);
+                   }
+                   v = parent1;
+               } else{
+                   break;
+               }
+
+            }
+            v = u.first;
+            while(v!=origin) {
+                string parent1 = " ";
+                for (auto connection: targets[v]) {
+                    if (distance1[connection.getDestination().getName()] < distance1[v]) {
+                        parent1 = connection.getDestination().getName();
+                        break;
+                    }
+                }
+                if (parent1 != " ") {
+                    if (maxCapacity[parent1] > heaviest_edge.getCapacity()) {
+                        heaviest_edge.setSource(stations[v]);
+                        heaviest_edge.setDestination(stations[parent1]);
+                        heaviest_edge.setCapacity(maxCapacity[parent1]);
+                    }
+                    v = parent1;
+                } else {
+                    break;
+                }
+            }
+            break;
+        }
+    }
+    return heaviest_edge;
 }
 
 

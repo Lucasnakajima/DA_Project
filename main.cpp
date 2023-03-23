@@ -18,13 +18,13 @@ int main() {
 
     cout << bstations << " " << bconnections << endl;
 
-    cout << shortest;
+    cout << shortest<< endl;
 
-    //vector<pair<string, string>> pairs = g.findStationPairsRequiringMostTrains();
+    vector<pair<string, string>> pairs = g.findStationPairsRequiringMostTrains();
 
-    vector<pair<string, string>> pairs = g.findHeaviestEdgesInPath("Lisboa Oriente", "Espinho");
+    Connection a = g.findHeaviestEdgesInPath("Lisboa Oriente", "Espinho");
 
-    cout << pairs.size();
+    cout << pairs.size()<< endl;
 
     for (auto i : pairs) {
         cout << i.first << " " << i.second;

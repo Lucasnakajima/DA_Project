@@ -22,13 +22,19 @@ public:
 
     Connection(Station source, Station destination, int capacity, string service);
 
+    Connection& operator=(Connection *other);
+
     Station getSource();
+    void setSource(Station newSource);
 
     Station getDestination();
+    void setDestination(Station newDestination);
 
     int getCapacity();
+    void setCapacity(int newCapacity);
 
     string getService();
+    void setService(string newService);
 };
 
 
