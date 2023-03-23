@@ -201,3 +201,125 @@ int Graph::maxTrainsBetweenStations(const string source, const string destinatio
     }
         return max_flow;
 }
+
+// Add this function to the Graph class
+/*vector<pair<string, string>> Graph::findStationPairsRequiringMostTrains() {
+    int maxFlow = -1;
+    vector<pair<string, string>> maxFlowStationPairs;
+    unordered_map<string, unordered_map<string, int>> memo;
+
+    for ( auto& source : targets) {
+        for ( auto& connection : source.second) {
+            const auto& destination = connection.getDestination().getName();
+
+            if (memo[source.first].find(destination) == memo[source.first].end()) {
+                memo[source.first][destination] = maxTrainsBetweenStations(source.first, destination);
+            }
+
+            int flow = memo[source.first][destination];
+
+            if (flow > maxFlow) {
+                maxFlow = flow;
+                maxFlowStationPairs.clear();
+                maxFlowStationPairs.push_back({source.first, destination});
+            } else if (flow == maxFlow) {
+                maxFlowStationPairs.push_back({source.first, destination});
+            }
+        }
+    }
+
+    return maxFlowStationPairs;
+}*/
+
+vector<pair<string, string>> Graph::findStationPairsRequiringMostTrains() {
+    int maxFlow = -1;
+    vector<pair<string, string>> maxFlowStationPairs;
+
+    for (auto& source : targets) {
+        for (auto& connection : source.second) {
+            const auto& destination = connection.getDestination().getName();
+
+            int flow = maxTrainsBetweenStations(source.first, destination);
+
+            if (flow > maxFlow) {
+                maxFlow = flow;
+                maxFlowStationPairs.clear();
+                maxFlowStationPairs.push_back({source.first, destination});
+            } else if (flow == maxFlow) {
+                maxFlowStationPairs.push_back({source.first, destination});
+            }
+        }
+    }
+
+    return maxFlowStationPairs;
+}
+
+vector<pair<string, string>> Graph::findHeaviestEdgesInPath(string origin, string end) {
+    unordered_map<string, int> maxCapacity;
+    unordered_map<string, string> previous;
+    unordered_set<string> unvisited;
+
+    // Initialize the maxCapacity and previous maps
+    for (const auto& station : stations) {
+        maxCapacity[station.first] = (station.first == origin) ? INT_MAX : 0;
+        previous[station.first] = "";
+        unvisited.insert(station.first);
+    }
+
+    while (!unvisited.empty()) {
+        // Find the station with the maximum capacity that has not been visited
+        string currentStation;
+        int currentMaxCapacity = -1;
+        for (const auto& station : unvisited) {
+            if (maxCapacity[station] > currentMaxCapacity) {
+                currentMaxCapacity = maxCapacity[station];
+                currentStation = station;
+            }
+        }
+
+        // If the current station is the end station, break the loop
+        if (currentStation == end) break;
+
+        // Mark the current station as visited
+        unvisited.erase(currentStation);
+
+        // Update the capacities for the neighbors of the current station
+        for ( auto& connection : targets[currentStation]) {
+            const auto& neighbor = connection.getDestination().getName();
+            int capacity = connection.getCapacity();
+
+            if (unvisited.find(neighbor) != unvisited.end() && min(maxCapacity[currentStation], capacity) > maxCapacity[neighbor]) {
+                maxCapacity[neighbor] = min(maxCapacity[currentStation], capacity);
+                previous[neighbor] = currentStation;
+            }
+        }
+    }
+
+    // Find the heaviest edges in the path
+    vector<pair<string, string>> heaviestEdges;
+    int heaviestEdgeCapacity = -1;
+    string current = end;
+
+    while (previous[current] != "") {
+        string prev = previous[current];
+        int capacity = maxCapacity[current];
+
+        if (capacity > heaviestEdgeCapacity) {
+            heaviestEdgeCapacity = capacity;
+            heaviestEdges.clear();
+            heaviestEdges.push_back({prev, current});
+        } else if (capacity == heaviestEdgeCapacity) {
+            heaviestEdges.push_back({prev, current});
+        }
+
+        current = prev;
+    }
+
+    return heaviestEdges;
+}
+
+
+
+
+
+

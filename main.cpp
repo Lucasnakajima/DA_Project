@@ -9,8 +9,8 @@ int main() {
     bool bconnections = g.loadConnections();
 
     unordered_map<string, Station> stations = g.getStations();
-    string source = "Lisboa Oriente";
-    string destination = "Vila Nova de Gaia-Devesas";
+    string source = "Entroncamento";
+    string destination = "Lisboa Oriente";
 
     vector<Connection> targets = g.getTargets()[destination];
 
@@ -20,5 +20,13 @@ int main() {
 
     cout << shortest;
 
+    //vector<pair<string, string>> pairs = g.findStationPairsRequiringMostTrains();
 
+    vector<pair<string, string>> pairs = g.findHeaviestEdgesInPath("Lisboa Oriente", "Espinho");
+
+    cout << pairs.size();
+
+    for (auto i : pairs) {
+        cout << i.first << " " << i.second;
+    }
 }

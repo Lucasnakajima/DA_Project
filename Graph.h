@@ -9,6 +9,7 @@
 #include <vector>
 #include <unordered_map>
 #include <limits>
+#include <unordered_set>
 #include <queue>
 #include "Station.h"
 #include "Connection.h"
@@ -22,9 +23,6 @@ private:
     unordered_map<string, vector<Connection>> targets;
     vector<Connection> connections;
     unordered_map<string, unordered_map<string, int>> residual; // Add an adjacency matrix
-
-
-
 
 public:
     Graph();
@@ -40,10 +38,8 @@ public:
     void dfsHelper(Station current, unordered_map<string, bool>& visited, vector<Station>& path);
     vector<Station> dfs(Station start, Station end);
     int maxTrainsBetweenStations(const string source, const string destination);
-
-    vector<Station> djikstra(Station start, Station end);
-    Station getClosestStation(unordered_map<string, int>& distances, unordered_map<string, bool>& visited);
-
+    vector<pair<string, string>> findStationPairsRequiringMostTrains();
+    vector<pair<string, string>> findHeaviestEdgesInPath(string origin, string end);
 
 };
 
