@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <queue>
 #include "Graph.h"
 
 using namespace std;
@@ -71,6 +72,9 @@ bool Graph::loadConnections() {
             Connection connection((source->second), (dest->second), capacity, service);
             targets[sourceName].push_back(connection);
             connections.push_back(connection);
+            Connection connection_reverse((dest->second), (source->second), capacity, service);
+            targets[destName].push_back(connection);
+            connections.push_back(connection_reverse);
         }
     }
 
@@ -99,6 +103,17 @@ vector<Connection> Graph::getConnections(){
 
 unordered_map<string, vector<Connection>> Graph::getTargets() {
     return targets;
+}
+
+int Graph::getIndex(const string name) {
+    int i = 0;
+    for(auto x : stations) {
+        if (x.first == name) {
+            return i;
+        }
+        i++;
+    }
+    return -1;
 }
 
 // dfs implementation without pointer or reference
@@ -254,185 +269,114 @@ vector<pair<string, string>> Graph::findStationPairsRequiringMostTrains() {
     return maxFlowStationPairs;
 }
 
-Connection Graph::findHeaviestEdgesInPath(string origin, string end) {
-/*    unordered_map<string, int> maxCapacity;
-    unordered_map<string, string> previous;
-    unordered_set<string> unvisited;
-
-    // Initialize the maxCapacity and previous maps
-    for (const auto& station : stations) {
-        maxCapacity[station.first] = (station.first == origin) ? INT_MAX : 0;
-        previous[station.first] = "";
-        unvisited.insert(station.first);
+struct CompareNodes {
+    bool operator()(const pair<string, int>& lhs, const pair<string, int>& rhs) {
+        return lhs.second > rhs.second;
     }
+};
 
-    while (!unvisited.empty()) {
-        // Find the station with the maximum capacity that has not been visited
-        string currentStation;
-        int currentMaxCapacity = -1;
-        for (const auto& station : unvisited) {
-            if (maxCapacity[station] > currentMaxCapacity) {
-                currentMaxCapacity = maxCapacity[station];
-                currentStation = station;
-            }
-        }
-
-        // If the current station is the end station, break the loop
-        if (currentStation == end) break;
-
-        // Mark the current station as visited
-        unvisited.erase(currentStation);
-
-        // Update the capacities for the neighbors of the current station
-        for ( auto& connection : targets[currentStation]) {
-            const auto& neighbor = connection.getDestination().getName();
-            int capacity = connection.getCapacity();
-
-            if (unvisited.find(neighbor) != unvisited.end() && min(maxCapacity[currentStation], capacity) > maxCapacity[neighbor]) {
-                maxCapacity[neighbor] = min(maxCapacity[currentStation], capacity);
-                previous[neighbor] = currentStation;
-            }
-        }
-    }
-
-    // Find the heaviest edges in the path
-    vector<pair<string, string>> heaviestEdges;
-    int heaviestEdgeCapacity = -1;
-    string current = end;
-
-    while (previous[current] != "") {
-        string prev = previous[current];
-        int capacity = maxCapacity[current];
-
-        if (capacity > heaviestEdgeCapacity) {
-            heaviestEdgeCapacity = capacity;
-            heaviestEdges.clear();
-            heaviestEdges.push_back({prev, current});
-        } else if (capacity == heaviestEdgeCapacity) {
-            heaviestEdges.push_back({prev, current});
-        }
-
-        current = prev;
-    }
-
-    return heaviestEdges;*/
+Station Graph::findHeaviestEdgesInPath(string origin, string end) {
 
     unordered_map<string, int> maxCapacity;
-    unordered_map<string,string> parent;
+    unordered_map<string, string> parent;
     unordered_map<string, int> distance;
-    unordered_map<string, int> distance1;
     unordered_map<string, bool> visited;
-    for(auto i : stations){
-        parent[i.first] = " ";
+    for (auto i : stations) {
+        parent[i.first] = "";
         maxCapacity[i.first] = 0;
         distance[i.first] = INF;
-        distance1[i.first] = INF;
         visited[i.first] = false;
     }
-    priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> pq;
-    priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> pq1;
+    queue<pair<int, string>> pq;
     distance[origin] = 0;
-    distance1[end] = 0;
     pq.push({0, origin});
-    pq1.push({0, end});
-    while(!pq.empty() && !pq1.empty()){
-        if(pq.top().first <= pq1.top().first) {
-            string u = pq.top().second;
-            pq.pop();
-            if(visited[u]) continue;
-            visited[u] = true;
-            for(auto j : targets[u]){
-                string v = j.getDestination().getName();
-                int weight = j.getCapacity();
-                if(!visited[v]){
-                    int new_distance = distance[u] + 1;
-                    if(new_distance < distance[v]) {
-                        distance[v] = new_distance;
-                        maxCapacity[v] = max(maxCapacity[u], weight);
-                        pq.push({distance[v], v});
-                    }
+    Connection temp;
+    while (!pq.empty()) {
+        string u = pq.front().second;
+        pq.pop();
+        if (visited[u]) continue;
+        visited[u] = true;
+        for (auto j : targets[u]) {
+            string v = j.getDestination().getName();
+            if(v=="Espinho"){
+                int c = 0;
+            }
+            int weight = j.getCapacity();
+            if (!visited[v]) {
+                int new_distance = distance[u] + 1;
+                if (new_distance < distance[v]) {
+                    distance[v] = new_distance;
+                    parent[v]=u;
+                    pq.push({distance[v], v});
                 }
             }
-            if(visited[end]) break;
-        } else{
-            string u = pq1.top().second;
-            pq1.pop();
-            if(visited[u]) continue;
-            visited[u] = true;
-            for(auto j : targets[u]){
-                string v = j.getDestination().getName();
-                int weight = j.getCapacity();
-                if(!visited[v]){
-                    int new_distance = distance1[u] + 1;
-                    if(new_distance < distance1[v]) {
-                        distance1[v] = new_distance;
-                        maxCapacity[v] = max(maxCapacity[u], weight);
-                        pq1.push({distance1[v], v});
-                    }
-                }
-            }
-            if(visited[origin]) break;
         }
+        if (visited[end]) break;
     }
 
     Connection heaviest_edge;
-    int min_distance = INF;
-    for(auto u: stations){
-        if(distance[u.first] < INF || distance1[u.first]< INF){
-            int ok = distance[u.first];
-            int ok1 = distance1[u.first];
-            min_distance = INF;
+    string u = end;
+    int max = targets[u].size();
+    string maxi = u;
+    while (u != origin) {
+        string v = parent[u];
+        if(targets[v].size() > max){
+            maxi=v;
+            max = targets[v].size();
         }
-        if((distance[u.first] < INF || distance1[u.first] < INF)/* && distance1[u.first] + distance[u.first] < min_distance*/){
-            if(distance[u.first] < INF) min_distance = distance[u.first];
-            else min_distance = distance1[u.first];
-            heaviest_edge = new Connection(u.second, u.second, maxCapacity[u.first], "a");
-            string v = u.first;
-            while(v!=origin){
-                string parent1 = " ";
-                for(auto connection : targets[v]){
-                    if(distance[connection.getDestination().getName()] < distance[v]){
-                        parent1 = connection.getDestination().getName();
-                        break;
-                    }
-                }
-               if(parent1 != " "){
-                   if(maxCapacity[parent1] > heaviest_edge.getCapacity()){
-                        heaviest_edge.setSource(stations[parent1]);
-                        heaviest_edge.setDestination(stations[v]);
-                        heaviest_edge.setCapacity(maxCapacity[parent1]);
-                   }
-                   v = parent1;
-               } else{
-                   break;
-               }
-
-            }
-            v = u.first;
-            while(v!=origin) {
-                string parent1 = " ";
-                for (auto connection: targets[v]) {
-                    if (distance1[connection.getDestination().getName()] < distance1[v]) {
-                        parent1 = connection.getDestination().getName();
-                        break;
-                    }
-                }
-                if (parent1 != " ") {
-                    if (maxCapacity[parent1] > heaviest_edge.getCapacity()) {
-                        heaviest_edge.setSource(stations[v]);
-                        heaviest_edge.setDestination(stations[parent1]);
-                        heaviest_edge.setCapacity(maxCapacity[parent1]);
-                    }
-                    v = parent1;
-                } else {
-                    break;
-                }
-            }
-            break;
-        }
+        u = v;
     }
-    return heaviest_edge;
+    if(targets[origin].size() > max){
+        maxi=origin;
+        max = targets[origin].size();
+    }
+    return stations[maxi];
+    /*vector<bool> visited(stations.size(), false);
+    vector<int> distance(stations.size(), INF);
+    vector<string> parent(stations.size(), "");
+    priority_queue<pair<string, int>, vector<pair<string, int>>, CompareNodes> pq;
+    distance[getIndex(origin)] = 0;
+    pq.emplace(origin, 0);
+    while (!pq.empty()) {
+        auto u = pq.top().first;
+        pq.pop();
+        if (visited[getIndex(u)]) continue;
+        visited[getIndex(u)] = true;
+        auto adj_list = targets[u];
+        auto it = adj_list.begin();
+        while (it != adj_list.end()) {
+            string v = it->getDestination().getName();
+            if (!visited[getIndex(v)]) {
+                int new_distance = distance[getIndex(u)] + 1;
+                if (new_distance < distance[getIndex(v)]) {
+                    distance[getIndex(v)] = new_distance;
+                    parent[getIndex(v)] = u;
+                    pq.emplace(v, new_distance);
+                }
+            }
+            it++;
+        }
+        if (u == end) break;
+    }
+
+    string u = end;
+    int max = targets[u].size();
+    string maxi = u;
+    while (u != origin) {
+        string v = parent[getIndex(u)];
+        if (targets[v].size() > max) {
+            maxi = v;
+            max = targets[v].size();
+        }
+        u = v;
+    }
+    if (targets[origin].size() > max) {
+        maxi = origin;
+        max = targets[origin].size();
+    }
+    return stations[maxi];*/
 }
+
 
 
 

@@ -39,7 +39,8 @@ public:
     vector<Station> dfs(Station start, Station end);
     int maxTrainsBetweenStations(const string source, const string destination);
     vector<pair<string, string>> findStationPairsRequiringMostTrains();
-    Connection findHeaviestEdgesInPath(string origin, string end);
+    Station findHeaviestEdgesInPath(string origin, string end);
+    int getIndex(const string name);
 
 };
 

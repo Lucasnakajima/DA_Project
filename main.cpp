@@ -22,7 +22,7 @@ int main() {
 
     vector<pair<string, string>> pairs = g.findStationPairsRequiringMostTrains();
 
-    Connection a = g.findHeaviestEdgesInPath("Lisboa Oriente", "Espinho");
+    Station a = g.findHeaviestEdgesInPath("Lisboa Oriente", "Espinho");
 
     cout << pairs.size()<< endl;
 
