@@ -73,8 +73,8 @@ bool Graph::loadConnections() {
             targets[sourceName].push_back(connection);
             connections.push_back(connection);
             Connection connection_reverse((dest->second), (source->second), capacity, service);
-            targets[destName].push_back(connection);
             connections.push_back(connection_reverse);
+            targets[destName].push_back(connection_reverse);
         }
     }
 
@@ -82,12 +82,19 @@ bool Graph::loadConnections() {
 }
 
 void Graph::updateResidualMatrix() {
+    residual.clear();
+    for (auto i : stations) {
+        residual[i.first] = unordered_map<string, int>();
+        for (auto j : stations) {
+            residual[i.first][j.first] = 0;
+        }
+    }
     for (Connection& connection : connections) {
         string source = connection.getSource().getName();
         string destination = connection.getDestination().getName();
         int capacity = connection.getCapacity();
-        residual[source][destination] = capacity;
-        residual[destination][source] = capacity;
+        residual[source][destination] += capacity;
+        residual[destination][source] += capacity;
     }
 }
 
@@ -140,36 +147,48 @@ void Graph::dfsHelper(Station current, unordered_map<string, bool>& visited, vec
 }
 
 
-vector<Station> Graph::bfs(Station start, Station end) {
+bool Graph::bfs(Station sourceName, Station destName) {
+    queue<string> q;
     unordered_map<string, bool> visited;
-    vector<Station> path;
-    queue<Station> q;
 
-    q.push(start);
-    visited[start.getName()] = true;
+    for (auto it = stations.begin(); it != stations.end(); it++) {
+        visited[it->first] = false;
+        parent[it->first] = "";
+    }
+
+    q.push(sourceName.getName());
+    visited[sourceName.getName()] = true;
+    parent[sourceName.getName()] = "";
 
     while (!q.empty()) {
-        Station current = q.front();
+        string u = q.front();
         q.pop();
 
-        path.push_back(current);
+        for (auto it = targets[u].begin(); it != targets[u].end(); it++) {
+            string v = it->getDestination().getName();
 
-        for (Connection& connection : targets[current.getName()]) {
-            Station neighbor = connection.getDestination();
+            // Only consider edges with positive residual capacity
+            if (visited[v] == false && residual[u][v] > 0) {
+                visited[v] = true;
+                parent[v] = u;
+                q.push(v);
+                cout << "Parent of node " << v << " is " << parent[v] << endl;
 
-            if (!visited[neighbor.getName()]) {
-                q.push(neighbor);
-                visited[neighbor.getName()] = true;
+                // Return true if we have reached the destination
+                if (v == destName.getName()) {
+                    return true;
+                }
             }
         }
     }
 
-    return path;
+    // If we reach this point, there is no augmenting path from source to dest
+    return false;
 }
 
 // implement ford fulkerson algorithm
 int Graph::maxTrainsBetweenStations(const string source, const string destination) {
-    int n = stations.size();
+    /*int n = stations.size();
     // Construct the residual graph by subtracting the flow from the capacity along forward edges and adding the flow to the capacity along backward edges.
     updateResidualMatrix();
     int max_flow = 0;
@@ -214,7 +233,28 @@ int Graph::maxTrainsBetweenStations(const string source, const string destinatio
         }
         if(parent[destination] == " ") break;
     }
-        return max_flow;
+        return max_flow;*/
+    int max_flow = 0;
+    updateResidualMatrix();
+    while (bfs(stations[source], stations[destination])) {
+        int path_flow = INT_MAX;
+        string v = destination;
+        while (v != source) {
+            string u = parent[v];
+            path_flow = min(path_flow, residual[u][v]);
+            v = u;
+        }
+        v = destination;
+        while (v != source) {
+            string u = parent[v];
+            residual[u][v] -= path_flow;
+            residual[v][u] += path_flow;
+            v = u;
+        }
+        max_flow += path_flow;
+        updateResidualMatrix();
+    }
+    return max_flow;
 }
 
 // Add this function to the Graph class
@@ -269,12 +309,6 @@ vector<pair<string, string>> Graph::findStationPairsRequiringMostTrains() {
     return maxFlowStationPairs;
 }
 
-struct CompareNodes {
-    bool operator()(const pair<string, int>& lhs, const pair<string, int>& rhs) {
-        return lhs.second > rhs.second;
-    }
-};
-
 Station Graph::findHeaviestEdgesInPath(string origin, string end) {
 
     unordered_map<string, int> maxCapacity;
@@ -287,83 +321,37 @@ Station Graph::findHeaviestEdgesInPath(string origin, string end) {
         distance[i.first] = INF;
         visited[i.first] = false;
     }
-    queue<pair<int, string>> pq;
+    priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> pq;
     distance[origin] = 0;
     pq.push({0, origin});
-    Connection temp;
+
     while (!pq.empty()) {
-        string u = pq.front().second;
+        string u = pq.top().second;
         pq.pop();
+        if (u == end) break;
         if (visited[u]) continue;
         visited[u] = true;
         for (auto j : targets[u]) {
             string v = j.getDestination().getName();
-            if(v=="Espinho"){
-                int c = 0;
+            if(v == "Espinho") {
+                int weight = j.getCapacity();
             }
-            int weight = j.getCapacity();
-            if (!visited[v]) {
                 int new_distance = distance[u] + 1;
                 if (new_distance < distance[v]) {
                     distance[v] = new_distance;
-                    parent[v]=u;
+                    parent[v] = u;
                     pq.push({distance[v], v});
                 }
-            }
+
         }
-        if (visited[end]) break;
     }
 
-    Connection heaviest_edge;
     string u = end;
     int max = targets[u].size();
     string maxi = u;
+    string v = parent[u];
     while (u != origin) {
         string v = parent[u];
-        if(targets[v].size() > max){
-            maxi=v;
-            max = targets[v].size();
-        }
-        u = v;
-    }
-    if(targets[origin].size() > max){
-        maxi=origin;
-        max = targets[origin].size();
-    }
-    return stations[maxi];
-    /*vector<bool> visited(stations.size(), false);
-    vector<int> distance(stations.size(), INF);
-    vector<string> parent(stations.size(), "");
-    priority_queue<pair<string, int>, vector<pair<string, int>>, CompareNodes> pq;
-    distance[getIndex(origin)] = 0;
-    pq.emplace(origin, 0);
-    while (!pq.empty()) {
-        auto u = pq.top().first;
-        pq.pop();
-        if (visited[getIndex(u)]) continue;
-        visited[getIndex(u)] = true;
-        auto adj_list = targets[u];
-        auto it = adj_list.begin();
-        while (it != adj_list.end()) {
-            string v = it->getDestination().getName();
-            if (!visited[getIndex(v)]) {
-                int new_distance = distance[getIndex(u)] + 1;
-                if (new_distance < distance[getIndex(v)]) {
-                    distance[getIndex(v)] = new_distance;
-                    parent[getIndex(v)] = u;
-                    pq.emplace(v, new_distance);
-                }
-            }
-            it++;
-        }
-        if (u == end) break;
-    }
-
-    string u = end;
-    int max = targets[u].size();
-    string maxi = u;
-    while (u != origin) {
-        string v = parent[getIndex(u)];
         if (targets[v].size() > max) {
             maxi = v;
             max = targets[v].size();
@@ -374,7 +362,7 @@ Station Graph::findHeaviestEdgesInPath(string origin, string end) {
         maxi = origin;
         max = targets[origin].size();
     }
-    return stations[maxi];*/
+    return stations[maxi];
 }
 
 

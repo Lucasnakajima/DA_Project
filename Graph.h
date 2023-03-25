@@ -22,6 +22,7 @@ private:
     unordered_map<string, Station> stations;
     unordered_map<string, vector<Connection>> targets;
     vector<Connection> connections;
+    unordered_map<string, string> parent;
     unordered_map<string, unordered_map<string, int>> residual; // Add an adjacency matrix
 
 public:
@@ -34,7 +35,7 @@ public:
     vector<Connection> getConnections();
     unordered_map<string, vector<Connection>> getTargets();
     void updateResidualMatrix();
-    vector<Station> bfs(Station start, Station end);
+    bool bfs(Station start, Station end);
     void dfsHelper(Station current, unordered_map<string, bool>& visited, vector<Station>& path);
     vector<Station> dfs(Station start, Station end);
     int maxTrainsBetweenStations(const string source, const string destination);
