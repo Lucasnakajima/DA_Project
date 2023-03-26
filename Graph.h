@@ -29,19 +29,33 @@ public:
     Graph();
 
     bool loadStations();
+
     bool loadConnections();
 
     unordered_map<string, Station> getStations();
+
     vector<Connection> getConnections();
+
     unordered_map<string, vector<Connection>> getTargets();
-    void updateResidualMatrix();
-    bool bfs(Station start, Station end);
-    void dfsHelper(Station current, unordered_map<string, bool>& visited, vector<Station>& path);
-    vector<Station> dfs(Station start, Station end);
-    int maxTrainsBetweenStations(const string source, const string destination);
-    vector<pair<string, string>> findStationPairsRequiringMostTrains();
-    Station findHeaviestEdgesInPath(string origin, string end);
-    int getIndex(const string name);
+
+    bool bfsHelper(const string &source, const string &destination, unordered_map<string, bool> &visited);
+
+    bool bfs(string source, string destination);
+
+    bool dfsHelper(const string &source, const string &destination, unordered_map<string, bool> &visited);
+
+    bool dfs(string source, string destination);
+
+    vector<Station> shortestPath(string source, string destination);
+
+    int findAugmentingPath(const string &source, const string &sink, int flow, unordered_map<string, bool> &visited);
+
+    int calculateMaxFlow(string source, string sink);
+
+    vector<pair<string, string>> mostTrainsRequiredPairs(string start, string end);
+
+    vector<pair<string, string>> highestMaxFlowPairs();
+
 
 };
 

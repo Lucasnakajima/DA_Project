@@ -24,16 +24,16 @@ public:
 
     Connection& operator=(Connection *other);
 
-    Station getSource();
+    Station getSource() const;
     void setSource(Station newSource);
 
-    Station getDestination();
+    Station getDestination() const;
     void setDestination(Station newDestination);
 
-    int getCapacity();
+    int getCapacity() const;
     void setCapacity(int newCapacity);
 
-    string getService();
+    string getService() const;
     void setService(string newService);
 };
 

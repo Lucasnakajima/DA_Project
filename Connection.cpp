@@ -11,19 +11,19 @@ Connection::Connection(Station source, Station destination, int capacity, string
     this->service = service;
 }
 
-Station Connection::getSource(){
+Station Connection::getSource() const{
     return source;
 }
 
-Station Connection::getDestination(){
+Station Connection::getDestination() const{
     return destination;
 }
 
-int Connection::getCapacity(){
+int Connection::getCapacity() const{
     return capacity;
 }
 
-string Connection::getService() {
+string Connection::getService() const{
     return service;
 }
 

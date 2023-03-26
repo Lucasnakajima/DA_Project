@@ -9,24 +9,41 @@ int main() {
     bool bconnections = g.loadConnections();
 
     unordered_map<string, Station> stations = g.getStations();
-    string source = "Vila Nova de Gaia - Devesas";
+    string source = "Vila Nova de Gaia-Devesas";
     string destination = "Lisboa Oriente";
 
-    vector<Connection> targets = g.getTargets()[destination];
+    string source2 = "Bencanta";
+    string destination2 = "Aguim";
 
-    int shortest = g.maxTrainsBetweenStations(source,destination);
+    //vector<Connection> targets = g.getTargets()[destination];
 
-    cout << bstations << " " << bconnections << endl;
+    cout << g.calculateMaxFlow("Espinho", "Porto Campanhã") << endl;
 
-    cout << shortest<< endl;
+    //cout << bstations << " " << bconnections << endl;
 
-   vector<pair<string, string>> pairs = g.findStationPairsRequiringMostTrains();
-    cout << pairs.size()<< endl;
+    //cout << shortest<< endl;
+
+    //vector<Station> shortest_path = g.shortestPath(source2, destination2);
+
+    //for (auto i : shortest_path) {
+        //cout << i.getName() << endl;}
+
+   //bool dfs = g.dfs(source2, destination2);
+
+   //cout << "  a " << g.calculateMaxFlow("Bencanta","Aguim") << endl;
+
+   //cout << dfs << endl;
+
+    vector<pair<string, string>> pairs = g.highestMaxFlowPairs();
+
+    //cout << pairs.size() << endl;
 
     for (auto i : pairs) {
-        cout << i.first << " " << i.second;
+        cout << i.first << " " << i.second << endl;
     }
 
-    Station a = g.findHeaviestEdgesInPath("Lisboa Oriente", "Espinho");
+
+
+    //Station a = g.findHeaviestEdgesInPath("Lisboa Oriente", "Espinho");
 
 }

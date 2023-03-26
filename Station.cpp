@@ -12,23 +12,23 @@ Station::Station(string name, string district, string municipality, string towns
     this->line = line;
 }
 
-string Station::getName() {
+string Station::getName() const{
     return name;
 }
 
-string Station::getDistrict() {
+string Station::getDistrict() const {
     return district;
 }
 
-string Station::getMunicipality() {
+string Station::getMunicipality() const {
     return municipality;
 }
 
-string Station::getTownship() {
+string Station::getTownship() const{
     return township;
 }
 
-string Station::getLine() {
+string Station::getLine() const {
     return line;
 }
 
