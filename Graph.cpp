@@ -282,36 +282,26 @@ int Graph::calculateMaxFlow(string source, string sink) {
 }
 
 vector<pair<string, string>> Graph::highestMaxFlowPairs() {
-    vector<pair<string, string>> maxFlowPairs;
-    int highestMaxFlow = 0;
-    unordered_map<string, unordered_map<string, int>> memo;
+    int maxFlow = -1;
+    vector<pair<string, string>> maxFlowStationPairs;
 
-    for (const auto &sourceEntry : stations) {
-        for (const auto &destEntry : stations) {
-            if (sourceEntry.first != destEntry.first) {
-                int currentMaxFlow;
+    for (auto& source : targets) {
+        for (auto& connection : source.second) {
+            const auto& destination = connection.getDestination().getName();
 
-                // Check if max flow is already calculated for this pair
-                if (memo[sourceEntry.first].count(destEntry.first)) {
-                    currentMaxFlow = memo[sourceEntry.first][destEntry.first];
-                } else {
-                    currentMaxFlow = calculateMaxFlow(sourceEntry.first, destEntry.first);
-                    memo[sourceEntry.first][destEntry.first] = currentMaxFlow;
-                    updateResidualConnections();
-                }
+            int flow = calculateMaxFlow(source.first, destination);
 
-                if (currentMaxFlow > highestMaxFlow) {
-                    maxFlowPairs.clear();
-                    maxFlowPairs.push_back(make_pair(sourceEntry.first, destEntry.first));
-                    highestMaxFlow = currentMaxFlow;
-                } else if (currentMaxFlow == highestMaxFlow) {
-                    maxFlowPairs.push_back(make_pair(sourceEntry.first, destEntry.first));
-                }
+            if (flow > maxFlow) {
+                maxFlow = flow;
+                maxFlowStationPairs.clear();
+                maxFlowStationPairs.push_back({source.first, destination});
+            } else if (flow == maxFlow) {
+                maxFlowStationPairs.push_back({source.first, destination});
             }
         }
     }
 
-    return maxFlowPairs;
+    return maxFlowStationPairs;
 }
 
 
