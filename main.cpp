@@ -14,11 +14,12 @@ int main() {
 
     string source2 = "Bencanta";
     string destination2 = "Aguim";
-
     //vector<Connection> targets = g.getTargets()[destination];
 
     cout << g.calculateMaxFlow("Espinho", "Porto Campanhã") << endl;
     cout << g.calculateMaxFlow(source, destination) << endl;
+    pair<int, int> a = g.calculateMinCostMaxFlow(source, destination);
+    cout << a.first << endl << a.second;
     //cout << bstations << " " << bconnections << endl;
 
     //cout << shortest<< endl;

@@ -58,6 +58,8 @@ public:
 
     void updateResidualConnections();
 
+    pair<int, int> calculateMinCostMaxFlow(string source, string sink);
+
 
 };
 

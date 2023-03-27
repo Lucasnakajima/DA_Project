@@ -276,7 +276,7 @@ int Graph::calculateMaxFlow(string source, string sink) {
 
         maxFlow += pathFlow;
     }
-
+    updateResidualConnections();
     return maxFlow;
 
 }
@@ -316,17 +316,55 @@ vector<pair<string, string>> Graph::highestMaxFlowPairs() {
 
 
 void Graph::updateResidualConnections() {
-    for(auto i : connections){
+    for(auto &i : connections){
         i.setResidual(i.getCapacity());
     }
-    for(auto j : targets){
-        for(auto x : j.second){
+    for(auto &j : targets){
+        for(auto &x : j.second){
             x.setResidual(x.getCapacity());
         }
     }
 }
 
+pair<int, int> Graph::calculateMinCostMaxFlow(string source, string sink) {
+    int maxFlow = 0;
+    int minCost = 0;
+    parent.clear();
+    updateResidualConnections();
+    while (bfs(source, sink)) {
+        int pathFlow = numeric_limits<int>::max();
+        int pathCost = 0;
 
+        for (string v = sink; v != source; v = parent[v]) {
+            string u = parent[v];
+            for (auto &connection : targets[u]) {
+                if (connection.getDestination().getName() == v) {
+                    pathFlow = min(pathFlow, connection.getResidual());
+                    pathCost += (connection.getService() == "STANDARD" ? 2 : 4);
+                }
+            }
+        }
+
+        for (string v = sink; v != source; v = parent[v]) {
+            string u = parent[v];
+            for (auto &connection : targets[u]) {
+                if (connection.getDestination().getName() == v) {
+                    connection.setResidual(connection.getResidual() - pathFlow);
+                }
+            }
+            for (auto &reverseConnection : targets[v]) {
+                if (reverseConnection.getDestination().getName() == u) {
+                    reverseConnection.setResidual(reverseConnection.getResidual() + pathFlow);
+                }
+            }
+        }
+
+        maxFlow += pathFlow;
+        minCost += pathFlow * pathCost;
+    }
+
+    return make_pair(maxFlow, minCost);
+}
 
 
 
