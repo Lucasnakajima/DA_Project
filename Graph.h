@@ -38,15 +38,13 @@ public:
 
     unordered_map<string, vector<Connection>> getTargets();
 
-    bool bfsHelper(const string &source, const string &destination, unordered_map<string, bool> &visited);
-
     bool bfs(string source, string destination);
 
     bool dfsHelper(const string &source, const string &destination, unordered_map<string, bool> &visited);
 
     bool dfs(string source, string destination);
 
-    vector<Station> shortestPath(string source, string destination);
+    bool shortestPath(string source, string destination);
 
     int findAugmentingPath(const string &source, const string &sink, int flow, unordered_map<string, bool> &visited);
 

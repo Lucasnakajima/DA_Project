@@ -164,52 +164,46 @@ bool Graph::bfs(string source, string destination) {
     return false;
 }
 
-vector<Station> Graph::shortestPath(string source, string destination) {
-    unordered_map<string, int> distances;
-    unordered_map<string, Station> previous;
+bool Graph::shortestPath(string source, string destination) {
+    unordered_map<string, int> dist;
+    unordered_map<string, bool> visited;
+    priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> pq;
 
     for (const auto& entry : stations) {
-        distances[entry.first] = numeric_limits<int>::max();
+        dist[entry.first] = numeric_limits<int>::max();
+        visited[entry.first] = false;
     }
 
-    distances[source] = 0;
-
-    using StationDistance = pair<int, string>;
-    priority_queue<StationDistance, vector<StationDistance>, greater<StationDistance>> pq;
-    pq.push(make_pair(0, source));
+    dist[source] = 0;
+    pq.push({0, source});
+    parent[source] = "";
 
     while (!pq.empty()) {
-        string current = pq.top().second;
+        int curCost = pq.top().first;
+        string curNode = pq.top().second;
         pq.pop();
 
-        if (current == destination) {
-            break;
-        }
+        if (visited[curNode]) continue;
 
-        for (const auto& connection : targets[current]) {
-            string next = connection.getDestination().getName();
-            int newDistance = distances[current] + 1;
+        visited[curNode] = true;
+        if (curNode == destination) return true;
 
-            if (newDistance < distances[next]) {
-                distances[next] = newDistance;
-                previous[next] = stations[current];
-                pq.push(make_pair(newDistance, next));
+        for (auto& connection : targets[curNode]) {
+            const string& next = connection.getDestination().getName();
+            if (visited[next]) continue;
+
+            int cost = (connection.getService() == "STANDARD" ? 2 : 4);
+            int newPathDist = dist[curNode] + cost;
+
+            if (connection.getResidual() > 0 && newPathDist < dist[next]) {
+                dist[next] = newPathDist;
+                parent[next] = curNode;
+                pq.push({newPathDist, next});
             }
         }
     }
 
-    vector<Station> path;
-    if (previous.find(destination) != previous.end()) {
-        Station currentStation = stations[destination];
-        while (currentStation.getName() != source) {
-            path.push_back(currentStation);
-            currentStation = previous[currentStation.getName()];
-        }
-        path.push_back(stations[source]);
-        reverse(path.begin(), path.end());
-    }
-
-    return path;
+    return false;
 }
 
 int Graph::findAugmentingPath(const string& source, const string& sink, int flow, unordered_map<string, bool>& visited) {
@@ -321,7 +315,8 @@ pair<int, int> Graph::calculateMinCostMaxFlow(string source, string sink) {
     int minCost = 0;
     parent.clear();
     updateResidualConnections();
-    while (bfs(source, sink)) {
+
+    while (shortestPath(source, sink)) { // Replace with your Dijkstra function
         int pathFlow = numeric_limits<int>::max();
         int pathCost = 0;
 
@@ -344,7 +339,7 @@ pair<int, int> Graph::calculateMinCostMaxFlow(string source, string sink) {
             }
             for (auto &reverseConnection : targets[v]) {
                 if (reverseConnection.getDestination().getName() == u) {
-                    reverseConnection.setResidual(reverseConnection.getResidual() + pathFlow);
+                    reverseConnection.setResidual(reverseConnection.getResidual() +pathFlow);
                 }
             }
         }
@@ -355,6 +350,8 @@ pair<int, int> Graph::calculateMinCostMaxFlow(string source, string sink) {
 
     return make_pair(maxFlow, minCost);
 }
+
+
 
 
 
