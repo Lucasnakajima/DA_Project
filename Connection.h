@@ -16,6 +16,7 @@ private:
     Station destination;
     int capacity;
     string service;
+    int residual;
 
 public:
     Connection();
@@ -35,6 +36,9 @@ public:
 
     string getService() const;
     void setService(string newService);
+
+    int getResidual();
+    void setResidual(int newresidual);
 };
 
 

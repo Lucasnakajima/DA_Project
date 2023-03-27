@@ -18,7 +18,7 @@ int main() {
     //vector<Connection> targets = g.getTargets()[destination];
 
     cout << g.calculateMaxFlow("Espinho", "Porto Campanhã") << endl;
-
+    cout << g.calculateMaxFlow(source, destination) << endl;
     //cout << bstations << " " << bconnections << endl;
 
     //cout << shortest<< endl;

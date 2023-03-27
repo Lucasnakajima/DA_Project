@@ -23,7 +23,7 @@ private:
     unordered_map<string, vector<Connection>> targets;
     vector<Connection> connections;
     unordered_map<string, string> parent;
-    unordered_map<string, unordered_map<string, int>> residual; // Add an adjacency matrix
+    unordered_map<string, vector<pair<string, int>>> residual; // Add an adjacency matrix
 
 public:
     Graph();
@@ -55,6 +55,8 @@ public:
     vector<pair<string, string>> mostTrainsRequiredPairs(string start, string end);
 
     vector<pair<string, string>> highestMaxFlowPairs();
+
+    void updateResidualConnections();
 
 
 };

@@ -9,6 +9,7 @@ Connection::Connection(Station source, Station destination, int capacity, string
     this->destination = destination;
     this->capacity = capacity;
     this->service = service;
+    residual = capacity;
 }
 
 Station Connection::getSource() const{
@@ -25,6 +26,10 @@ int Connection::getCapacity() const{
 
 string Connection::getService() const{
     return service;
+}
+
+int Connection::getResidual() {
+    return residual;
 }
 
 Connection::Connection() {
@@ -58,4 +63,8 @@ void Connection::setCapacity(int newCapacity) {
 
 void Connection::setService(string newService) {
     service = newService;
+}
+
+void Connection::setResidual(int newresidual) {
+    residual = newresidual;
 }

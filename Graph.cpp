@@ -120,30 +120,6 @@ bool Graph::dfsHelper(const string &source, const string &destination, unordered
     return false;
 }
 
-bool Graph::bfsHelper(const string &source, const string &destination, unordered_map<string, bool> &visited) {
-    queue<string> q;
-    q.push(source);
-    visited[source] = true;
-
-    while (!q.empty()) {
-        string current = q.front();
-        q.pop();
-
-        if (current == destination) {
-            return true;
-        }
-
-        for (const auto &connection : targets[current]) {
-            const string &next = connection.getDestination().getName();
-            if (!visited[next]) {
-                visited[next] = true;
-                q.push(next);
-            }
-        }
-    }
-
-    return false;
-}
 
 bool Graph::bfs(string source, string destination) {
     unordered_map<string, bool> visited;
@@ -151,7 +127,41 @@ bool Graph::bfs(string source, string destination) {
         visited[entry.first] = false;
     }
 
-    return bfsHelper(source, destination, visited);
+    queue<string> q;
+    q.push(source);
+    visited[source] = true;
+    parent[source] = "";
+
+    while (!q.empty()) {
+        string current = q.front();
+        q.pop();
+
+        for (auto &connection : targets[current]) {
+            const string &next = connection.getDestination().getName();
+            if (!visited[next] && connection.getResidual() >0) {
+                visited[next] = true;
+                parent[next] = current;
+                q.push(next);
+            }
+
+            if (next == destination) {
+                int pathFlow = numeric_limits<int>::max();
+                for (string v = destination; v != source; v = parent[v]) {
+                    string u = parent[v];
+                    for (auto &conn : targets[u]) {
+                        if (conn.getDestination().getName() == v) {
+                            pathFlow = min(pathFlow, conn.getResidual());
+                        }
+                    }
+                }
+                if (pathFlow > 0) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
 }
 
 vector<Station> Graph::shortestPath(string source, string destination) {
@@ -233,29 +243,87 @@ int Graph::findAugmentingPath(const string& source, const string& sink, int flow
 
     return 0;
 }
-
+//Edmonds-Karp algorithm
 int Graph::calculateMaxFlow(string source, string sink) {
+    updateResidualConnections();
     int maxFlow = 0;
+    parent.clear();
     unordered_map<string, bool> visited;
+    while(bfs(source,sink)) {
+        int pathFlow = INF;
 
-    // Initialize visited map
-    for (const auto& entry : stations) {
-        visited[entry.first] = false;
-    }
-
-    int flow = findAugmentingPath(source, sink, numeric_limits<int>::max(), visited);
-    while (flow != 0) {
-        maxFlow += flow;
-
-        // Reset visited map for the next iteration
-        for (const auto& entry : stations) {
-            visited[entry.first] = false;
+        for (string v = sink; v != source; v = parent[v]) {
+            string u = parent[v];
+            for (const auto &connection: targets[u]) {
+                if (connection.getDestination().getName() == v) {
+                    pathFlow = min(pathFlow, connection.getCapacity());
+                }
+            }
+        }
+        for (string v = sink; v != source; v = parent[v]) {
+            string u = parent[v];
+            for (auto &connection : targets[u]) {
+                if (connection.getDestination().getName() == v) {
+                    connection.setResidual(connection.getResidual() - pathFlow);
+                }
+            }
+            for (auto &reverseConnection : targets[v]) {
+                if (reverseConnection.getDestination().getName() == u) {
+                    reverseConnection.setResidual(reverseConnection.getResidual() + pathFlow);
+                }
+            }
         }
 
-        flow = findAugmentingPath(source, sink, numeric_limits<int>::max(), visited);
+        maxFlow += pathFlow;
     }
 
     return maxFlow;
+
+}
+
+vector<pair<string, string>> Graph::highestMaxFlowPairs() {
+    vector<pair<string, string>> maxFlowPairs;
+    int highestMaxFlow = 0;
+    unordered_map<string, unordered_map<string, int>> memo;
+
+    for (const auto &sourceEntry : stations) {
+        for (const auto &destEntry : stations) {
+            if (sourceEntry.first != destEntry.first) {
+                int currentMaxFlow;
+
+                // Check if max flow is already calculated for this pair
+                if (memo[sourceEntry.first].count(destEntry.first)) {
+                    currentMaxFlow = memo[sourceEntry.first][destEntry.first];
+                } else {
+                    currentMaxFlow = calculateMaxFlow(sourceEntry.first, destEntry.first);
+                    memo[sourceEntry.first][destEntry.first] = currentMaxFlow;
+                    updateResidualConnections();
+                }
+
+                if (currentMaxFlow > highestMaxFlow) {
+                    maxFlowPairs.clear();
+                    maxFlowPairs.push_back(make_pair(sourceEntry.first, destEntry.first));
+                    highestMaxFlow = currentMaxFlow;
+                } else if (currentMaxFlow == highestMaxFlow) {
+                    maxFlowPairs.push_back(make_pair(sourceEntry.first, destEntry.first));
+                }
+            }
+        }
+    }
+
+    return maxFlowPairs;
+}
+
+
+void Graph::updateResidualConnections() {
+    for(auto i : connections){
+        i.setResidual(i.getCapacity());
+    }
+    for(auto j : targets){
+        for(auto x : j.second){
+            x.setResidual(x.getCapacity());
+        }
+    }
 }
 
 
