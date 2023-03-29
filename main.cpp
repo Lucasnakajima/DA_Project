@@ -1,9 +1,9 @@
 #include <iostream>
-
+#include "Menu.h"
 #include "Graph.h"
-
+using namespace std;
 int main() {
-    Graph g;
+    /*Graph g;
 
     bool bstations = g.loadStations();
     bool bconnections = g.loadConnections();
@@ -43,8 +43,8 @@ int main() {
         cout << i.first << " " << i.second << endl;
     }
 
+    //Station a = g.findHeaviestEdgesInPath("Lisboa Oriente", "Espinho");*/
 
-
-    //Station a = g.findHeaviestEdgesInPath("Lisboa Oriente", "Espinho");
-
+    Menu menu;
+    return 0;
 }
