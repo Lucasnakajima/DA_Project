@@ -52,6 +52,9 @@ cmake-build-debug/CMakeCache.txt
 cmake-build-debug/Makefile
 cmake-build-debug/Projeto.cbp
 cmake-build-debug/Projeto.exe
+cmake-build-debug/.ninja_deps
+cmake-build-debug/.ninja_log
+cmake-build-debug/build.ninja
 # Mongo Explorer plugin
 .idea/**/mongoSettings.xml
 
@@ -120,3 +123,5 @@ fabric.properties
 .idea/**/azureSettings.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/clion
+/.vscode/
+/cmake-build-debug/.cmake/
