@@ -77,6 +77,7 @@ public:
     //pair<int, int> calculateMinCostMaxFlow(string source, string sink);
 
 
+    void removeConnection(string s1, string s2);
 };
 
 

@@ -20,6 +20,12 @@ public:
     bool validStation(Graph g, string station);
 
     bool validConnection(Graph g, string s1, string s2);
+
+    void addSegFail(Graph& rc);
+
+    void stationByMunicipality();
+
+    void stationByDistrict();
 };
 
 

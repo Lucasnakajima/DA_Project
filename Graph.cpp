@@ -671,7 +671,23 @@ vector<string> Graph::topkbudgetDistrict() {
     return result;
 }
 
-
+void Graph:: removeConnection(string s1, string s2){
+    for(auto i = targets.find(s1)->second.begin(); i!=targets.find(s1)->second.end(); i++){
+        if(i->getDestination().getName() == s2){
+            targets.find(s1)->second.erase(i);
+        }
+    }
+    for(auto i = targets.find(s2)->second.begin(); i!=targets.find(s2)->second.end(); i++){
+        if(i->getDestination().getName() == s1){
+            targets.find(s2)->second.erase(i);
+        }
+    }
+    for(auto i = connections.begin(); i!=connections.end(); i++){
+        if(i->getSource().getName() == s1 || i->getSource().getName() == s2){
+            connections.erase(i);
+        }
+    }
+}
 
 
 
