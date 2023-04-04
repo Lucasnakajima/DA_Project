@@ -83,10 +83,9 @@ void Menu::run() {
                 break;
             case 41:
                 g.topkbudgetMunicipality();
-                g.topkbudgetDistrict();
                 break;
             case 42:
-                //TODO DistRegardignTranspNeeds
+                g.topkbudgetDistrict();
                 break;
             case 43:
                 //TODO maxNumberInStation
