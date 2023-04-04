@@ -302,27 +302,6 @@ vector<pair<string, string>> Graph::highestMaxFlowPairs() {
 }
 
 
-vector<pair<string, string>> Graph::highestMaxFlowPairsPath(string source, string sink) {
-    int maxFlow = -1;
-    vector<pair<string, string>> maxFlowStationPairs;
-
-    for (const auto& connection : targets[source]) {
-        const auto& destination = connection.getDestination().getName();
-
-        int flow = calculateMaxFlow(source, destination);
-
-        if (flow > maxFlow) {
-            maxFlow = flow;
-            maxFlowStationPairs.clear();
-            maxFlowStationPairs.push_back({source, destination});
-        } else if (flow == maxFlow) {
-            maxFlowStationPairs.push_back({source, destination});
-        }
-    }
-
-    return maxFlowStationPairs;
-}
-
 vector<string> Graph::findSourceStations() {
     unordered_map<string, int> inDegree;
     for (const auto& station : stations) {
@@ -343,6 +322,27 @@ vector<string> Graph::findSourceStations() {
     }
 
     return sourceStations;
+}
+
+vector<pair<string, string>> Graph::highestMaxFlowPairsPath(string source, string sink) {
+    int maxFlow = -1;
+    vector<pair<string, string>> maxFlowStationPairs;
+
+    for (const auto& connection : targets[source]) {
+        const auto& destination = connection.getDestination().getName();
+
+        int flow = calculateMaxFlow(source, destination);
+
+        if (flow > maxFlow) {
+            maxFlow = flow;
+            maxFlowStationPairs.clear();
+            maxFlowStationPairs.push_back({source, destination});
+        } else if (flow == maxFlow) {
+            maxFlowStationPairs.push_back({source, destination});
+        }
+    }
+
+    return maxFlowStationPairs;
 }
 
 // 2.4

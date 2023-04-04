@@ -12,6 +12,10 @@ void Menu::run() {
         cout << "Fail to open the files!!";
         exit(0);
     }
+    if(!(rc.loadStations() || rc.loadConnections())){
+        cout << "Fail to open the files!!";
+        exit(0);
+    }
     while(true){
         cout << string(50,'\n');
         cout << "||==================================================================================================================||\n"
@@ -42,6 +46,7 @@ void Menu::run() {
                 "||==================================================================================================================||\n"
                 "Choose an option: ";
         vector<string> s;
+        bool flag;
         int choice;
         vector<int> values = {0,11,12,21,22,23,31,32,33,41,42,43};
         cin >> choice;
@@ -49,6 +54,9 @@ void Menu::run() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         switch(choice){
             case 11:
+                s = stationsFetch();
+                flag = validConnection(g, s[0], s[1]);
+                cout << (flag);
                 //TODO stationsByMunicipality
                 break;
             case 12:
@@ -159,6 +167,19 @@ bool Menu:: validStation(Graph g, string station){
         return false;
     }
     return true;
+}
+
+bool Menu:: validConnection(Graph g, string s1, string s2){
+    if(!(validStation(g,s1) && validStation(g,s2))){
+        return false;
+    }
+    vector<Connection> v = g.getTargets().find(s1)->second;
+    for(auto i = v.begin(); i!=v.end(); i++){
+        if(i->getDestination().getName() == s2){
+            return true;
+        }
+    }
+    return false;
 }
 
 

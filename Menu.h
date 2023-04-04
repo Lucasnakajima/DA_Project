@@ -7,7 +7,8 @@
 ///Um menu apenas apresenta as opcoes.
 class Menu {
 private:
-    Graph g;
+    Graph g; //Graph for the original railroad
+    Graph rc; //Graph for reduced connectivity
 public:
     Menu();
     void run();
@@ -17,6 +18,8 @@ public:
     vector<string> stationsFetch();
 
     bool validStation(Graph g, string station);
+
+    bool validConnection(Graph g, string s1, string s2);
 };
 
 
