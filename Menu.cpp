@@ -61,6 +61,7 @@ void Menu::run() {
                 maxBetweenTwoStations();
                 break;
             case 22:
+                //TODO pairsMostTrains highestMaxFlowPairsPath
                 pairsMostTrains();
                 break;
 
@@ -68,7 +69,7 @@ void Menu::run() {
                 addSegFail(rc);
                 break;
             case 32:
-                //TODO affectedStations();
+                //TODO affectedStations(); fazer a funcao
                 break;
             case 33:
                 break;
@@ -113,13 +114,13 @@ void Menu::maxBetweenTwoStations(){
             case 0:
                 return;
             case 1:{
-                //TODO maxFullRail();
+                //TODO maxFullRail(); calculateMaxFlow no g
                 break;}
             case 2:
-                //TODO maxMinumumCost();
+                //TODO maxMinumumCost(); calculateMinCostMaxFlow
                 break;
             case 3:
-                //TODO maxReducedConectivity();
+                //TODO maxReducedConectivity(); calculateMaxFlow no rc
                 break;
             default:
                 break;
