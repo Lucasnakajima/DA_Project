@@ -31,16 +31,14 @@ void Menu::run() {
                 "||                                                     |                                                            ||\n"
                 "||  Stations by municipalities                    [11] |  Max number of trains that can travel...              [21] ||\n"
                 "||  Stations by Districts                         [12] |  Which pairs of stations require the most trains      [22] ||\n"
-                "||                                                     |  Top-k stations most affected by each seg. failure    [23] ||\n"
                 "||                                                     |                                                            ||\n"
                 "||==================================================================================================================||\n"
                 "||                REDUCED CONNECTIVITY                 |                    TRANSPORTATION NEEDS                    ||\n"
                 "||==================================================================================================================||\n"
                 "||                                                     |                                                            ||\n"
                 "||  Add a segment failure                         [31] |  Top-k municipalities regarding transportation needs  [41] ||\n"
-                "||  Remove a segment failure  [OUTDATED]          [32] |  Top-k districts regarding transportation needs       [42] ||\n"
-                "||  Existent segment failures [OUTDATED]          [33] |  Max number of trains that can arrive at a station    [43] ||\n"
-                "||                                                     |                                                            ||\n"
+                "||  Most affected stations by each seg. failure   [32] |  Top-k districts regarding transportation needs       [42] ||\n"
+                "||                                                     |  Max number of trains that can arrive at a station    [43] ||\n"
                 "||==================================================================================================================||\n"
                 "||                                                   EXIT [0]                                                       ||\n"
                 "||==================================================================================================================||\n"
@@ -63,24 +61,22 @@ void Menu::run() {
                 maxBetweenTwoStations();
                 break;
             case 22:
-                //TODO pairsMostTrains();
-                break;
-            case 23:
-                //TODO affectedStations();
+                pairsMostTrains();
                 break;
 
             case 31:
                 addSegFail(rc);
                 break;
             case 32:
+                //TODO affectedStations();
                 break;
             case 33:
                 break;
             case 41:
-                g.topkbudgetMunicipality();
+                budgetMunicipalities();
                 break;
             case 42:
-                g.topkbudgetDistrict();
+                budgetDistricts();
                 break;
             case 43:
                 maxNumberInStation();
@@ -279,5 +275,60 @@ void Menu:: maxNumberInStation(){
             sleep(1);
             return;
         //}
+    }
+}
+
+void Menu:: pairsMostTrains(){
+    vector<string> s = stationsFetch();
+
+}
+
+void Menu:: budgetMunicipalities(){
+    //TODO correcoes no topkbudgetMunicipality
+    auto v = g.topkbudgetMunicipality();
+    int k;
+    while(true) {
+        cout << "Type the k value:";
+        cin >> k;
+        if (cin.fail() || cin.peek() != '\n') {
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+            cout << "Invalid input! Try again!" << endl;
+            sleep(1);
+            continue;
+        }
+        else{
+            cout << "Those are the top-" << k << " municipalities that need more budget:\n";
+            for(int i=0; i<k and i<v.size(); i++){
+                cout << v[i] << "\n";
+            }
+            system("pause");
+            return;
+        }
+    }
+}
+
+void Menu:: budgetDistricts(){
+    //TODO correcoes no topkbudgetDistrict
+    auto v = g.topkbudgetDistrict();
+    int k;
+    while(true) {
+        cout << "Type the k value:";
+        cin >> k;
+        if (cin.fail() || cin.peek() != '\n') {
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+            cout << "Invalid input! Try again!" << endl;
+            sleep(1);
+            continue;
+        }
+        else{
+            cout << "Those are the top-" << k << " districts that need more budget:\n";
+            for(int i=0; i<k and i<v.size(); i++){
+                cout << v[i] << "\n";
+            }
+            system("pause");
+            return;
+        }
     }
 }

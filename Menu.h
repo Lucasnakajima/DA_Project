@@ -28,6 +28,12 @@ public:
     void stationByDistrict();
 
     void maxNumberInStation();
+
+    void pairsMostTrains();
+
+    void budgetMunicipalities();
+
+    void budgetDistricts();
 };
 
 
