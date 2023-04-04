@@ -55,13 +55,9 @@ void Menu::run() {
         switch(choice){
             case 11:
                 stationByMunicipality();
-                //TODO stationsByMunicipality
                 break;
             case 12:
-                cout << "Type the district:";
-                getline(cin,s);
-                //stationByDistrict(s);
-                //TODO stationsByDistricts
+                stationByDistrict();
                 break;
             case 21:
                 maxBetweenTwoStations();
@@ -75,13 +71,10 @@ void Menu::run() {
 
             case 31:
                 addSegFail(rc);
-                //TODO addSegFailure
                 break;
             case 32:
-                //TODO remSegFailure
                 break;
             case 33:
-                //TODO existentSegFailures
                 break;
             case 41:
                 g.topkbudgetMunicipality();
@@ -90,7 +83,7 @@ void Menu::run() {
                 g.topkbudgetDistrict();
                 break;
             case 43:
-                //TODO maxNumberInStation
+                maxNumberInStation();
                 break;
             case 0:
                 cout << string(15,'\n');
@@ -168,6 +161,7 @@ vector<string> Menu:: stationsFetch(){
 }
 
 bool Menu:: validStation(Graph g, string station){
+    //TODO resolver bug no input de estacoes com acento
     if(g.getStations().find(station) == g.getStations().end()){
         return false;
     }
@@ -267,5 +261,23 @@ void Menu:: stationByDistrict(){
             sleep(1);
             return;
         }
+    }
+}
+
+void Menu:: maxNumberInStation(){
+    string s;
+    while(true) {
+        cout << "Type the station:";
+        getline(cin, s);
+//        if (!validStation(g, s)) {
+//            cout << "Invalid station! Make sure you typed correctly and try again!\n";
+//            continue;
+//        }
+//        else{
+            int m = g.maxTrainsAtStation(s);
+            cout << "The maximum number of trains to arrive at " << s << " station is: " << m;
+            sleep(1);
+            return;
+        //}
     }
 }

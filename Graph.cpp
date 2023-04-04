@@ -347,6 +347,7 @@ vector<pair<string, string>> Graph::highestMaxFlowPairsPath(string source, strin
 
 // 2.4
 int Graph::maxTrainsAtStation(string stationName) {
+    //TODO testes com Viana do Castelo e Porto Campanhã
     string superSource = "SUPER_SOURCE";
 
     vector<string> sourceStations = findSourceStations();

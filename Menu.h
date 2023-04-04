@@ -26,6 +26,8 @@ public:
     void stationByMunicipality();
 
     void stationByDistrict();
+
+    void maxNumberInStation();
 };
 
 
