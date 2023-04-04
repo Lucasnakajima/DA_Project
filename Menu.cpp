@@ -41,10 +41,12 @@ void Menu::run() {
                 "||                                                   EXIT [0]                                                       ||\n"
                 "||==================================================================================================================||\n"
                 "Choose an option: ";
+        vector<string> s;
         int choice;
-        cin >> choice;
         vector<int> values = {0,11,12,21,22,23,31,32,33,41,42,43};
+        cin >> choice;
         if(!inputTest(choice,values)) continue;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         switch(choice){
             case 11:
                 //TODO stationsByMunicipality
@@ -126,24 +128,26 @@ void Menu::maxBetweenTwoStations(){
 vector<string> Menu:: stationsFetch(){
     string source, target;
         while(true) {
-            cout << string(50,'\n');
         cout << "Type the source:";
-        cin >> source;
+        getline(cin,source);
         if (!validStation(g, source)) {
             cout << "Invalid source! Make sure you typed correctly and try again!\n";
             sleep(1);
+            cout << string(50,'\n');
             continue;
         }
         cout << "Type the target:";
-        cin >> target;
+        getline(cin,target);
         if (!validStation(g, target)) {
-            cout << "Invalid target! Make sure you typed correctly 2 and try again!\n";
+            cout << "Invalid target! Make sure you typed correctly and try again!\n";
             sleep(1);
+            cout << string(50,'\n');
             continue;
         }
         if (source==target){
             cout << "You typed the same station twice! Try again!\n";
             sleep(1);
+            cout << string(50,'\n');
             continue;
         }
         return {source, target};

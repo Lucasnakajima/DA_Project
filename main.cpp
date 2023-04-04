@@ -8,12 +8,12 @@ int main() {
     bool bstations = g.loadStations();
     bool bconnections = g.loadConnections();
 
-    unordered_map<string, Station> stations = g.getStations();
-    string source = "Vila Nova de Gaia-Devesas";
-    string destination = "Lisboa Oriente";
-
-    string source2 = "Bencanta";
-    string destination2 = "Aguim";
+    //unordered_map<string, Station> stations = g.getStations();
+    //string source = "Vila Nova de Gaia-Devesas";
+    //string destination = "Lisboa Oriente";
+//
+    //string source2 = "Bencanta";
+    //string destination2 = "Aguim";
     //vector<Connection> targets = g.getTargets()[destination];
 
     //cout << g.calculateMaxFlow(source, "Porto Campanhã") << endl;
@@ -45,10 +45,10 @@ int main() {
 
     //Station a = g.findHeaviestEdgesInPath("Lisboa Oriente", "Espinho");
 
-    pair<int, int> pair = g.calculateMinCostMaxFlow("Porto Campanhã", "Lisboa Oriente");
+//    pair<int, int> pair = g.calculateMinCostMaxFlow("Porto Campanhã", "Lisboa Oriente");
+//
+//    cout << pair.first << " " << pair.second << endl;
 
-    cout << pair.first << " " << pair.second << endl;
-
-    //Menu menu;
+    Menu menu;
     return 0;
 }
