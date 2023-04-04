@@ -8,12 +8,12 @@ Menu::Menu() {
 }
 
 void Menu::run() {
-    if(!(g.loadStations() || g.loadConnections())){
-        cout << "Fail to open the files!!";
+    if(!(g.loadStations() && rc.loadStations())){
+        cout << "Fail to open the Stations files!!";
         exit(0);
     }
-    if(!(rc.loadStations() || rc.loadConnections())){
-        cout << "Fail to open the files!!";
+    if(!(g.loadConnections() && rc.loadConnections())){
+        cout << "Fail to open the Connections files!!";
         exit(0);
     }
     while(true){
@@ -173,12 +173,13 @@ bool Menu:: validConnection(Graph g, string s1, string s2){
     if(!(validStation(g,s1) && validStation(g,s2))){
         return false;
     }
-    vector<Connection> v = g.getTargets().find(s1)->second;
-    for(auto i = v.begin(); i!=v.end(); i++){
-        if(i->getDestination().getName() == s2){
-            return true;
-        }
-    }
+    auto v= g.getTargets().find(s1)->first;
+    //vector<Connection> v = g.getTargets().find(s1)->second;
+//    for(auto i = v.begin(); i!=v.end(); i++){
+//        if(i->getDestination().getName() == s2){
+//            return true;
+//        }
+//    }
     return false;
 }
 
