@@ -38,14 +38,14 @@ void Menu::run() {
                 "||==================================================================================================================||\n"
                 "||                                                     |                                                            ||\n"
                 "||  Add a segment failure                         [31] |  Top-k municipalities regarding transportation needs  [41] ||\n"
-                "||  Remove a segment failure                      [32] |  Top-k districts regarding transportation needs       [42] ||\n"
-                "||  Existent segment failures                     [33] |  Max number of trains that can arrive at a station    [43] ||\n"
+                "||  Remove a segment failure  [OUTDATED]          [32] |  Top-k districts regarding transportation needs       [42] ||\n"
+                "||  Existent segment failures [OUTDATED]          [33] |  Max number of trains that can arrive at a station    [43] ||\n"
                 "||                                                     |                                                            ||\n"
                 "||==================================================================================================================||\n"
                 "||                                                   EXIT [0]                                                       ||\n"
                 "||==================================================================================================================||\n"
                 "Choose an option: ";
-        vector<string> s;
+        string s;
         bool flag;
         int choice;
         vector<int> values = {0,11,12,21,22,23,31,32,33,41,42,43};
@@ -54,12 +54,13 @@ void Menu::run() {
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         switch(choice){
             case 11:
-                s = stationsFetch();
-                flag = validConnection(g, s[0], s[1]);
-                cout << (flag);
+                stationByMunicipality();
                 //TODO stationsByMunicipality
                 break;
             case 12:
+                cout << "Type the district:";
+                getline(cin,s);
+                //stationByDistrict(s);
                 //TODO stationsByDistricts
                 break;
             case 21:
@@ -73,6 +74,7 @@ void Menu::run() {
                 break;
 
             case 31:
+                addSegFail(rc);
                 //TODO addSegFailure
                 break;
             case 32:
@@ -112,12 +114,15 @@ void Menu::maxBetweenTwoStations(){
                 "|| In the full railway network               [1] ||\n"
                 "|| With a minimum cost for the company       [2] ||\n"
                 "|| In the network with reduced connectivity  [3] ||\n"
+                "|| Exit                                      [0] ||\n"
                 "||===============================================||\n"
                 "Choose an option: ";
         cin >> choice;
-        vector<int> values = {1, 2, 3};
+        vector<int> values = {0, 1, 2, 3};
         if (!inputTest(choice, values)) continue;
         switch(choice){
+            case 0:
+                return;
             case 1:{
                 //TODO maxFullRail();
                 break;}
@@ -170,16 +175,16 @@ bool Menu:: validStation(Graph g, string station){
 }
 
 bool Menu:: validConnection(Graph g, string s1, string s2){
-    if(!(validStation(g,s1) && validStation(g,s2))){
+    if(!(validStation(g,s1) && validStation(g,s2))){ //not really necessary
         return false;
     }
-    auto v= g.getTargets().find(s1)->first;
-    //vector<Connection> v = g.getTargets().find(s1)->second;
-//    for(auto i = v.begin(); i!=v.end(); i++){
-//        if(i->getDestination().getName() == s2){
-//            return true;
-//        }
-//    }
+    //auto v= g.getTargets().find(s1)->first;
+    vector<Connection> v = g.getTargets().find(s1)->second;
+    for(auto i = v.begin(); i!=v.end(); i++){
+        if(i->getDestination().getName() == s2){
+            return true;
+        }
+    }
     return false;
 }
 
@@ -198,4 +203,69 @@ bool Menu:: inputTest(char choice ,vector<int> values) {
         return false;
     }
     return true;
+}
+
+void Menu:: addSegFail(Graph& rc){
+    vector<string> stationsNames = stationsFetch();
+    if(!validConnection(rc,stationsNames[0],stationsNames[1])){
+        cout << "This two stations are not adjacent or do not represent a valid connection in the Reduced Connectivity Railroad!\n Try again!\n";
+        sleep(1);
+    }
+    else{
+        rc.removeConnection(stationsNames[0], stationsNames[1]);
+        cout << "Connection removed successfully!\n";
+        sleep(1);
+    }
+}
+
+void Menu:: stationByMunicipality(){
+    string s, l;
+    int c=0;
+    while(true) {
+        cout << "Type the municipality:";
+        getline(cin, s);
+        s = l;
+        transform(l.begin(), l.end(), l.begin(), ::tolower);
+        for (auto i: g.getStations()) {
+            if (i.second.getMunicipality() == s or i.second.getMunicipality() == l) {
+                cout << i.second.getName() << "\n";
+                c++;
+            }
+        }
+        if (c == 0) {
+            cout << "This municipality does not exist! Try again!";
+            sleep(1);
+            continue;
+        }
+        else{
+            sleep(1);
+            return;
+        }
+    }
+}
+
+void Menu:: stationByDistrict(){
+    string s, l;
+    int c=0;
+    while(true) {
+        cout << "Type the district:";
+        getline(cin, s);
+        s = l;
+        transform(l.begin(), l.end(), l.begin(), ::tolower);
+        for (auto i: g.getStations()) {
+            if (i.second.getDistrict() == s or i.second.getDistrict() == l) {
+                cout << i.second.getName() << "\n";
+                c++;
+            }
+        }
+        if (c == 0) {
+            cout << "This district does not exist! Try again!";
+            sleep(1);
+            continue;
+        }
+        else{
+            sleep(1);
+            return;
+        }
+    }
 }
