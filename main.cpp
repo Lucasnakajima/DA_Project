@@ -3,7 +3,7 @@
 #include "Graph.h"
 using namespace std;
 int main() {
-    /*Graph g;
+    Graph g;
 
     bool bstations = g.loadStations();
     bool bconnections = g.loadConnections();
@@ -16,10 +16,10 @@ int main() {
     string destination2 = "Aguim";
     //vector<Connection> targets = g.getTargets()[destination];
 
-    cout << g.calculateMaxFlow("Espinho", "Porto Campanhã") << endl;
-    cout << g.calculateMaxFlow(source, destination) << endl;
-    pair<int, int> a = g.calculateMinCostMaxFlow(source, destination);
-    cout << a.first << endl << a.second;
+    //cout << g.calculateMaxFlow(source, "Porto Campanhã") << endl;
+    //cout << g.calculateMaxFlow(source, destination) << endl;
+    //pair<int, int> a = g.calculateMinCostMaxFlow(source, destination);
+    //cout << a.first << endl << a.second;
     //cout << bstations << " " << bconnections << endl;
 
     //cout << shortest<< endl;
@@ -35,16 +35,20 @@ int main() {
 
    //cout << dfs << endl;
 
-    vector<pair<string, string>> pairs = g.highestMaxFlowPairs();
+    //vector<pair<string, string>> pairs = g.highestMaxFlowPairsPath("Vila Nova de Gaia-Devesas", "Lisboa Oriente");
 
     //cout << pairs.size() << endl;
 
-    for (auto i : pairs) {
-        cout << i.first << " " << i.second << endl;
-    }
+    //for (auto i : pairs) {cout << i.first << " " << i.second << " " << g.calculateMaxFlow(i.first, i.second) << endl;}
 
-    //Station a = g.findHeaviestEdgesInPath("Lisboa Oriente", "Espinho");*/
+    //cout << g.maxTrainsAtStation("Coimbra B");
 
-    Menu menu;
+    //Station a = g.findHeaviestEdgesInPath("Lisboa Oriente", "Espinho");
+
+    pair<int, int> pair = g.calculateMinCostMaxFlow("Porto Campanhã", "Lisboa Oriente");
+
+    cout << pair.first << " " << pair.second << endl;
+
+    //Menu menu;
     return 0;
 }

@@ -44,19 +44,25 @@ public:
 
     bool dfs(string source, string destination);
 
-    bool shortestPath(string source, string destination);
+    bool dijkstra(string source, string destination);
 
     int findAugmentingPath(const string &source, const string &sink, int flow, unordered_map<string, bool> &visited);
 
     int calculateMaxFlow(string source, string sink);
 
-    vector<pair<string, string>> mostTrainsRequiredPairs(string start, string end);
+    vector<pair<string, string>> highestMaxFlowPairsPath(string source, string sink);
+
+    int maxTrainsAtStation(string stationName);
+
+    vector<string> findSourceStations();
 
     vector<pair<string, string>> highestMaxFlowPairs();
 
     void updateResidualConnections();
 
     pair<int, int> calculateMinCostMaxFlow(string source, string sink);
+
+    //pair<int, int> calculateMinCostMaxFlow(string source, string sink);
 
 
 };
