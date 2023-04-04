@@ -62,6 +62,18 @@ public:
 
     pair<int, int> calculateMinCostMaxFlow(string source, string sink);
 
+    int calculateMaxFlowMunicipality(string source, string sink);
+
+    bool bfsMunicipality(string source, string destination);
+
+    vector<string> topkbudgetMunicipality();
+
+    int calculateMaxFlowDistrict(string source, string sink);
+
+    bool bfsDistrict(string source, string destination);
+
+    vector<string> topkbudgetDistrict();
+
     //pair<int, int> calculateMinCostMaxFlow(string source, string sink);
 
 

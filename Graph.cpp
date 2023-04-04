@@ -425,6 +425,252 @@ pair<int, int> Graph::calculateMinCostMaxFlow(string source, string sink) {
     return make_pair(maxFlow, minCost);
 }
 
+bool Graph::bfsMunicipality(string source, string destination) {
+    unordered_map<string, bool> visited;
+    for (const auto &entry : stations) {
+        visited[entry.first] = false;
+    }
+    auto municipality = stations.find(source)->second.getMunicipality();
+    queue<string> q;
+    q.push(source);
+    visited[source] = true;
+    parent[source] = "";
+
+    while (!q.empty()) {
+        string current = q.front();
+        q.pop();
+
+        for (auto &connection : targets[current]) {
+            const string &next = connection.getDestination().getName();
+            if (!visited[next] && connection.getResidual() >0 && municipality==connection.getDestination().getMunicipality()) {
+                visited[next] = true;
+                parent[next] = current;
+                q.push(next);
+            }
+
+            if (next == destination) {
+                int pathFlow = numeric_limits<int>::max();
+                for (string v = destination; v != source; v = parent[v]) {
+                    string u = parent[v];
+                    for (auto &conn : targets[u]) {
+                        if (conn.getDestination().getName() == v) {
+                            pathFlow = min(pathFlow, conn.getResidual());
+                        }
+                    }
+                }
+                if (pathFlow > 0) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
+int Graph::calculateMaxFlowMunicipality(string source, string sink) {
+    updateResidualConnections();
+    int maxFlow = 0;
+    parent.clear();
+    unordered_map<string, bool> visited;
+    while(bfsMunicipality(source,sink)) {
+        int pathFlow = INF;
+
+        for (string v = sink; v != source; v = parent[v]) {
+            string u = parent[v];
+            for (const auto &connection: targets[u]) {
+                if (connection.getDestination().getName() == v) {
+                    pathFlow = min(pathFlow, connection.getCapacity());
+                }
+            }
+        }
+        for (string v = sink; v != source; v = parent[v]) {
+            string u = parent[v];
+            for (auto &connection : targets[u]) {
+                if (connection.getDestination().getName() == v) {
+                    connection.setResidual(connection.getResidual() - pathFlow);
+                }
+            }
+            for (auto &reverseConnection : targets[v]) {
+                if (reverseConnection.getDestination().getName() == u) {
+                    reverseConnection.setResidual(reverseConnection.getResidual() + pathFlow);
+                }
+            }
+        }
+
+        maxFlow += pathFlow;
+    }
+    updateResidualConnections();
+    return maxFlow;
+
+}
+
+vector<string> Graph::topkbudgetMunicipality() {
+    unordered_map<string, int> municipalities;
+    unordered_map<string, int> maxmunicipalities;
+    int maxFlow = -1;
+    vector<pair<string, string>> maxFlowStationPairs;
+    unordered_set<string> addedPairs;
+
+    for (auto& source : targets) {
+        auto municipality = stations.find(source.first)->second.getMunicipality();
+        if(municipalities.empty()){
+            municipalities.emplace(municipality, -1);
+        }
+        else if(municipalities.find(municipality) == municipalities.end()){
+            municipalities.emplace(municipality, -1);
+        }
+        for (auto& connection : source.second) {
+            if(connection.getDestination().getMunicipality() != municipality) continue;
+
+            else {
+                const auto &destination = connection.getDestination().getName();
+
+                int flow = calculateMaxFlowMunicipality(source.first, destination);
+
+                if (flow > municipalities.find(municipality)->second) {
+                    municipalities.find(municipality)->second = flow;
+                }
+            }
+        }
+        if(maxmunicipalities.empty() || maxmunicipalities.begin()->second==municipalities.find(municipality)->second){
+            maxmunicipalities.emplace(municipality, municipalities.find(municipality)->second);
+        }
+        else if(maxmunicipalities.begin()->second < municipalities.find(municipality)->second){
+            maxmunicipalities.clear();
+            maxmunicipalities.emplace(municipality, municipalities.find(municipality)->second);
+        }
+    }
+    vector<string> result;
+    for(auto i: maxmunicipalities){
+        result.push_back(i.first);
+    }
+    return result;
+}
+
+bool Graph::bfsDistrict(string source, string destination) {
+    unordered_map<string, bool> visited;
+    for (const auto &entry : stations) {
+        visited[entry.first] = false;
+    }
+    auto district = stations.find(source)->second.getDistrict();
+    queue<string> q;
+    q.push(source);
+    visited[source] = true;
+    parent[source] = "";
+
+    while (!q.empty()) {
+        string current = q.front();
+        q.pop();
+
+        for (auto &connection : targets[current]) {
+            const string &next = connection.getDestination().getName();
+            if (!visited[next] && connection.getResidual() >0 && district==connection.getDestination().getDistrict()) {
+                visited[next] = true;
+                parent[next] = current;
+                q.push(next);
+            }
+
+            if (next == destination) {
+                int pathFlow = numeric_limits<int>::max();
+                for (string v = destination; v != source; v = parent[v]) {
+                    string u = parent[v];
+                    for (auto &conn : targets[u]) {
+                        if (conn.getDestination().getName() == v) {
+                            pathFlow = min(pathFlow, conn.getResidual());
+                        }
+                    }
+                }
+                if (pathFlow > 0) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
+}
+
+int Graph::calculateMaxFlowDistrict(string source, string sink) {
+    updateResidualConnections();
+    int maxFlow = 0;
+    parent.clear();
+    unordered_map<string, bool> visited;
+    while(bfsDistrict(source,sink)) {
+        int pathFlow = INF;
+
+        for (string v = sink; v != source; v = parent[v]) {
+            string u = parent[v];
+            for (const auto &connection: targets[u]) {
+                if (connection.getDestination().getName() == v) {
+                    pathFlow = min(pathFlow, connection.getCapacity());
+                }
+            }
+        }
+        for (string v = sink; v != source; v = parent[v]) {
+            string u = parent[v];
+            for (auto &connection : targets[u]) {
+                if (connection.getDestination().getName() == v) {
+                    connection.setResidual(connection.getResidual() - pathFlow);
+                }
+            }
+            for (auto &reverseConnection : targets[v]) {
+                if (reverseConnection.getDestination().getName() == u) {
+                    reverseConnection.setResidual(reverseConnection.getResidual() + pathFlow);
+                }
+            }
+        }
+
+        maxFlow += pathFlow;
+    }
+    updateResidualConnections();
+    return maxFlow;
+
+}
+
+vector<string> Graph::topkbudgetDistrict() {
+    unordered_map<string, int> districts;
+    unordered_map<string, int> maxdistricts;
+    int maxFlow = -1;
+    vector<pair<string, string>> maxFlowStationPairs;
+    unordered_set<string> addedPairs;
+
+    for (auto& source : targets) {
+        auto district = stations.find(source.first)->second.getDistrict();
+        if(districts.empty()){
+            districts.emplace(district, -1);
+        }
+        else if(districts.find(district) == districts.end()){
+            districts.emplace(district, -1);
+        }
+        for (auto& connection : source.second) {
+            if(connection.getDestination().getDistrict() != district) continue;
+
+            else {
+                const auto &destination = connection.getDestination().getName();
+
+                int flow = calculateMaxFlowDistrict(source.first, destination);
+
+                if (flow > districts.find(district)->second) {
+                    districts.find(district)->second = flow;
+                }
+            }
+        }
+        if(maxdistricts.empty() || maxdistricts.begin()->second==districts.find(district)->second){
+            maxdistricts.emplace(district, districts.find(district)->second);
+        }
+        else if(maxdistricts.begin()->second < districts.find(district)->second){
+            maxdistricts.clear();
+            maxdistricts.emplace(district, districts.find(district)->second);
+        }
+    }
+    vector<string> result;
+    for(auto i: maxdistricts){
+        result.push_back(i.first);
+    }
+    return result;
+}
+
 
 
 

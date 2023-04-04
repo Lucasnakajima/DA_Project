@@ -82,7 +82,8 @@ void Menu::run() {
                 //TODO existentSegFailures
                 break;
             case 41:
-                //TODO MunRegardignTranspNeeds
+                g.topkbudgetMunicipality();
+                g.topkbudgetDistrict();
                 break;
             case 42:
                 //TODO DistRegardignTranspNeeds
