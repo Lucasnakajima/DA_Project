@@ -28,14 +28,14 @@ bool Graph::loadStations() {
     while (getline(inputFile, line)) {
         istringstream iss(line);
 
-        string name, district, municipality, township, lineName;
+        string name, district, municipality, township, line;
         getline(iss, name, ',');
         getline(iss, district, ',');
         getline(iss, municipality, ',');
         getline(iss, township, ',');
-        getline(iss, lineName, ',');
+        getline(iss, line, ',');
 
-        Station station(name, district, municipality, township, lineName);
+        Station station(name, district, municipality, township, line);
         stations.emplace(station.getName(), station);
     }
 
@@ -198,10 +198,6 @@ bool Graph::dijkstra(string source, string destination) {
     return dist[destination] != numeric_limits<int>::max();
 }
 
-
-
-
-
 int Graph::findAugmentingPath(const string& source, const string& sink, int flow, unordered_map<string, bool>& visited) {
     if (source == sink) {
         return flow;
@@ -268,11 +264,13 @@ int Graph::calculateMaxFlow(string source, string sink) {
     }
     updateResidualConnections();
     return maxFlow;
+
 }
 
 vector<pair<string, string>> Graph::highestMaxFlowPairs() {
     int maxFlow = -1;
     vector<pair<string, string>> maxFlowStationPairs;
+    unordered_set<string> addedPairs;
 
     for (auto& source : targets) {
         for (auto& connection : source.second) {
@@ -284,8 +282,18 @@ vector<pair<string, string>> Graph::highestMaxFlowPairs() {
                 maxFlow = flow;
                 maxFlowStationPairs.clear();
                 maxFlowStationPairs.push_back({source.first, destination});
+                addedPairs.clear();
+                addedPairs.insert(source.first + "->" + destination);
+                addedPairs.insert(destination + "->" + source.first);
             } else if (flow == maxFlow) {
-                maxFlowStationPairs.push_back({source.first, destination});
+                string forwardPairStr = source.first + "->" + destination;
+                string reversePairStr = destination + "->" + source.first;
+                if (addedPairs.find(forwardPairStr) == addedPairs.end() &&
+                    addedPairs.find(reversePairStr) == addedPairs.end()) {
+                    maxFlowStationPairs.push_back({source.first, destination});
+                    addedPairs.insert(forwardPairStr);
+                    addedPairs.insert(reversePairStr);
+                }
             }
         }
     }
@@ -359,15 +367,13 @@ int Graph::maxTrainsAtStation(string stationName) {
 }
 
 
-
-
 void Graph::updateResidualConnections() {
     for(auto &i : connections){
-        i.setCapacity(i.getCapacity());
+        i.setResidual(i.getCapacity());
     }
     for(auto &j : targets){
         for(auto &x : j.second){
-            x.setCapacity(x.getCapacity());
+            x.setResidual(x.getCapacity());
         }
     }
 }
@@ -382,10 +388,13 @@ pair<int, int> Graph::calculateMinCostMaxFlow(string source, string sink) {
         int pathFlow = numeric_limits<int>::max();
         int pathCost = 0;
 
+        cout << pathCost << endl;
+
         for (string v = sink; v != source; v = parent[v]) {
             string u = parent[v];
             for (auto &connection : targets[u]) {
                 if (connection.getDestination().getName() == v) {
+                    cout << pathCost << endl;
                     pathFlow = min(pathFlow, connection.getCapacity());
                 }
             }
@@ -394,13 +403,15 @@ pair<int, int> Graph::calculateMinCostMaxFlow(string source, string sink) {
         // Calculate the path cost
         for (string v = sink; v != source; v = parent[v]) {
             string u = parent[v];
-            for (auto &connection : targets[u]) {
+            for (auto &connection: targets[u]) {
                 if (connection.getDestination().getName() == v) {
+                    cout << pathCost << endl;
                     connection.setCapacity(connection.getCapacity() - pathFlow);
                     pathCost += (connection.getService() == "STANDARD" ? 2 : 4);
+                    cout << pathCost << endl;
                 }
             }
-            for (auto &reverseConnection : targets[v]) {
+            for (auto &reverseConnection: targets[v]) {
                 if (reverseConnection.getDestination().getName() == u) {
                     reverseConnection.setCapacity(reverseConnection.getCapacity() + pathFlow);
                 }
@@ -413,8 +424,6 @@ pair<int, int> Graph::calculateMinCostMaxFlow(string source, string sink) {
 
     return make_pair(maxFlow, minCost);
 }
-
-
 
 
 

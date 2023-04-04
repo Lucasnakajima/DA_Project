@@ -35,11 +35,11 @@ int main() {
 
    //cout << dfs << endl;
 
-    //vector<pair<string, string>> pairs = g.highestMaxFlowPairsPath("Vila Nova de Gaia-Devesas", "Lisboa Oriente");
-
     //cout << pairs.size() << endl;
 
-    //for (auto i : pairs) {cout << i.first << " " << i.second << " " << g.calculateMaxFlow(i.first, i.second) << endl;}
+    //vector<pair<string, string>> pairs = g.highestMaxFlowPairs();
+
+    //for (auto i : pairs) cout << i.first << " " << i.second << endl;
 
     //cout << g.maxTrainsAtStation("Coimbra B");
 
