@@ -737,7 +737,6 @@ vector<string> Graph::MostAffectStations(Graph rc){
 }
 
 bool Graph::ValidStation(string name){
-    cout << name << endl;
     if(stations.find(name)==stations.end()){
         return false;
     }

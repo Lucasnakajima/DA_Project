@@ -40,6 +40,10 @@ public:
     void maxReducedConectivity();
 
     void maxMinumumCost();
+
+    void Mostafffected();
+
+    void pause();
 };
 
 

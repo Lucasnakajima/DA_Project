@@ -71,7 +71,7 @@ void Menu::run() {
                 addSegFail(rc);
                 break;
             case 32:
-                g.MostAffectStations(rc);
+                Mostafffected();
                 break;
             case 41:
                 budgetMunicipalities();
@@ -89,7 +89,7 @@ void Menu::run() {
                 exit(0);
             default:
                 cout << "Invalid Input !";
-                system("pause");
+                pause();
         }
 
     }
@@ -113,7 +113,6 @@ void Menu::maxBetweenTwoStations(){
         switch(choice){
             case 0:
                 return;
-                break;
             case 1:
                 maxFullRail();
                 break;
@@ -137,7 +136,7 @@ vector<string> Menu:: stationsFetch(){
         if (!validStation(g, source)) {
             cout << "Invalid source! Make sure you typed correctly and try again!\n";
             sleep(1);
-            cout << string(50,'\n');
+            cout << string(2,'\n');
             continue;
         }
         cout << "Type the target:";
@@ -145,13 +144,13 @@ vector<string> Menu:: stationsFetch(){
         if (!validStation(g, target)) {
             cout << "Invalid target! Make sure you typed correctly and try again!\n";
             sleep(1);
-            cout << string(50,'\n');
+            cout << string(2,'\n');
             continue;
         }
         if (source==target){
             cout << "You typed the same station twice! Try again!\n";
             sleep(1);
-            cout << string(50,'\n');
+            cout << string(2,'\n');
             continue;
         }
         return {source, target};
@@ -159,7 +158,6 @@ vector<string> Menu:: stationsFetch(){
 }
 
 bool Menu:: validStation(Graph a, string station){
-    cout << station << endl;
     return a.ValidStation(station);
 }
 
@@ -203,7 +201,7 @@ void Menu:: addSegFail(Graph& rc){
     else{
         rc.removeConnection(stationsNames[0], stationsNames[1]);
         cout << "Connection removed successfully!\n";
-        system("pause");
+        pause();
     }
 }
 
@@ -227,10 +225,11 @@ void Menu:: stationByMunicipality(){
             continue;
         }
         else{
-            system("pause");
-            return;
+            break;
         }
+
     }
+    pause();
 }
 
 void Menu:: stationByDistrict(){
@@ -253,7 +252,7 @@ void Menu:: stationByDistrict(){
             continue;
         }
         else{
-            system("pause");
+            pause();
             return;
         }
     }
@@ -271,8 +270,8 @@ void Menu:: maxNumberInStation(){
         }
         else{
         int m = g.maxTrainsAtStation(s);
-        cout << "The maximum number of trains to arrive at " << s << " station is: " << m;
-        system("pause");
+        cout << "The maximum number of trains to arrive at " << s << " station is: " << m << endl;
+        pause();
         return;
         }
     }
@@ -286,8 +285,23 @@ void Menu:: pairsMostTrains(){
     for(auto i : v){
         cout << i.first << "->" << i.second << "\n";
     }
-    system("pause");
+    pause();
 }
+
+void Menu::Mostafffected(){
+    vector<string>v = g.MostAffectStations(rc);
+    if(v.empty()){
+        cout << "There are no segment failures \n";
+        pause();
+        return;
+    }
+    cout << "The most affected stations by the segment failure are: \n";
+    for(auto i : v){
+        cout << i << "\n";
+    }
+    pause();
+}
+
 
 void Menu:: budgetMunicipalities(){
     auto v = g.topkbudgetMunicipality();
@@ -308,10 +322,11 @@ void Menu:: budgetMunicipalities(){
                 cout << v[i] << "\n";
             }
             sleep(1);
-            system("pause");
-            return;
+            break;
         }
     }
+    cin.ignore(INT_MAX, '\n');
+    pause();
 }
 
 void Menu:: budgetDistricts(){
@@ -333,10 +348,11 @@ void Menu:: budgetDistricts(){
                 cout << v[i] << "\n";
             }
             sleep(1);
-            system("pause");
-            return;
+            break;
         }
     }
+    cin.ignore(INT_MAX, '\n');
+    pause();
 }
 
 void Menu:: maxFullRail(){
@@ -344,7 +360,7 @@ void Menu:: maxFullRail(){
     cout << "The max number of trains tha can travel in the full railway network\n"
             "between " << s[0] << " station\n"
                                   "and " << s[1] << " station is:" << g.calculateMaxFlow(s[0], s[1]) << "\n";
-    system("pause");
+    pause();
 }
 
 void Menu:: maxReducedConectivity(){
@@ -352,7 +368,7 @@ void Menu:: maxReducedConectivity(){
     cout << "The max number of trains tha can travel in the reduced connectivity network\n"
             "between " << s[0] << " station\n"
                                   "and " << s[1] << " station is:" << rc.calculateMaxFlow(s[0], s[1]) << "\n";
-    system("pause");
+    pause();
 }
 
 void Menu:: maxMinumumCost(){
@@ -362,5 +378,10 @@ void Menu:: maxMinumumCost(){
             "between " << s[0] << " station\n"
                                   "and " << s[1] << " station is:" << m.first << "\n"
                                                                                  "With a minimum cost for the company of:" << m.second << "\n";
-    system("pause");
+    pause();
+}
+
+void Menu::pause() {
+    cout << "Press any key to continue...";
+    cin.get();
 }
