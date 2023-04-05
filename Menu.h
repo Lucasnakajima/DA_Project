@@ -17,7 +17,7 @@ public:
 
     vector<string> stationsFetch();
 
-    bool validStation(Graph g, string station);
+    bool validStation(Graph a, string station);
 
     bool validConnection(Graph g, string s1, string s2);
 
@@ -34,6 +34,12 @@ public:
     void budgetMunicipalities();
 
     void budgetDistricts();
+
+    void maxFullRail();
+
+    void maxReducedConectivity();
+
+    void maxMinumumCost();
 };
 
 

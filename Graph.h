@@ -78,6 +78,10 @@ public:
 
 
     void removeConnection(string s1, string s2);
+
+    vector<string> MostAffectStations(Graph rc);
+
+    bool ValidStation(string name);
 };
 
 

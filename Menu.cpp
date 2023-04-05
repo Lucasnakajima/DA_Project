@@ -1,6 +1,8 @@
 #include <unistd.h>
 #include "Menu.h"
+#include <locale>
 #include <algorithm>
+#include <string>
 
 using namespace std;
 Menu::Menu() {
@@ -30,14 +32,14 @@ void Menu::run() {
                 "||==================================================================================================================||\n"
                 "||                                                     |                                                            ||\n"
                 "||  Stations by municipalities                    [11] |  Max number of trains that can travel...              [21] ||\n"
-                "||  Stations by Districts                         [12] |  Which pairs of stations require the most trains      [22] ||\n"
-                "||                                                     |                                                            ||\n"
+                "||  Stations by Districts                         [12] |                                                            ||\n"
+                "||  Pairs of stations require the most trains     [13] |                                                            ||\n"
                 "||==================================================================================================================||\n"
                 "||                REDUCED CONNECTIVITY                 |                    TRANSPORTATION NEEDS                    ||\n"
                 "||==================================================================================================================||\n"
                 "||                                                     |                                                            ||\n"
                 "||  Add a segment failure                         [31] |  Top-k municipalities regarding transportation needs  [41] ||\n"
-                "||  Most affected stations by each seg. failure   [32] |  Top-k districts regarding transportation needs       [42] ||\n"
+                "||  Most affected stations                        [32] |  Top-k districts regarding transportation needs       [42] ||\n"
                 "||                                                     |  Max number of trains that can arrive at a station    [43] ||\n"
                 "||==================================================================================================================||\n"
                 "||                                                   EXIT [0]                                                       ||\n"
@@ -46,7 +48,8 @@ void Menu::run() {
         string s;
         bool flag;
         int choice;
-        vector<int> values = {0,11,12,21,22,23,31,32,33,41,42,43};
+        wstring a;
+        vector<int> values = {0,11,12,13,21,23,31,32,41,42,43};
         cin >> choice;
         if(!inputTest(choice,values)) continue;
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
@@ -60,8 +63,7 @@ void Menu::run() {
             case 21:
                 maxBetweenTwoStations();
                 break;
-            case 22:
-                //TODO pairsMostTrains highestMaxFlowPairsPath
+            case 13:
                 pairsMostTrains();
                 break;
 
@@ -69,9 +71,7 @@ void Menu::run() {
                 addSegFail(rc);
                 break;
             case 32:
-                //TODO affectedStations(); fazer a funcao
-                break;
-            case 33:
+                g.MostAffectStations(rc);
                 break;
             case 41:
                 budgetMunicipalities();
@@ -86,7 +86,6 @@ void Menu::run() {
                 cout << string(15,'\n');
                 cout << "                                                  Thank you for using the railway network system!";
                 cout << string(15,'\n');
-                sleep(1);
                 exit(0);
             default:
                 cout << "Invalid Input !";
@@ -110,17 +109,19 @@ void Menu::maxBetweenTwoStations(){
         cin >> choice;
         vector<int> values = {0, 1, 2, 3};
         if (!inputTest(choice, values)) continue;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         switch(choice){
             case 0:
                 return;
-            case 1:{
-                //TODO maxFullRail(); calculateMaxFlow no g
-                break;}
+                break;
+            case 1:
+                maxFullRail();
+                break;
             case 2:
-                //TODO maxMinumumCost(); calculateMinCostMaxFlow
+                maxMinumumCost();
                 break;
             case 3:
-                //TODO maxReducedConectivity(); calculateMaxFlow no rc
+                maxReducedConectivity();
                 break;
             default:
                 break;
@@ -130,7 +131,7 @@ void Menu::maxBetweenTwoStations(){
 
 vector<string> Menu:: stationsFetch(){
     string source, target;
-        while(true) {
+    while(true) {
         cout << "Type the source:";
         getline(cin,source);
         if (!validStation(g, source)) {
@@ -157,12 +158,9 @@ vector<string> Menu:: stationsFetch(){
     }
 }
 
-bool Menu:: validStation(Graph g, string station){
-    //TODO resolver bug no input de estacoes com acento
-    if(g.getStations().find(station) == g.getStations().end()){
-        return false;
-    }
-    return true;
+bool Menu:: validStation(Graph a, string station){
+    cout << station << endl;
+    return a.ValidStation(station);
 }
 
 bool Menu:: validConnection(Graph g, string s1, string s2){
@@ -205,7 +203,7 @@ void Menu:: addSegFail(Graph& rc){
     else{
         rc.removeConnection(stationsNames[0], stationsNames[1]);
         cout << "Connection removed successfully!\n";
-        sleep(1);
+        system("pause");
     }
 }
 
@@ -215,10 +213,10 @@ void Menu:: stationByMunicipality(){
     while(true) {
         cout << "Type the municipality:";
         getline(cin, s);
-        s = l;
-        transform(l.begin(), l.end(), l.begin(), ::tolower);
+        l = s;
+        transform(l.begin(), l.end(), l.begin(), ::toupper);
         for (auto i: g.getStations()) {
-            if (i.second.getMunicipality() == s or i.second.getMunicipality() == l) {
+            if (i.second.getMunicipality() == l) {
                 cout << i.second.getName() << "\n";
                 c++;
             }
@@ -229,7 +227,7 @@ void Menu:: stationByMunicipality(){
             continue;
         }
         else{
-            sleep(1);
+            system("pause");
             return;
         }
     }
@@ -241,8 +239,8 @@ void Menu:: stationByDistrict(){
     while(true) {
         cout << "Type the district:";
         getline(cin, s);
-        s = l;
-        transform(l.begin(), l.end(), l.begin(), ::tolower);
+        l = s;
+        transform(l.begin(), l.end(), l.begin(), ::toupper);
         for (auto i: g.getStations()) {
             if (i.second.getDistrict() == s or i.second.getDistrict() == l) {
                 cout << i.second.getName() << "\n";
@@ -255,7 +253,7 @@ void Menu:: stationByDistrict(){
             continue;
         }
         else{
-            sleep(1);
+            system("pause");
             return;
         }
     }
@@ -266,26 +264,32 @@ void Menu:: maxNumberInStation(){
     while(true) {
         cout << "Type the station:";
         getline(cin, s);
-//        if (!validStation(g, s)) {
-//            cout << "Invalid station! Make sure you typed correctly and try again!\n";
-//            continue;
-//        }
-//        else{
-            int m = g.maxTrainsAtStation(s);
-            cout << "The maximum number of trains to arrive at " << s << " station is: " << m;
-            sleep(1);
-            return;
-        //}
+        cout << s <<endl;
+        if (!validStation(g, s)) {
+            cout << "Invalid station! Make sure you typed correctly and try again!\n";
+            continue;
+        }
+        else{
+        int m = g.maxTrainsAtStation(s);
+        cout << "The maximum number of trains to arrive at " << s << " station is: " << m;
+        system("pause");
+        return;
+        }
     }
 }
 
 void Menu:: pairsMostTrains(){
-    vector<string> s = stationsFetch();
-
+//    vector<string> s = stationsFetch();
+//    vector<pair<string, string>> v = g.highestMaxFlowPairsPath(s[0], s[1]);
+    vector<pair<string, string>> v = g.highestMaxFlowPairs();
+//    cout << "The pair(s) of station(s) between " << s[0] << " station\n" << "and " << s[1] << " station are:\n";
+    for(auto i : v){
+        cout << i.first << "->" << i.second << "\n";
+    }
+    system("pause");
 }
 
 void Menu:: budgetMunicipalities(){
-    //TODO correcoes no topkbudgetMunicipality
     auto v = g.topkbudgetMunicipality();
     int k;
     while(true) {
@@ -303,6 +307,7 @@ void Menu:: budgetMunicipalities(){
             for(int i=0; i<k and i<v.size(); i++){
                 cout << v[i] << "\n";
             }
+            sleep(1);
             system("pause");
             return;
         }
@@ -310,7 +315,6 @@ void Menu:: budgetMunicipalities(){
 }
 
 void Menu:: budgetDistricts(){
-    //TODO correcoes no topkbudgetDistrict
     auto v = g.topkbudgetDistrict();
     int k;
     while(true) {
@@ -328,8 +332,35 @@ void Menu:: budgetDistricts(){
             for(int i=0; i<k and i<v.size(); i++){
                 cout << v[i] << "\n";
             }
+            sleep(1);
             system("pause");
             return;
         }
     }
+}
+
+void Menu:: maxFullRail(){
+    vector<string> s = stationsFetch();
+    cout << "The max number of trains tha can travel in the full railway network\n"
+            "between " << s[0] << " station\n"
+                                  "and " << s[1] << " station is:" << g.calculateMaxFlow(s[0], s[1]) << "\n";
+    system("pause");
+}
+
+void Menu:: maxReducedConectivity(){
+    vector<string> s = stationsFetch();
+    cout << "The max number of trains tha can travel in the reduced connectivity network\n"
+            "between " << s[0] << " station\n"
+                                  "and " << s[1] << " station is:" << rc.calculateMaxFlow(s[0], s[1]) << "\n";
+    system("pause");
+}
+
+void Menu:: maxMinumumCost(){
+    vector<string> s = stationsFetch();
+    auto m = g.calculateMinCostMaxFlow(s[0], s[1]);
+    cout << "The max number of trains tha can travel in the full railway network,\n"
+            "between " << s[0] << " station\n"
+                                  "and " << s[1] << " station is:" << m.first << "\n"
+                                                                                 "With a minimum cost for the company of:" << m.second << "\n";
+    system("pause");
 }

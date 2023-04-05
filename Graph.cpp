@@ -6,8 +6,11 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <unordered_map>
 #include <queue>
+#include <locale>
 #include "Graph.h"
+#include <cmath>
 
 using namespace std;
 const int INF = 1e9;
@@ -28,15 +31,22 @@ bool Graph::loadStations() {
     while (getline(inputFile, line)) {
         istringstream iss(line);
 
-        string name, district, municipality, township, line;
+        string name, district, municipality, township, lines;
         getline(iss, name, ',');
         getline(iss, district, ',');
         getline(iss, municipality, ',');
         getline(iss, township, ',');
-        getline(iss, line, ',');
+        getline(iss, lines, ',');
 
-        Station station(name, district, municipality, township, line);
-        stations.emplace(station.getName(), station);
+//        if(name == "Porto Campanhã"){
+//            cout << name << endl;
+//        }
+        if(stations.find(name) != stations.end()){
+//            cout << name << endl;
+            continue;
+        }
+        Station station(name, district, municipality, township, lines);
+        stations.emplace(name, station);
     }
 
     return true;
@@ -390,13 +400,10 @@ pair<int, int> Graph::calculateMinCostMaxFlow(string source, string sink) {
         int pathFlow = numeric_limits<int>::max();
         int pathCost = 0;
 
-        cout << pathCost << endl;
-
         for (string v = sink; v != source; v = parent[v]) {
             string u = parent[v];
             for (auto &connection : targets[u]) {
                 if (connection.getDestination().getName() == v) {
-                    cout << pathCost << endl;
                     pathFlow = min(pathFlow, connection.getCapacity());
                 }
             }
@@ -407,10 +414,8 @@ pair<int, int> Graph::calculateMinCostMaxFlow(string source, string sink) {
             string u = parent[v];
             for (auto &connection: targets[u]) {
                 if (connection.getDestination().getName() == v) {
-                    cout << pathCost << endl;
                     connection.setCapacity(connection.getCapacity() - pathFlow);
                     pathCost += (connection.getService() == "STANDARD" ? 2 : 4);
-                    cout << pathCost << endl;
                 }
             }
             for (auto &reverseConnection: targets[v]) {
@@ -425,6 +430,10 @@ pair<int, int> Graph::calculateMinCostMaxFlow(string source, string sink) {
     }
 
     return make_pair(maxFlow, minCost);
+}
+
+bool cmp(const pair<string, int>& a, const pair<string, int>& b) {
+    return a.second > b.second;
 }
 
 bool Graph::bfsMunicipality(string source, string destination) {
@@ -509,7 +518,8 @@ int Graph::calculateMaxFlowMunicipality(string source, string sink) {
 
 vector<string> Graph::topkbudgetMunicipality() {
     unordered_map<string, int> municipalities;
-    unordered_map<string, int> maxmunicipalities;
+    vector<pair<string, int>> temp;
+    vector<string> result;
     int maxFlow = -1;
     vector<pair<string, string>> maxFlowStationPairs;
     unordered_set<string> addedPairs;
@@ -535,17 +545,16 @@ vector<string> Graph::topkbudgetMunicipality() {
                 }
             }
         }
-        if(maxmunicipalities.empty() || maxmunicipalities.begin()->second==municipalities.find(municipality)->second){
-            maxmunicipalities.emplace(municipality, municipalities.find(municipality)->second);
-        }
-        else if(maxmunicipalities.begin()->second < municipalities.find(municipality)->second){
-            maxmunicipalities.clear();
-            maxmunicipalities.emplace(municipality, municipalities.find(municipality)->second);
-        }
     }
-    vector<string> result;
-    for(auto i: maxmunicipalities){
-        result.push_back(i.first);
+    temp.reserve(municipalities.size());
+    for (auto elem : municipalities) {
+        temp.emplace_back(elem.first, elem.second);
+    }
+    // Sort vector by value
+    sort(temp.begin(), temp.end(), cmp);
+    result.reserve(municipalities.size());
+    for (auto elem : temp) {
+        result.push_back(elem.first);
     }
     return result;
 }
@@ -632,7 +641,7 @@ int Graph::calculateMaxFlowDistrict(string source, string sink) {
 
 vector<string> Graph::topkbudgetDistrict() {
     unordered_map<string, int> districts;
-    unordered_map<string, int> maxdistricts;
+    vector<pair<string, int>> temp;
     int maxFlow = -1;
     vector<pair<string, string>> maxFlowStationPairs;
     unordered_set<string> addedPairs;
@@ -658,17 +667,17 @@ vector<string> Graph::topkbudgetDistrict() {
                 }
             }
         }
-        if(maxdistricts.empty() || maxdistricts.begin()->second==districts.find(district)->second){
-            maxdistricts.emplace(district, districts.find(district)->second);
-        }
-        else if(maxdistricts.begin()->second < districts.find(district)->second){
-            maxdistricts.clear();
-            maxdistricts.emplace(district, districts.find(district)->second);
-        }
     }
     vector<string> result;
-    for(auto i: maxdistricts){
-        result.push_back(i.first);
+    temp.reserve(districts.size());
+    for (auto elem : districts) {
+        temp.emplace_back(elem.first, elem.second);
+    }
+    // Sort vector by value
+    sort(temp.begin(), temp.end(), cmp);
+    result.reserve(districts.size());
+    for (auto elem : temp) {
+        result.push_back(elem.first);
     }
     return result;
 }
@@ -685,11 +694,56 @@ void Graph:: removeConnection(string s1, string s2){
         }
     }
     for(auto i = connections.begin(); i!=connections.end(); i++){
-        if(i->getSource().getName() == s1 || i->getSource().getName() == s2){
+        if((i->getSource().getName() == s1 && i->getDestination().getName() == s2) || (i->getSource().getName() == s2 && i->getDestination().getName() == s1)){
             connections.erase(i);
         }
     }
 }
+
+
+vector<string> Graph::MostAffectStations(Graph rc){
+    int maxdiff = -1;
+    unordered_set<string> addedPairs;
+    for (auto& source : targets) {
+        for (auto& connection : source.second) {
+            const auto& destination = connection.getDestination().getName();
+
+            int floworiginal = calculateMaxFlow(source.first, destination);
+            int flowrc = rc.calculateMaxFlow(source.first, destination);
+            if(flowrc != floworiginal){
+                if(abs(floworiginal-flowrc) > maxdiff){
+                    maxdiff = abs(floworiginal-flowrc);
+                    addedPairs.clear();
+                    addedPairs.insert(source.first);
+                    addedPairs.insert(destination);
+                }
+                if(abs(floworiginal-flowrc) == maxdiff){
+                    if(addedPairs.find(destination) == addedPairs.end()){
+                        addedPairs.insert(destination);
+                    }
+                    if(addedPairs.find(source.first) == addedPairs.end()){
+                        addedPairs.insert(source.first);
+                    }
+                }
+            }
+        }
+    }
+    vector<string> result;
+    for(auto i: addedPairs){
+        result.push_back(i);
+    }
+    return result;
+
+}
+
+bool Graph::ValidStation(string name){
+    cout << name << endl;
+    if(stations.find(name)==stations.end()){
+        return false;
+    }
+    return true;
+}
+
 
 
 
