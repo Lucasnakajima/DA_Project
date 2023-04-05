@@ -35,3 +35,5 @@ string Station::getLine() const {
 Station::Station() {
 
 }
+
+Station::Station(string name) : name(name) {}

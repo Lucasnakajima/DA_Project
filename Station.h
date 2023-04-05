@@ -10,6 +10,7 @@ using namespace std;
 
 class Station {
 private:
+
     string name;
     string district;
     string municipality;
@@ -19,7 +20,7 @@ private:
 
 public:
     Station();
-
+    Station(string name);
     Station(string name, string district, string municipality, string township, string line);
 
     string getName() const;

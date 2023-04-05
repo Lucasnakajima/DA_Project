@@ -346,25 +346,26 @@ vector<pair<string, string>> Graph::highestMaxFlowPairsPath(string source, strin
 }
 
 // 2.4
-int Graph::maxTrainsAtStation(string stationName) {
-    //TODO testes com Viana do Castelo e Porto Campanhã
+int Graph::maxTrainsAtStation(string station) {
+    // Create a super source and connect it to the source stations
     string superSource = "SUPER_SOURCE";
+    targets[superSource] = vector<Connection>();
+    Station superSourceStation(superSource);
 
-    vector<string> sourceStations = findSourceStations();
-
-    // Create a super source and connect it to all source stations with infinite capacity
-    for (const auto& source : sourceStations) {
-        Connection superSourceConnection(Station(superSource, "", "", "", ""), stations[source], INF, "STANDARD");
-        targets[superSource].push_back(superSourceConnection);
+    for (const auto& source : targets) {
+        if (source.second.size() == 1 && source.first != station) {
+            Connection connection(superSourceStation, getStations()[source.first], numeric_limits<int>::max(), "STANDARD");
+            targets[superSource].push_back(connection);
+        }
     }
 
     // Calculate max flow between the super source and the given station
-    int maxTrains = calculateMaxFlow(superSource, stationName);
+    int maxFlow = calculateMaxFlow(superSource, station);
 
-    // Remove the super source and its connections
+    // Remove the super source from the graph
     targets.erase(superSource);
 
-    return maxTrains;
+    return maxFlow;
 }
 
 
